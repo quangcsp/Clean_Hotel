@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rate_avg: 1.5
+  title: MyString
+  content: MyText
+  image: MyString
+  hotel: one
+  user: one
+
+two:
+  rate_avg: 1.5
+  title: MyString
+  content: MyText
+  image: MyString
+  hotel: two
+  user: two
