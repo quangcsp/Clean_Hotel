@@ -1,0 +1,38 @@
+<div id="menu">
+  <ul class="headerNav">
+    <li>
+      <%= link_to "ホームページ", root_path %>
+    </li>
+    <li>
+      <%= link_to "ホテル" %>
+    </li>
+    <li>
+      <%= link_to "レビュー"%>
+    </li>
+    <li>
+      <%= link_to "連絡"%>
+    </li>
+    <% if user_signed_in? %>
+      <li class="signin">
+        <%= link_to "ユーザの編集", edit_user_registration_path %>
+      </li>
+      <li class="signup">
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+      </li>
+    <% else %>
+      <li class="signin">
+      <%= link_to "サインイン",  new_user_session_path %>
+      </li>
+      <li class="signup">
+      <%= link_to "サインアップ",  new_user_registration_path %>
+      </li>
+    <% end %>
+
+<!--     <li class="addtocart">
+      <a href="#">
+        <img src="https://www.nopcommerce.com/images/thumbs/0003726_400.png"/>
+      </a>
+    </li> -->
+  </ul>
+</div>
+

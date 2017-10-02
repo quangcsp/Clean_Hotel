@@ -18,7 +18,7 @@
 
 .main-signup {
   width: 500px;
-  height: 850px;
+  height: 420px;
   margin: 4em auto;
   background-color: #ECEFF1;
   border-radius: 20px;
@@ -31,7 +31,7 @@
 
 .main-signin {
   width: 500px;
-  height: 450px;
+  height: 400px;
   margin: 4em auto;
   background-color: #ECEFF1;
   border-radius: 20px;
@@ -179,6 +179,46 @@ span.mb-2:hover {
   list-style: none;
   text-align: left;
   padding-left: 125px;
+}
+
+
+/*==Style cho menu===*/
+#menu ul {
+  background: #2196f3;
+  list-style-type: none;
+  text-align: center;
+
+}
+#menu li {
+  color: #f1f1f1;
+  display: inline-block;
+  width: 140px;
+  height: 50px;
+  line-height: 50px;
+  margin-left: 5px;
+  font-size: 120%;
+}
+#menu .signin{
+  padding-left: 150px;
+}
+
+#menu a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  font-weight:600;
+}
+#menu a:hover {
+  background: #F1F1F1;
+  color: #333;
+}
+#menu .headerbg{
+  left:0;
+  width:100%;
+  height:50%;
+  z-index:-1;
+  padding-top: 0;
+
 }
 
 
