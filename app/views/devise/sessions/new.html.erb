@@ -1,0 +1,37 @@
+<head>
+  <title>Sign in</title>
+</head>
+<body class="body-signin">
+  <div align="center" class="main-signin">
+    <p class="su">Sign in</p>
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>">
+        <%= message %>
+      </div>
+      <br/>
+    <% end %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= f.email_field :email, autofocus: true, class: "mail", placeholder: "Email Address" %>
+      <br/>
+      <%= f.password_field :password, autocomplete: "off", class: "pass", placeholder: "Choose Password" %>
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
+      <%= f.submit "Log in", class: "submit" %>
+    <% end %>
+    <br/>
+    <%= render "devise/shared/links" %>
+  </div>
+  <div class="bottom">
+    <p align="center" class="mb">
+      <strong>-</strong>
+      Designed By
+      <a href="https://www.khaledmneimneh.me" target="_blank">
+        <span class="mb-2">Khaled Mneimneh</span>
+      </a>
+    </p>
+  </div>
+</body>

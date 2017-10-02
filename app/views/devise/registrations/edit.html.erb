@@ -1,0 +1,34 @@
+<head>
+  <title>Edit user</title>
+</head>
+
+<body class="body-edit-user">
+  <div align="center" class="main-edit-user">
+    <p class="su">Edit <%= @user.name %></p>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= devise_error_messages! %>
+      <%= f.text_field :name, autofocus: true, placeholder: "Full Name", class: "text-field" %>
+      <%= f.text_field :avatar, autofocus: true, placeholder: "Avatar", class: "text-field" %>
+      <%= f.text_field :age, autofocus: true, placeholder: "Age", class: "text-field" %>
+      <%= f.password_field :password, autofocus: true, placeholder: "Password", class: "pass" %>
+      <%= f.password_field :password_confirmation, autofocus: true, placeholder: "password confirmation", class: "pass" %>
+      <%= f.password_field :current_password, autofocus: true, placeholder: "current password", class: "pass" %>
+      <%= f.text_field :address, autofocus: true, placeholder: "Address", class: "text-field" %>
+      <%= f.text_field :phone, autofocus: true, placeholder: "Phone number", class: "text-field" %>
+      <%= f.date_field :birth_day, autofocus: true, placeholder: "Bir thday", class: "text-field" %>
+      <br>
+      <%= f.label :gender, "Gender:" %>
+      <%= f.label :male, "male"%>
+      <%= f.radio_button :gender, "true", checked: true %>
+      <%= f.label :female, "female"%>
+      <%= f.radio_button :gender, "false" %>
+      <br>
+      <%= f.submit "Edit", class: "submit" %>
+
+    <% end %>
+
+    <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "submit" %></p>
+
+    <%= link_to "Back", :back %>
+  </div>
+</body>
