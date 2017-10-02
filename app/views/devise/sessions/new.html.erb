@@ -1,0 +1,28 @@
+<head>
+  <title>Sign in</title>
+</head>
+<body class="body-signin">
+  <div align="center" class="main-signin">
+    <p class="su">サインイン</p>
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>">
+        <%= message %>
+      </div>
+      <br/>
+    <% end %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= f.email_field :email, autofocus: true, class: "mail", placeholder: "メールアドレス" %>
+      <br/>
+      <%= f.password_field :password, autocomplete: "off", class: "pass", placeholder: "パスワード" %>
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :思い出す %>
+        </div>
+      <% end %>
+      <%= f.submit "ログイン", class: "submit" %>
+    <% end %>
+    <br/>
+    <%= render "devise/shared/links" %>
+  </div>
+</body>

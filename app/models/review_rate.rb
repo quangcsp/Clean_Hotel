@@ -1,0 +1,2 @@
+class ReviewRate < ApplicationRecord
+end
