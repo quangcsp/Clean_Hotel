@@ -6,7 +6,7 @@
 # avatar: string
 # star: integer
 # rate_avg: float
-#  desciption: string
+# desciption: string
 
 class Hotel < ApplicationRecord
   has_many :hotel_images

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'reviews/new'
+
   root to: 'pages#home'
 
   devise_for :users
