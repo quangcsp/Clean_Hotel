@@ -13,4 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require medium-editor.min
+//= require handlebars.runtime.min
+//= require jquery-sortable-min
+//= require jquery.ui.widget
+//= require jquery.iframe-transport
+//= require jquery.fileupload
+//= require medium-editor-insert-plugin.min
 //= require_tree .
