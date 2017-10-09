@@ -1,38 +1,135 @@
-<div id="menu">
-  <ul class="headerNav">
-    <li>
-      <%= link_to "ホームページ", root_path %>
+<nav class="site-navigation" role="navigation" aria-label="Main Navigation">
+  <ul class="nav">
+    <li class="menu-item">
+      <%= link_to "Home", root_path %>
     </li>
-    <li>
-      <%= link_to "ホテル" %>
-    </li>
-    <li>
-      <%= link_to "レビュー", reviews_path%>
-    </li>
-    <li>
-      <%= link_to "連絡"%>
-    </li>
+    <li class="menu-item"><a href="#fallback-page">Hotel</a></li>
     <% if user_signed_in? %>
-      <li class="signin">
-        <%= link_to "ユーザの編集", edit_user_registration_path %>
-      </li>
-      <li class="signup">
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+      <li class="menu-item-has-children"><a href="#fallback-page">Reviews</a>
+        <ul class="sub-menu">
+          <li><%= link_to "All Review", reviews_path %></li>
+          <li><%= link_to "My Reviews" %></li>
+          <li><%= link_to "New Review", new_review_path %></li>
+        </ul>
       </li>
     <% else %>
-      <li class="signin">
-      <%= link_to "サインイン",  new_user_session_path %>
-      </li>
-      <li class="signup">
-      <%= link_to "サインアップ",  new_user_registration_path %>
+      <li class="menu-item">
+        <%= link_to "All Review", reviews_path %>
       </li>
     <% end %>
-
-<!--     <li class="addtocart">
-      <a href="#">
-        <img src="https://www.nopcommerce.com/images/thumbs/0003726_400.png"/>
-      </a>
-    </li> -->
+    <li class="menu-item"><a href="#">Contact</a></li>
+    <% if user_signed_in? %>
+    <li class="menu-item-has-children">
+      <a href="#fallback-page"><%= current_user.name.titleize %></a>
+      <ul class="sub-menu">
+        <li><%= link_to "Edit User", edit_user_registration_path %></li>
+        <li><%= link_to "LogOut", destroy_user_session_path, method: :delete %></li>
+      </ul>
+    </li>
+    <% else %>
+    <li class="menu-item">
+      <%= link_to "SignIn", new_user_session_path %>
+    </li>
+    <li class="menu-iem">
+      <%= link_to "SignUp", new_user_registration_path %>
+    </li>
+    <% end %>
   </ul>
-</div>
+</nav>
 
+<script>
+  // Using jQuery because WordPress already has it
+  (function($) {
+    var $allMenus = $(".menu-item-has-children");
+    var $allToggles = $allMenus.find('> a');
+    var $allTopLinks = $(".nav > li > a");
+
+    var hoverTimer, blurTimer,
+    delay = 500;
+
+  // Reusable functions
+  function openMenu($current) {
+    $allToggles.attr("aria-expanded", "false");
+    $current.attr("aria-expanded", "true");
+  }
+
+  function closeMenu($current) {
+    $current.attr("aria-expanded", "false");
+  }
+
+  function focusSubmenu($current) {
+    $current.on("transitionend", function() {
+      if ($current.css("visibility") === "visible") {
+        $current.find("li:first-child a").focus();
+        $current.off("transitionend");
+      }
+    });
+  }
+
+  // Add aria roles
+  $(".menu-item.active > a").attr("aria-current", "page");
+  $allToggles.attr({
+    "aria-haspopup": "true",
+    "aria-expanded": "false",
+    "role": "button"
+  });
+
+  // Open menu on hover
+  $allMenus.on("mouseenter", function(e) {
+    openMenu($(this).find("[aria-expanded]"));
+
+    clearTimeout(hoverTimer);
+  });
+
+  // Close menu after a short delay
+  $allMenus.on("mouseleave", function() {
+    var $element = $(this).find("[aria-expanded]");
+
+    hoverTimer = setTimeout(function() {
+      closeMenu($element);
+    }, delay);
+  });
+
+  // Toggle menu on click, tap, or focus + enter/space
+  $allToggles
+  .on("click touchstart", function(e) {
+    var $this = $(this);
+    var $submenu = $this.next(".sub-menu");
+
+    if ($this.attr("aria-expanded") === "true") closeMenu($this);
+    else openMenu($this);
+
+    focusSubmenu($submenu);
+
+    e.preventDefault();
+  })
+  .on("keyup", function(e) {
+    if (e.keyCode === 32) {
+      openMenu($(this));
+      focusSubmenu($(this).next(".sub-menu"));
+    }
+  });
+
+  // Close menu when refocusing on top-level links
+  $allTopLinks.on("focus", function() {
+    closeMenu($allToggles);
+  });
+
+  // Close menu on esc and focus loss
+  $(".site-navigation").on("keyup", function(e) {
+    if (e.keyCode === 27) closeMenu($allToggles);
+  });
+
+  // Close menu if focus isn't inside site navigation
+  $('.sub-menu').on('focusout', function(){
+    // There's a delay between focusout and re-focus
+    setTimeout( function() {
+      var $focused = $(document.activeElement);
+      if($focused.closest('.site-navigation').length === 0 ) {
+        closeMenu($allToggles);
+      }
+    }, 1);
+  });
+
+})(jQuery);
+</script>
