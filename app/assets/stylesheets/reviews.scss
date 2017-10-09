@@ -175,6 +175,7 @@ header{
         p{
           font-family:$sub-font;
           text-align: left;
+
         }
       }
 
@@ -241,6 +242,12 @@ header{
       }
     }
   }
+}
+#div-content {
+  // width: 400px;
+  height: 180px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 footer {
@@ -328,3 +335,6 @@ footer {
     transition: all .35s ease;
   }
 }
+
+// show
+
