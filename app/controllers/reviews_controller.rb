@@ -1,11 +1,11 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :destroy]
   def index
-    if user_signed_in?
-      @reviews = current_user.reviews.paginate(page: params[:page])
-    else
-      @reviews = Review.all.paginate(page: params[:page])
-    end
+    # if user_signed_in?
+    #   @reviews = current_user.reviews.paginate(page: params[:page])
+    # else
+    @reviews = Review.all.paginate(page: params[:page])
+    # end
   end
 
   def show
