@@ -29,12 +29,18 @@ class ReviewsController < ApplicationController
     #   flash[:error] = @review.errors.full_messages.to_sentence
     #   redirect_back fallback_location: new_review_path
     # end
+    @review = current_user.reviews.build review_params
+    if @review.save
+      redirect_to root_path
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   private
 
   def review_params
-    params.require(:review).permit(:title, :content, :book_id)
+    params.require(:review).permit(:title, :content, :hotel_id, :image, :rate_avg)
 
   end
 end

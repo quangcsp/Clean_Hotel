@@ -1,18 +1,19 @@
 .body-signin {
   background-color: #cfd8dc;
-  background-image: url("/assets/background-signin.svg");
+  background-image: url("/assets/background.jpg");
+  background-size: auto;
   font-family: 'Ubuntu', sans-serif;
 }
 
 .body-signup {
   background-color: #cfd8dc;
-  background-image: url("/assets/background-signin.svg");
+  background-image: url("/assets/background.jpg");
   font-family: 'Ubuntu', sans-serif;
 }
 
 .body-edit-user {
   background-color: #cfd8dc;
-  background-image: url("/assets/background-signin.svg");
+  background-image: url("/assets/background.jpg");
   font-family: 'Ubuntu', sans-serif;
 }
 

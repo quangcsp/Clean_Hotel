@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
-  get 'reviews/new'
+  # get 'reviews/new'
+  #
+
 
   root to: 'pages#home'
 
   devise_for :users
+
+  resources :reviews
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
