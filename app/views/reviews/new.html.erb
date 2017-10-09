@@ -1,0 +1,69 @@
+<div class="write-review">
+  <header class="container u-maxWidth740">
+    <div class="uiScale uiScale-ui--regular uiScale-caption--regular postMetaHeader u-paddingBottom10 row">
+      <div class="col u-size12of12 js-postMetaLockup">
+        <div class="uiScale uiScale-ui--regular uiScale-caption--regular postMetaLockup postMetaLockup--authorWithBio u-flex js-postMetaLockup">
+          <div class="u-flex0">
+            <a class="link avatar u-baseColor--link"
+               href="#"
+               dir="auto">
+              <img src="https://cdn-images-1.medium.com/fit/c/40/40/0*SD_kDWTIj98kIlBn."
+                   class="avatar-image avatar-image--smaller" alt="Go to the profile of Long Nguyễn">
+            </a>
+          </div>
+          <div class="u-flex1 u-paddingLeft15 u-overflowHidden">
+            <a class="link ui-captionStrong link link--darken link--darker u-baseColor--link"
+               href="#"
+               dir="auto">
+              Long Nguyễn
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="postArticle-content js-postField js-notesSource">
+    <section class="section section--body section--first section--last">
+      <div class="section-content">
+
+        <div class="section-inner sectionLayout--insetColumn">
+
+          <h3 class="graf graf--h3 graf--leading graf--title">
+            <div class="review-title editable"
+                 id="review-editable-title" title="Tiêu đề">
+            </div>
+          </h3>
+
+          <p class="graf graf--p graf-after--h3 graf--trailing review-content editable"
+             id="review-editable-content" title="Nội dung bài review của bạn...">
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="u-paddingTop20 u-textAlignCenter container u-maxWidth740">
+    <button class="button
+            button--primary
+            button--large
+            is-active
+            button--withChrome
+            u-accentColor--buttonNormal
+            is-touched"
+            id="dang-bai">
+      Đăng bài
+    </button>
+  </div>
+
+</div>
+<script>
+    $('.editable').each(function (_, el) {
+        let editor = new MediumEditor(`#${el.id}`, {
+            placeholder: {
+                text: el.title,
+            },
+        });
+    });
+</script>
+

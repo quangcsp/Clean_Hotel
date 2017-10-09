@@ -23,8 +23,21 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+# Font awesome
+gem 'font-awesome-sass'
+
+gem 'bootstrap', '~> 4.0.0.alpha5'
+gem 'sendgrid-rails', '~> 2.0', '>= 2.0.5'
+
+# Medium editor
+gem 'medium-editor-rails'
+
+# Typeahead for autocomplete
+gem 'twitter-typeahead-rails', :git => "git://github.com/yourabi/twitter-typeahead-rails.git"
+
+
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
