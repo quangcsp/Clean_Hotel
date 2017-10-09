@@ -1,0 +1,19 @@
+<div class="column">
+  <div class="img-wrap">
+    <% if review.image.blank? %>
+      <img src="https://res.cloudinary.com/lichin/image/upload/v1462040642/aqur_bfi25g.png" alt="photo1" />
+    <% else %>
+      <%= image_tag review.image %>
+    <% end %>
+
+  </div>
+  <div class="paragraph">
+  <h1>
+    <%= raw review.title %>
+  </h1>
+    <p>
+      <%= raw review.content %>
+    </p>
+    <button class="blue-btn view-btn">Read</button>
+  </div>
+</div>

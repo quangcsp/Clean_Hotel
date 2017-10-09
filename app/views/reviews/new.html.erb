@@ -15,7 +15,10 @@
             <a class="link ui-captionStrong link link--darken link--darker u-baseColor--link"
                 href="#"
                 dir="auto">
-              <%= current_user.name %>
+              <h2>
+                <%= current_user.name %>
+              </h2>
+
             </a>
           </div>
         </div>
@@ -23,25 +26,72 @@
     </div>
   </header>
 
-  <div class="postArticle-content js-postField js-notesSource">
-    <section class="section section--body section--first section--last">
-      <div class="section-content">
+  <%= form_for @review do |f| %>
+    <%= render 'partials/error_messages', object: f.object %>
+    <div class="postArticle-content js-postField js-notesSource">
+      <section class="section section--body section--first section--last">
+        <div class="section-content">
 
-        <div class="section-inner sectionLayout--insetColumn">
+          <div class="section-inner sectionLayout--insetColumn">
 
-          <h3 class="graf graf--h3 graf--leading graf--title">
-            <div class="review-title editable"
-                 id="review-editable-title" title="Tiêu đề">
+            <h3 class="graf graf--h3 graf--leading graf--title">
+              <%=
+                f.text_area :title, class: 'review-title editable',
+                id: 'review-editable-title', title: 'Tiêu đề'
+              %>
+
+            </h3>
+            <%=
+              f.text_area :content, class: 'graf graf--p graf-after--h3 graf--trailing review-content editable',
+              id: 'review-editable-content', title: 'Nội dung bài review của bạn...'
+            %>
+
+            <div class="u-paddingTop20 u-textAlignCenter container u-maxWidth740">
+              <%= f.submit 'Đăng Bai', class: 'button
+                button--primary
+                button--large
+                is-active
+                button--withChrome
+                u-accentColor--buttonNormal
+                is-touched', id: 'dang-bai' %>
             </div>
-          </h3>
-
-          <p class="graf graf--p graf-after--h3 graf--trailing review-content editable"
-             id="review-editable-content" title="Nội dung bài review của bạn...">
-          </p>
+          </div>
         </div>
-      </div>
-    </section>
-  </div>
+      </section>
+    </div>
+  <% end %>
+</div>
+
+<script>
+    $('.editable').each(function (_, el) {
+        let editor = new MediumEditor(`#${el.id}`, {
+            placeholder: {
+                text: el.title,
+            },
+        });
+    });
+</script>
+
+<!--     <div class="postArticle-content js-postField js-notesSource">
+      <section class="section section--body section--first section--last">
+        <div class="section-content">
+
+          <div class="section-inner sectionLayout--insetColumn">
+
+            <h3 class="graf graf--h3 graf--leading graf--title">
+              <div class="review-title editable"
+                   id="review-editable-title" title="Tiêu đề">
+
+              </div>
+            </h3>
+
+            <p class="graf graf--p graf-after--h3 graf--trailing review-content editable"
+               id="review-editable-content" title="Nội dung bài review của bạn...">
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
 
   <div class="u-paddingTop20 u-textAlignCenter container u-maxWidth740">
     <button class="button
@@ -54,16 +104,5 @@
             id="dang-bai">
       Đăng bài
     </button>
-  </div>
-
-</div>
-<script>
-    $('.editable').each(function (_, el) {
-        let editor = new MediumEditor(`#${el.id}`, {
-            placeholder: {
-                text: el.title,
-            },
-        });
-    });
-</script>
+  </div> -->
 
