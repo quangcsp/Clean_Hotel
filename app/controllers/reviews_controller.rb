@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :destroy]
   def index
     if user_signed_in?
       @reviews = current_user.reviews.paginate(page: params[:page])
