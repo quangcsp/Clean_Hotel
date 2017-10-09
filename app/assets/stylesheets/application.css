@@ -15,6 +15,12 @@
  *= require medium-editor/themes/beagle
  *= require medium-editor-insert-plugin.min
  *= require medium-editor-insert-plugin-frontend.min
+ *= require style
  *= require_tree .
  *= require_self
  */
+
+/*reviews*/
+.u-maxWidth740 {
+    max-width: 55vw !important;
+}

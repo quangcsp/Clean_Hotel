@@ -1,23 +1,25 @@
+<% create_at = review.created_at.to_time %>
+
 <div class="u-borderBox u-size6of12  u-paddingRight10 u-xs-paddingLeft0 u-xs-paddingRight0 u-xs-size12of12 js-trackedPost js-sectionItem" data-source="grid_home---8------0-50----------22d054b693da-----800691088" data-post-id="2b06b7f0bc8d" data-index="0" data-action-scope="_actionscope_18" data-scroll="native">
   <div class="u-flex u-sizeFullWidth u-height260 u-sm-flexWrap u-xs-heightAuto u-borderBox u-marginBottom20 u-backgroundColorWhite u-overflowHidden u-relative u-borderRadius2 u-borderBlackLightest">
     <div class="u-flex0 u-sizeFullHeight u-width200 u-sm-height100 u-sm-sizeFullWidth u-xs-height170">
       <% if review.image.blank? %>
-          <a href="#" data-action="open-post" data-action-value="#" class="u-block u-backgroundSizeCover u-backgroundOriginBorderBox u-backgroundColorGrayLight u-sizeFullHeight" style="background-image: url(https://res.cloudinary.com/lichin/image/upload/v1462040642/aqur_bfi25g.png); background-position: 50% 50% !important;" aria-label="<%= raw review.title %>"></a>
+          <a href="/reviews/<%= review.id %>" class="u-block u-backgroundSizeCover u-backgroundOriginBorderBox u-backgroundColorGrayLight u-sizeFullHeight" style="background-image: url(https://res.cloudinary.com/lichin/image/upload/v1462040642/aqur_bfi25g.png); background-position: 50% 50% !important;"></a>
       <% else %>
-          <a href="#" data-action="open-post" data-action-value="#" class="u-block u-backgroundSizeCover u-backgroundOriginBorderBox u-backgroundColorGrayLight u-sizeFullHeight" style="background-image: url(<%= raw review.image %>); background-position: 50% 50% !important;" aria-label="<%= raw review.title %>"></a>
+          <a href="/reviews/<%= review.id %>" class="u-block u-backgroundSizeCover u-backgroundOriginBorderBox u-backgroundColorGrayLight u-sizeFullHeight" style="background-image: url(<%= raw review.image %>); background-position: 50% 50% !important;"></a>
       <% end %>
     </div>
     <div class="u-borderBox u-flexColumn u-padding20 u-flex1 u-overflowHidden u-sizeFull u-sm-height160 u-xs-heightAuto">
       <div class="u-flex1 u-relative">
         <div class="u-flexColumnTop u-flexWrap u-overflowHidden u-absolute0 u-xs-relative">
           <div class="u-flex0 u-sizeFullWidth">
-            <a class="" href="#">
-              <h3 class="u-contentSansBold u-lineHeightTight u-fontSize16 u-sm-lineClamp2 u-sm-maxHeight2LineHeightTight">
-                <%= raw review.title %>
+            <a class="" href="/reviews/<%= review.id %>">
+              <h3 class="u-contentSansBold u-lineHeightTight u-fontSize18 u-sm-lineClamp2 u-sm-maxHeight2LineHeightTight">
+                <%= ActionView::Base.full_sanitizer.sanitize(review.title).truncate(80, separator: ' ') %>
               </h3></a></div>
-          <a class="" href="#">
-            <h4 class="u-uiTextRegular u-textColorNormal u-marginTop5 u-letterSpacingNormal u-lineClamp3 u-maxHeight3LineHeightBase u-textOverflowEllipsis u-fontSize12">
-              <%= raw sanitize(review.content).truncate(40, separator: ' ') %>
+          <a class="" href="/reviews/<%= review.id %>">
+            <h4 class="u-uiTextRegular u-textColorNormal u-marginTop5 u-letterSpacingNormal u-lineClamp3 u-maxHeight3LineHeightBase u-textOverflowEllipsis u-fontSize14">
+              <%= ActionView::Base.full_sanitizer.sanitize(review.content).truncate(120, separator: ' ') %>
             </h4></a></div>
       </div>
       <div class="u-flex u-paddingTop10 u-flex0">
@@ -26,11 +28,13 @@
         </div>
         <div class="u-flex1 u-noWrapWithEllipsis u-xs-paddingTop5">
           <div class="postMetaInline postMetaInline-authorLockup u-paddingLeft0 u-noWrapWithEllipsis">
-            <a class="link u-textColorDarker u-fontSize12 u-baseColor--link" href="https://blog.prototypr.io/@trydesignlab" data-action="show-user-card" data-action-value="2c97cc6869c8" data-action-type="hover" data-user-id="2c97cc6869c8" data-collection-slug="front-end-dev" dir="auto">Designlab</a>
+            <a class="link u-textColorDarker u-fontSize12 u-baseColor--link" href="#" data-action="show-user-card">
+              <%= review.user.name %>
+            </a>
           </div>
           <div class="u-fontSize12 u-textColorNormal u-lineHeightTight u-noWrapWithEllipsis u-paddingTop2">
-            <time datetime="2017-10-05T19:31:52.158Z">Oct 6</time>
-            <span class="middotDivider u-fontSize12"></span><span class="readingTime" title="9 min read"></span></div>
+            <time><%= create_at.strftime("%Y年%m月%d日") %></time>
+          </div>
         </div>
       </div>
     </div>
