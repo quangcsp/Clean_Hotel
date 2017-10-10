@@ -37,17 +37,16 @@
               <h3 class="graf graf--h3 graf--leading graf--title">
                 <%=
                   f.text_area :title, class: 'review-title editable',
-                    id: 'review-editable-title', title: 'タイトル'
+                              id: 'review-editable-title', value: @review.title
                 %>
 
               </h3>
               <%=
                 f.text_area :content, class: 'graf graf--p graf-after--h3 graf--trailing review-content editable',
-                  id: 'review-editable-content', title: '内容を書いてください。。。'
+                            id: 'review-editable-content', value: @review.content
               %>
-
               <div class="u-paddingTop20 u-textAlignCenter container u-maxWidth740">
-                <%= f.submit 'ポスト', class: 'button
+                <%= f.submit '保存', class: 'button
                 button--primary
                 button--large
                 is-active

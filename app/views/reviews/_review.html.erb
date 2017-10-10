@@ -1,6 +1,6 @@
 <% create_at = review.created_at.to_time %>
-<% raw_title = ActionView::Base.full_sanitizer.sanitize(review.content).truncate(120, separator: ' ').strip %>
-<% raw_title = raw_title[0, raw_title.length - 1] %>
+<% raw_title = ActionView::Base.full_sanitizer.sanitize(review.content).strip %>
+<% raw_title = raw_title.truncate(120, separator: ' ') %>
 
 <div class="u-borderBox u-size6of12  u-paddingRight10 u-xs-paddingLeft0 u-xs-paddingRight0 u-xs-size12of12 js-trackedPost js-sectionItem" data-source="grid_home---8------0-50----------22d054b693da-----800691088" data-post-id="2b06b7f0bc8d" data-index="0" data-action-scope="_actionscope_18" data-scroll="native">
   <div class="u-flex u-sizeFullWidth u-height260 u-sm-flexWrap u-xs-heightAuto u-borderBox u-marginBottom20 u-backgroundColorWhite u-overflowHidden u-relative u-borderRadius2 u-borderBlackLightest">
@@ -26,7 +26,7 @@
       </div>
       <div class="u-flex u-paddingTop10 u-flex0">
         <div class="u-flex0 u-paddingRight10">
-          <a class="link avatar u-baseColor--link" href="#"><img src="https://cdn-images-1.medium.com/fit/c/40/40/0*PaVRBUjr00_KZ2E9.png" class="avatar-image avatar-image--smaller" alt="Go to the profile of Designlab"></a>
+          <a class="link avatar u-baseColor--link" href="#"><img src="/no_avatar.jpg" class="avatar-image avatar-image--smaller" alt="Go to the profile of Designlab"></a>
         </div>
         <div class="u-flex1 u-noWrapWithEllipsis u-xs-paddingTop5">
           <div class="postMetaInline postMetaInline-authorLockup u-paddingLeft0 u-noWrapWithEllipsis">
