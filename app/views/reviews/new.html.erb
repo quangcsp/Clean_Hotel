@@ -37,17 +37,17 @@
               <h3 class="graf graf--h3 graf--leading graf--title">
                 <%=
                   f.text_area :title, class: 'review-title editable',
-                              id: 'review-editable-title', title: 'Tiêu đề'
+                    id: 'review-editable-title', title: 'タイトル'
                 %>
 
               </h3>
               <%=
                 f.text_area :content, class: 'graf graf--p graf-after--h3 graf--trailing review-content editable',
-                            id: 'review-editable-content', title: 'Nội dung bài review của bạn...'
+                  id: 'review-editable-content', title: '内容を書いてください。。。'
               %>
 
               <div class="u-paddingTop20 u-textAlignCenter container u-maxWidth740">
-                <%= f.submit 'Đăng Bai', class: 'button
+                <%= f.submit 'ポスト', class: 'button
                 button--primary
                 button--large
                 is-active

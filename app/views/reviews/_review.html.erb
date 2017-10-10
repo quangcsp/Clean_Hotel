@@ -1,10 +1,12 @@
 <% create_at = review.created_at.to_time %>
+<% raw_title = ActionView::Base.full_sanitizer.sanitize(review.content).truncate(120, separator: ' ').strip %>
+<% raw_title = raw_title[0, raw_title.length - 1] %>
 
 <div class="u-borderBox u-size6of12  u-paddingRight10 u-xs-paddingLeft0 u-xs-paddingRight0 u-xs-size12of12 js-trackedPost js-sectionItem" data-source="grid_home---8------0-50----------22d054b693da-----800691088" data-post-id="2b06b7f0bc8d" data-index="0" data-action-scope="_actionscope_18" data-scroll="native">
   <div class="u-flex u-sizeFullWidth u-height260 u-sm-flexWrap u-xs-heightAuto u-borderBox u-marginBottom20 u-backgroundColorWhite u-overflowHidden u-relative u-borderRadius2 u-borderBlackLightest">
     <div class="u-flex0 u-sizeFullHeight u-width200 u-sm-height100 u-sm-sizeFullWidth u-xs-height170">
       <% if review.image.blank? %>
-          <a href="/reviews/<%= review.id %>" class="u-block u-backgroundSizeCover u-backgroundOriginBorderBox u-backgroundColorGrayLight u-sizeFullHeight" style="background-image: url(https://res.cloudinary.com/lichin/image/upload/v1462040642/aqur_bfi25g.png); background-position: 50% 50% !important;"></a>
+          <a href="/reviews/<%= review.id %>" class="u-block u-backgroundSizeCover u-backgroundOriginBorderBox u-backgroundColorGrayLight u-sizeFullHeight" style="background-image: url('assets/review_hotel2'); background-position: 50% 50% !important;"></a>
       <% else %>
           <a href="/reviews/<%= review.id %>" class="u-block u-backgroundSizeCover u-backgroundOriginBorderBox u-backgroundColorGrayLight u-sizeFullHeight" style="background-image: url(<%= raw review.image %>); background-position: 50% 50% !important;"></a>
       <% end %>
@@ -19,7 +21,7 @@
               </h3></a></div>
           <a class="" href="/reviews/<%= review.id %>">
             <h4 class="u-uiTextRegular u-textColorNormal u-marginTop5 u-letterSpacingNormal u-lineClamp3 u-maxHeight3LineHeightBase u-textOverflowEllipsis u-fontSize14">
-              <%= ActionView::Base.full_sanitizer.sanitize(review.content).truncate(120, separator: ' ') %>
+              <%= raw_title %>
             </h4></a></div>
       </div>
       <div class="u-flex u-paddingTop10 u-flex0">
@@ -29,7 +31,7 @@
         <div class="u-flex1 u-noWrapWithEllipsis u-xs-paddingTop5">
           <div class="postMetaInline postMetaInline-authorLockup u-paddingLeft0 u-noWrapWithEllipsis">
             <a class="link u-textColorDarker u-fontSize12 u-baseColor--link" href="#" data-action="show-user-card">
-              <%= review.user.name %>
+              <%= review.user.name.titleize %>
             </a>
           </div>
           <div class="u-fontSize12 u-textColorNormal u-lineHeightTight u-noWrapWithEllipsis u-paddingTop2">

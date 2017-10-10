@@ -18,12 +18,18 @@ class ReviewsController < ApplicationController
 
   def create
     @review = current_user.reviews.build(review_params)
+    @review.title = ActionView::Base.full_sanitizer.sanitize(@review.title).strip
+    @review.title = @review.title[0, @review.title.length - 1]
     if @review.save
-      redirect_to root_path
+      redirect_to reviews_path
     else
       # redirect_to new_user_session_path
       render 'reviews/new'
     end
+  end
+
+  def my_review
+    @reviews = current_user.reviews.paginate(page: params[:page])
   end
 
   private
