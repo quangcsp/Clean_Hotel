@@ -8,7 +8,11 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :reviews
+  resources :reviews do
+    get 'my_review', on: :collection
+  end
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

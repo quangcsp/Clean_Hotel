@@ -295,3 +295,8 @@ span.picture {
 .gravatar_edit {
   margin-top: 15px;
 }
+
+/*image home*/
+#image-home {
+  width: 100%;
+}
