@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :destroy, :edit]
   def index
     # if user_signed_in?
     #   @reviews = current_user.reviews.paginate(page: params[:page])
@@ -18,18 +18,29 @@ class ReviewsController < ApplicationController
 
   def create
     @review = current_user.reviews.build(review_params)
-    @review.title = ActionView::Base.full_sanitizer.sanitize(@review.title).strip
-    @review.title = @review.title[0, @review.title.length - 1]
     if @review.save
-      redirect_to reviews_path
+      redirect_to @review
     else
       # redirect_to new_user_session_path
       render 'reviews/new'
     end
   end
 
+  def update
+    @review = Review.find(params[:id])
+    if @review.update_attributes(review_params)
+      redirect_to @review
+    else
+      render 'reviews/edit'
+    end
+  end
+
   def my_review
     @reviews = current_user.reviews.paginate(page: params[:page])
+  end
+
+  def edit
+    @review = Review.find(params[:id])
   end
 
   private

@@ -20,4 +20,5 @@
 //= require jquery.iframe-transport
 //= require jquery.fileupload
 //= require medium-editor-insert-plugin.min
+//= require vue.min
 //= require_tree .
