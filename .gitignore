@@ -18,3 +18,5 @@
 
 # Ignore the IDE config
 /.idea
+
+/public/uploads/*
