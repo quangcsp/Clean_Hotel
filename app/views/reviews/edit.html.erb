@@ -45,14 +45,20 @@
                 f.text_area :content, class: 'graf graf--p graf-after--h3 graf--trailing review-content editable',
                             id: 'review-editable-content', value: @review.content
               %>
-              <div class="u-paddingTop20 u-textAlignCenter container u-maxWidth740">
-                <%= f.submit '保存', class: 'button
+              <div class="u-paddingTop30 u-textAlignCenter container u-maxWidth740">
+                <button class="button
+                               button--large
+                               button--warning
+                               button--withChrome"
+                        onclick="location.href = '/reviews/<%= @review.id %>';">
+                  キャンセルする
+                </button>
+                <%= f.submit '保存する', class: 'button
                 button--primary
                 button--large
                 is-active
                 button--withChrome
-                u-accentColor--buttonNormal
-                is-touched', id: 'post-review' %>
+                u-accentColor--buttonNormal', id: 'post-review' %>
               </div>
             </div>
           </div>

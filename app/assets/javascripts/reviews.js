@@ -7,6 +7,9 @@ Review.init = function () {
 
 Review.initEditor = function () {
     this.editor_title = new MediumEditor('#review-editable-title', {
+        placeholder: {
+            text: $('#review-editable-title').attr('title'),
+        },
         autoLink: true,
         keyboardCommands: {
             /* This example includes the default options for keyboardCommands,
@@ -37,6 +40,9 @@ Review.initEditor = function () {
         },
     });
     this.editor_content = new MediumEditor('#review-editable-content', {
+        placeholder: {
+            text: $('#review-editable-content').attr('title'),
+        },
         autoLink: true,
         keyboardCommands: {
             /* This example includes the default options for keyboardCommands,
