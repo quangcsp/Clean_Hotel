@@ -1,5 +1,5 @@
-<div class="write-review">
-  <header class="container u-maxWidth740">
+<div class="write-review" id="write-review">
+  <header class="container u-maxWidth740 u-paddingLeft0">
     <div class="uiScale uiScale-ui--regular uiScale-caption--regular postMetaHeader u-paddingBottom10 row">
       <div class="col u-size12of12 js-postMetaLockup">
         <div class="uiScale uiScale-ui--regular uiScale-caption--regular postMetaLockup postMetaLockup--authorWithBio u-flex js-postMetaLockup">
@@ -29,24 +29,60 @@
   <%= form_for @review do |f| %>
       <%= render 'partials/error_messages', object: f.object %>
       <div class="postArticle-content js-postField js-notesSource">
-        <section class="section section--body section--first section--last">
+        <section class="section section--body section--first section--last u-paddingTop10">
           <div class="section-content">
 
             <div class="section-inner sectionLayout--insetColumn">
-
-              <h3 class="graf graf--h3 graf--leading graf--title">
+              <input type="hidden" name="review[hotel_id]" v-model="hotel_id">
+              <md-layout>
+                <md-layout md-flex="66">
+                  <md-input-container :class="[errors.has('hotel') ? 'md-input-invalid' : '']">
+                    <label>ホテルを選んでください</label>
+                    <md-autocomplete v-model="hotelValue"
+                                     name="hotel"
+                                     v-validate="'required'"
+                                     :list="hotelData"
+                                     print-attribute="name"
+                                     :filter-list="hotelFilter"
+                                     :min-chars="0"
+                                     :max-height="6"
+                                     @selected="hotelCallback"
+                                     :debounce="500">
+                    </md-autocomplete>
+                    <span class="md-error" v-show="errors.has('hotel')">{{ errors.first('hotel') }}</span>
+                  </md-input-container>
+                </md-layout>
+                <md-layout md-vertical-align="center"
+                           md-align="end"
+                           md-row>
+                  <input type="hidden" name="review[rate]" v-model="rate">
+                  <b>Rate this hotel</b>
+                  <md-rating-bar v-model="rate"
+                                 class="md-primary">
+                  </md-rating-bar>
+                </md-layout>
+              </md-layout>
+              <h3 class="graf graf--h3 graf--leading graf--title u-paddingTop20">
                 <%=
                   f.text_area :title, class: 'review-title editable',
-                    id: 'review-editable-title', title: 'タイトル'
+                              id: 'review-editable-title', title: 'タイトル'
                 %>
 
               </h3>
               <%=
                 f.text_area :content, class: 'graf graf--p graf-after--h3 graf--trailing review-content editable',
-                  id: 'review-editable-content', title: '内容を書いてください。。。'
+                            id: 'review-editable-content', title: '内容を書いてください。'
               %>
 
               <div class="u-paddingTop30 u-textAlignCenter container u-maxWidth740">
+                <button type="button"
+                        class="button
+                               button--large
+                               button--warning
+                               button--withChrome"
+                        onclick="location.href = '/reviews';">
+                  キャンセルする
+                </button>
                 <%= f.submit '投稿する', class: 'button
                 button--primary
                 button--large
@@ -63,5 +99,6 @@
 </div>
 
 <script>
-    $(Review.init());
+    newReview();
+    Review.init();
 </script>

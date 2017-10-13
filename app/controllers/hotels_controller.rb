@@ -1,6 +1,10 @@
 class HotelsController < ApplicationController
   def index
     @hotels = Hotel.all
+    respond_to do |format|
+      format.html
+      format.json {render :json => @hotels}
+    end
   end
 
   def show

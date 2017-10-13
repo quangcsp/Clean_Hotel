@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :destroy, :edit]
+
   def index
     # if user_signed_in?
     #   @reviews = current_user.reviews.paginate(page: params[:page])
@@ -18,6 +19,7 @@ class ReviewsController < ApplicationController
 
   def create
     @review = current_user.reviews.build(review_params)
+
     if @review.save
       redirect_to @review
     else
@@ -46,7 +48,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:title, :content, :hotel_id, :image, :rate_avg)
+    params.require(:review).permit(:title, :content, :hotel_id, :image, :rate)
 
   end
 end
