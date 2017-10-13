@@ -1,7 +1,7 @@
 class CreateReviews < ActiveRecord::Migration[5.0]
   def change
     create_table :reviews do |t|
-      t.float :rate_avg
+      t.float :rate
       t.string :title
       t.text :content
       t.string :image

@@ -3,11 +3,12 @@ class CreateHotels < ActiveRecord::Migration[5.0]
     create_table :hotels do |t|
       t.string :name
       t.string :address
-      t.string :avatar
-      t.integer :star
-      t.float :rate_avg
       t.integer :phone
-      t.text :desciption
+      t.text :description
+      t.integer :star
+      t.float :rate_sum
+      t.integer :rate_count
+      t.string :avatar
 
       t.timestamps
     end

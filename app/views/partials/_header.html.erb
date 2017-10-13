@@ -3,7 +3,17 @@
     <li class="menu-item">
       <%= link_to "ホームページ", root_path %>
     </li>
-    <li class="menu-item"><%= link_to "ホテル" %></li>
+    <% if user_signed_in? %>
+      <li class="menu-item-has-children">
+        <%= link_to "ホテル" %>
+        <ul class="sub-menu">
+          <li><%= link_to "Show All Hotel" %></li>
+          <li><%= link_to "Create Hotel", new_hotel_path %></li>
+        </ul>
+      </li>
+    <% else %>
+      <li class="menu-item"><%= link_to "ホテル" %></li>
+    <% end %>
     <% if user_signed_in? %>
       <li class="menu-item-has-children">
         <%= link_to "レビュー"%>

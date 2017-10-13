@@ -14,6 +14,7 @@ class Hotel < ApplicationRecord
   has_many :reviews
   validates :name, presence: true, length: {maximum: 20}
   validates :address, presence: true
-  validates :desciption, presence: true
+  validates :description, presence: true
   validates :star, presence: true
+  mount_uploader :avatar, HotelAvatarUploader
 end

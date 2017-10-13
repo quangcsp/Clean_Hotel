@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     get 'my_review', on: :collection
   end
 
+  resources :hotels
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

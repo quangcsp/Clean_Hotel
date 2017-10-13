@@ -1,13 +1,13 @@
 .body-signin {
   background-color: #cfd8dc;
-  background-image: url("/background.jpg");
+  background-image: url("/assets/background.jpg");
   background-size: auto;
   font-family: 'Ubuntu', sans-serif;
 }
 
 .body-signup {
   background-color: #cfd8dc;
-  background-image: url("/background.jpg");
+  background-image: url("/assets/background.jpg");
   font-family: 'Ubuntu', sans-serif;
 }
 
@@ -19,7 +19,7 @@
 
 .body-edit-user {
   background-color: #cfd8dc;
-  background-image: url("/background.jpg");
+  background-image: url("/assets/background.jpg");
   font-family: 'Ubuntu', sans-serif;
 }
 
@@ -147,6 +147,7 @@
   margin-top: 4%;
   font-size: 13px;
   box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .mail:focus,
@@ -254,7 +255,7 @@ span.mb-2:hover {
   width: 250px;
   padding-left: 3px;
   border-style: double;
-  border-right-width: 2px;
+  border-right-width: double 2px;
 }
 
 /* review */
@@ -279,7 +280,7 @@ span.mb-2:hover {
     }
   }
   .timestamp {
-    color: lightgray;
+    color: $gray-light;
     display: block;
     margin-left: 60px;
   }

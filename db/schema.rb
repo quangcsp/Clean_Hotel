@@ -12,34 +12,17 @@
 
 ActiveRecord::Schema.define(version: 20171009145754) do
 
-  create_table "hotel_images", force: :cascade do |t|
-    t.string   "image"
-    t.integer  "hotel_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["hotel_id"], name: "index_hotel_images_on_hotel_id"
-  end
-
-  create_table "hotel_rates", force: :cascade do |t|
-    t.integer  "rate"
-    t.integer  "hotel_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["hotel_id"], name: "index_hotel_rates_on_hotel_id"
-    t.index ["user_id"], name: "index_hotel_rates_on_user_id"
-  end
-
   create_table "hotels", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
-    t.string   "avatar"
-    t.integer  "star"
-    t.float    "rate_avg"
     t.integer  "phone"
-    t.text     "desciption"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "description"
+    t.integer  "star"
+    t.float    "rate_sum"
+    t.integer  "rate_count"
+    t.string   "avatar"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "pictures", force: :cascade do |t|
@@ -48,16 +31,8 @@ ActiveRecord::Schema.define(version: 20171009145754) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "review_rates", force: :cascade do |t|
-    t.integer  "rate"
-    t.integer  "user_review"
-    t.integer  "user_rate"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
   create_table "reviews", force: :cascade do |t|
-    t.float    "rate_avg"
+    t.float    "rate"
     t.string   "title"
     t.text     "content"
     t.string   "image"
@@ -79,6 +54,7 @@ ActiveRecord::Schema.define(version: 20171009145754) do
     t.date     "birth_day"
     t.integer  "phone"
     t.string   "address"
+    t.boolean  "admin"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
