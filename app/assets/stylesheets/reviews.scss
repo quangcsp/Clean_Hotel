@@ -336,3 +336,16 @@ p.source a:hover {
 figcaption {
   color: rgba(0, 0, 0, 0.8) !important;
 }
+
+.md-input-container:not(.md-input-focused):not(.md-has-value) {
+  label {
+    font-size: 21px;
+    font-weight: 400;
+    color: black;
+  }
+}
+
+.md-menu-content {
+  width: 100%;
+  max-width: 40vw;
+}

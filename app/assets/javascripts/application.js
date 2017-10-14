@@ -21,4 +21,14 @@
 //= require jquery.fileupload
 //= require medium-editor-insert-plugin.min
 //= require vue.min
+//= require vue-material
+//= require vee-validate
+//= require axios.min
 //= require_tree .
+
+Vue.use(VueMaterial);
+Vue.use(VeeValidate);
+Vue.material.registerTheme('default', {
+    primary: 'blue',
+    background: 'white',
+});

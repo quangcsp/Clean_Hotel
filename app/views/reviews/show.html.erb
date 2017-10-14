@@ -1,6 +1,6 @@
 <% create_at = @review.created_at.to_time %>
 
-<div class="show-review">
+<div class="show-review" id="show-review">
   <header class="container u-maxWidth740">
     <div class="uiScale uiScale-ui--regular uiScale-caption--regular postMetaHeader u-paddingBottom10 row">
       <div class="col u-size8of12 js-postMetaLockup">
@@ -38,7 +38,7 @@
         button--primary
         button--withChrome
         button--withHover"
-        onclick="location.href = '/reviews/<%= @review.id %>/edit'">
+                onclick="location.href = '/reviews/<%= @review.id %>/edit';">
           編集する
         </button>
         <button class="button
@@ -58,7 +58,30 @@
       <div class="section-content">
 
         <div class="section-inner sectionLayout--insetColumn u-maxWidth740">
-
+          <md-layout>
+            <md-layout md-flex="66" md-row md-align-vertical="center">
+              <md-layout md-flex="20"></md-layout>
+              <md-layout md-column>
+                <md-layout>
+                  <a href="/hotels/<%= @review.hotel.id %>" class="md-title"><%= @review.hotel.name %></a>
+                </md-layout>
+                <md-layout>
+                  <div class="md-caption">
+                    <%= @review.hotel.address %>
+                  </div>
+                </md-layout>
+              </md-layout>
+            </md-layout>
+            <md-layout md-vertical-align="center"
+                       md-align="end"
+                       md-row>
+              <b>Rate score</b>
+              <md-rating-bar value="<%= @review.rate %>"
+                             class="md-primary"
+                             disabled>
+              </md-rating-bar>
+            </md-layout>
+          </md-layout>
           <h3 class="graf graf--h3 graf--leading graf--title">
             <%= raw @review.title %>
           </h3>
@@ -71,3 +94,7 @@
     </section>
   </div>
 </div>
+
+<script>
+    showReview();
+</script>
