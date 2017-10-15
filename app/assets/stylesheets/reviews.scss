@@ -349,3 +349,21 @@ figcaption {
   width: 100%;
   max-width: 40vw;
 }
+
+.write-review {
+  .md-caption {
+    margin-top: 5px;
+  }
+}
+
+.show-review {
+  h3 {
+    p {
+      margin-bottom: 10px;
+    }
+  }
+
+  .section--first {
+    padding-top: 30px !important;
+  }
+}

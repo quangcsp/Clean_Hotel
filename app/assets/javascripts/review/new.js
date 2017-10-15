@@ -5,12 +5,19 @@ function newReview() {
     const WriteReview = new Vue({
         el: '#write-review',
         data: {
-            hotel_id: -1,
             hotelValue: '',
             hotelData: [{}],
             rate: 0,
+            hotel: {},
+        },
+        computed: {
+            avg_rate: function () {
+                return this.hotel.rate_count ? Math.round(this.hotel.rate_sum * 100 / this.hotel.rate_count) / 100 : 0;
+            },
         },
         mounted: function () {
+            this.rate = parseInt($('.md-rating-bar').attr('data-rate')) ?
+                parseInt($('.md-rating-bar').attr('data-rate')) : 0;
             this.fetchHotel();
         },
         methods: {
@@ -29,7 +36,7 @@ function newReview() {
             },
 
             hotelCallback: function (item) {
-                this.hotel_id = item.id;
+                this.hotel = item;
             },
 
             fetchHotel: function () {
@@ -41,17 +48,6 @@ function newReview() {
                     .catch(err => {
 
                     });
-            },
-
-            formatHotelData: function (data) {
-                let formated_data = [];
-                data.forEach(item => {
-                    formated_data.push({
-                        name: item.name + ' ・ ' + item.address,
-                        id: item.id,
-                    });
-                });
-                return formated_data;
             },
         },
     });
