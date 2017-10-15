@@ -30,3 +30,7 @@ body {
 .u-maxWidth740 {
     max-width: 55vw !important;
 }
+
+.u-maxWidth640 {
+    max-width: 52vw !important;
+}

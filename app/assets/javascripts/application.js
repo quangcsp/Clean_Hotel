@@ -26,9 +26,6 @@
 //= require axios.min
 //= require_tree .
 
-Vue.use(VueMaterial);
 Vue.use(VeeValidate);
-Vue.material.registerTheme('default', {
-    primary: 'blue',
-    background: 'white',
-});
+Vue.use(VueMaterial);
+

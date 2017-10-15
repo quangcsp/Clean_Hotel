@@ -49,6 +49,10 @@ function newReview() {
 
                     });
             },
+
+            hotelInput: function () {
+                this.hotel = {};
+            }
         },
     });
 }

@@ -39,7 +39,7 @@
                   <md-layout md-column>
                     <md-layout>
                       <md-input-container :class="[errors.has('hotel') ? 'md-input-invalid' : '']">
-                        <label>ホテル</label>
+                        <label>ホテルを選んでください</label>
                         <md-autocomplete v-model="hotelValue"
                                          class="md-title"
                                          name="hotel"
@@ -50,7 +50,8 @@
                                          :min-chars="0"
                                          :max-height="6"
                                          @selected="hotelCallback"
-                                         :debounce="500">
+                                         :debounce="500"
+                                         @input="hotelInput">
                         </md-autocomplete>
                         <span class="md-error" v-show="errors.has('hotel')">{{ errors.first('hotel') }}</span>
                       </md-input-container>
