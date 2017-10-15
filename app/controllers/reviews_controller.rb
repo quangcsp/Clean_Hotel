@@ -37,18 +37,24 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def edit
+    @review = Review.find(params[:id])
+  end
+
+  def destroy
+    @review = Review.find(params[:id]).destroy
+    redirect_to reviews_path
+  end
+
   def my_review
     @reviews = current_user.reviews.paginate(page: params[:page])
   end
 
-  def edit
-    @review = Review.find(params[:id])
-  end
+
 
   private
 
   def review_params
     params.require(:review).permit(:title, :content, :hotel_id, :image, :rate)
-
   end
 end
