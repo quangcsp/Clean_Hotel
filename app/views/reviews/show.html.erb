@@ -1,8 +1,9 @@
 <% create_at = @review.created_at.to_time %>
+<% avg_rate = 0 %>
 
 <div class="show-review" id="show-review">
   <header class="container u-maxWidth740">
-    <div class="uiScale uiScale-ui--regular uiScale-caption--regular postMetaHeader u-paddingBottom10 row">
+    <div class="uiScale uiScale)-ui--regular uiScale-caption--regular postMetaHeader u-paddingBottom10 row">
       <div class="col u-size8of12 js-postMetaLockup">
         <div class="uiScale uiScale-ui--regular uiScale-caption--regular postMetaLockup postMetaLockup--authorWithBio u-flex js-postMetaLockup">
           <div class="u-flex0">
@@ -60,16 +61,27 @@
       <div class="section-content">
 
         <div class="section-inner sectionLayout--insetColumn u-maxWidth740">
+          <h3 class="graf graf--h3 graf--leading graf--title">
+            <%= raw @review.title %>
+          </h3>
+
           <md-layout>
             <md-layout md-flex="66" md-row md-align-vertical="center">
-              <md-layout md-flex="20"></md-layout>
+              <md-layout md-flex="20">
+                <a class="link avatar u-baseColor--link"
+                   href="/hotels/<%= @review.hotel.id %>"
+                   dir="auto">
+                  <img src="<%= @review.hotel.avatar %>"
+                       class="avatar-image--small">
+                </a>
+              </md-layout>
               <md-layout md-column>
                 <md-layout>
                   <a href="/hotels/<%= @review.hotel.id %>" class="md-title"><%= @review.hotel.name %></a>
                 </md-layout>
                 <md-layout>
                   <div class="md-caption">
-                    <%= @review.hotel.address %>
+                    <%= @review.hotel.address %> ・ Avg rate: <%= avg_rate %>
                   </div>
                 </md-layout>
               </md-layout>
@@ -84,11 +96,8 @@
               </md-rating-bar>
             </md-layout>
           </md-layout>
-          <h3 class="graf graf--h3 graf--leading graf--title">
-            <%= raw @review.title %>
-          </h3>
 
-          <div class="graf graf--p graf-after--h3 graf--trailing">
+          <div class="graf graf--p graf-after--h3 graf--trailing u-paddingTop20">
             <%= raw @review.content %>
           </div>
         </div>

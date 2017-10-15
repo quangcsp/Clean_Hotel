@@ -88,10 +88,30 @@ Review.initEditor = function () {
 };
 
 Review.bindUIAction = function () {
-    $('form').on('submit', function (e) {
+    $('#post-review').on('click', function (e) {
         let title = Object.values(Review.editor_title.serialize())[0].value;
         let content = Object.values(Review.editor_content.serialize())[0].value;
         $('#review-editable-title').html(title);
         $('#review-editable-content').html(content);
+        let img = extractImg(content);
+        if (img !== null) {
+            $('input[name="review[image]"]').val(img);
+        }
     });
 };
+
+function extractImg(text) {
+    let arr = text.split('<img');
+    if (arr.length === 1) return null;
+    let tmp = arr[1];
+    let pos1 = tmp.indexOf('"');
+    let pos2 = tmp.indexOf('"', pos1 + 1);
+
+    let img = tmp.slice(pos1 + 1, pos2);
+    pos1 = img.indexOf('uploads');
+    if (pos1 >= 0) {
+        img = img.slice(pos1 -1);
+    }
+
+    return img;
+}

@@ -33,24 +33,34 @@
           <div class="section-content">
 
             <div class="section-inner sectionLayout--insetColumn">
-              <input type="hidden" name="review[hotel_id]" v-model="hotel_id">
+              <input type="hidden" name="review[hotel_id]" v-model="hotel.id">
               <md-layout>
-                <md-layout md-flex="66">
-                  <md-input-container :class="[errors.has('hotel') ? 'md-input-invalid' : '']">
-                    <label>ホテルを選んでください</label>
-                    <md-autocomplete v-model="hotelValue"
-                                     name="hotel"
-                                     v-validate="'required'"
-                                     :list="hotelData"
-                                     print-attribute="name"
-                                     :filter-list="hotelFilter"
-                                     :min-chars="0"
-                                     :max-height="6"
-                                     @selected="hotelCallback"
-                                     :debounce="500">
-                    </md-autocomplete>
-                    <span class="md-error" v-show="errors.has('hotel')">{{ errors.first('hotel') }}</span>
-                  </md-input-container>
+                <md-layout md-flex="66" md-row md-align-vertical="center">
+                  <md-layout md-column>
+                    <md-layout>
+                      <md-input-container :class="[errors.has('hotel') ? 'md-input-invalid' : '']">
+                        <label>ホテル</label>
+                        <md-autocomplete v-model="hotelValue"
+                                         class="md-title"
+                                         name="hotel"
+                                         v-validate="'required'"
+                                         :list="hotelData"
+                                         print-attribute="name"
+                                         :filter-list="hotelFilter"
+                                         :min-chars="0"
+                                         :max-height="6"
+                                         @selected="hotelCallback"
+                                         :debounce="500">
+                        </md-autocomplete>
+                        <span class="md-error" v-show="errors.has('hotel')">{{ errors.first('hotel') }}</span>
+                      </md-input-container>
+                    </md-layout>
+                    <md-layout v-show="hotel.address">
+                      <div class="md-caption">
+                        アドレス: <b>{{ hotel.address }}</b> ・ Avg rate: {{ avg_rate }}
+                      </div>
+                    </md-layout>
+                  </md-layout>
                 </md-layout>
                 <md-layout md-vertical-align="center"
                            md-align="end"
