@@ -1,4 +1,4 @@
-<% avg_rate = 0 %>
+<% avg_rate = @review.hotel.rate_count ? @review.hotel.rate_sum / @review.hotel.rate_count : 0 %>
 
 <div class="write-review" id="write-review">
   <header class="container u-maxWidth740 u-paddingLeft0">
@@ -40,21 +40,12 @@
                 <md-layout md-flex="66" md-row md-align-vertical="center">
                   <md-layout md-column>
                     <md-layout>
-                      <md-input-container :class="[errors.has('hotel') ? 'md-input-invalid' : '']">
+                      <md-input-container>
                         <label>ホテル</label>
-                        <md-autocomplete value="<%= @review.hotel.name %>"
-                                         disabled
-                                         name="hotel"
-                                         v-validate="'required'"
-                                         :list="hotelData"
-                                         print-attribute="name"
-                                         :filter-list="hotelFilter"
-                                         :min-chars="0"
-                                         :max-height="6"
-                                         @selected="hotelCallback"
-                                         :debounce="500">
-                        </md-autocomplete>
-                        <span class="md-error" v-show="errors.has('hotel')">{{ errors.first('hotel') }}</span>
+                        <md-input value="<%= @review.hotel.name %>"
+                                  disabled
+                                  name="hotel">
+                        </md-input>
                       </md-input-container>
                     </md-layout>
                     <md-layout>
