@@ -33,22 +33,24 @@
           </div>
         </div>
       </div>
-      <div class="col u-size4of12 u-textAlignRight">
-        <button class="button
-        button--primary
-        button--withChrome
-        button--withHover"
-                onclick="location.href = '/reviews/<%= @review.id %>/edit';">
-          編集する
-        </button>
-        <button class="button
-        button--primary
-        button--withChrome
-        button--withHover
-        button--warning">
-          削除する
-        </button>
-      </div>
+      <% if current_user? @review.user %>
+        <div class="col u-size4of12 u-textAlignRight">
+          <button class="button
+          button--primary
+          button--withChrome
+          button--withHover"
+                  onclick="location.href = '/reviews/<%= @review.id %>/edit';">
+            編集する
+          </button>
+          <button class="button
+          button--primary
+          button--withChrome
+          button--withHover
+          button--warning">
+            <%= link_to "削除する", review_path, method: :delete, data: {confirm: "You Sure?"} %>
+          </button>
+        </div>
+      <% end %>
     </div>
   </header>
 
