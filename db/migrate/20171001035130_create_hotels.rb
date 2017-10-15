@@ -6,8 +6,8 @@ class CreateHotels < ActiveRecord::Migration[5.0]
       t.integer :phone
       t.text :description
       t.integer :star
-      t.float :rate_sum
-      t.integer :rate_count
+      t.float :rate_sum, default: 0
+      t.integer :rate_count, default: 0
       t.string :avatar
 
       t.timestamps
