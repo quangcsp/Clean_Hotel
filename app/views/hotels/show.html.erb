@@ -8,7 +8,7 @@
       <p id="address-phone"><span><u>Adress:</u></span> <%= @hotel.address %>
         &emsp; <span><u>Tel:</u></span> +<%= @hotel.phone %></p>
       <div class="star-hotel">
-        <span style="color: red; font-style: bold;">Star: </span>
+        <span style="color: red; font-style: bold; margin-right: 5px;">Star: </span>
         <% for i in 0...5 %>
           <% if i<@hotel.star %>
             <i class="fa fa-star fa-star-yellow"></i>
@@ -25,7 +25,7 @@
   <div id="rate-show-hotel">
     <div id="rate-avg-hotel">
       <p style="text-align: center; font-size: 15pt;">Rate Average</p>
-      <p id="rate-sum"><%= @hotel.avg_rate %>/5</p>
+      <p id="rate-sum"><%= @hotel.avg_rate %>/5 </p>
       <p id="rate-count"><i class="fa fa-user"></i> Rate Count: <%= @hotel.total_rate %></p>
     </div>
     <div id="rate-detail-hotel">

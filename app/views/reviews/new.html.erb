@@ -58,7 +58,8 @@
                     </md-layout>
                     <md-layout v-show="hotel.address">
                       <div class="md-caption">
-                        アドレス: <b>{{ hotel.address }}</b> ・ Avg rate: {{ avg_rate }}
+                      <!-- khong doc duoc rate_sum tu hotel  -->
+                        アドレス: <b>{{ hotel.address }}</b> ・ Avg rate: {{ hotel.rate_sum }}
                       </div>
                     </md-layout>
                   </md-layout>
