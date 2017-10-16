@@ -23,7 +23,6 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to @review
     else
-      # redirect_to new_user_session_path
       render 'reviews/new'
     end
   end

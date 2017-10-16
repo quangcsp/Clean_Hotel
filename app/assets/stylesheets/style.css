@@ -253,9 +253,16 @@ span.mb-2:hover {
 
 .error_message {
   width: 250px;
+  margin: 0 auto;
   padding-left: 3px;
   border-style: double;
   border-right-width: double 2px;
+}
+
+.error_detail {
+  width: 250px;
+  margin: 0 auto;
+  padding-left: 3px;
 }
 
 /* review */

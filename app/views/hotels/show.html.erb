@@ -1,2 +1,98 @@
-<%= image_tag @hotel.avatar.url if @hotel.avatar? %>
-<%= @hotel.name %>
+<div id="container-show-hotel">
+  <div id="container-avatar-rate">
+    <div id="avatar-show-hotel">
+      <%= image_tag @hotel.avatar.url %>
+    </div>
+    <div id="title-description-hotel">
+      <h1><%= @hotel.name %></h1>
+      <p id="address-phone"><span><u>Adress:</u></span> <%= @hotel.address %>
+        &emsp; <span><u>Tel:</u></span> +<%= @hotel.phone %></p>
+      <div id="description-hotel">
+        <p><%= @hotel.description %></p>
+      </div>
+    </div>
+  </div>
+  <div id="rate-show-hotel">
+    <div id="rate-avg-hotel">
+      <p style="text-align: center; font-size: 15pt;">Rate Average</p>
+      <p id="rate-sum"><%= @hotel.avg_rate %>/5</p>
+      <p id="rate-count"><i class="fa fa-user"></i> Rate Count: <%= @hotel.total_rate %></p>
+    </div>
+    <div id="rate-detail-hotel">
+      <ul>
+        <li>
+          <span> 5 </span>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <% if @hotel.rate_five_per==0 %>
+            <div class="bar bar-5">
+              <p>0%</p>
+            </div>
+          <% else %>
+            <div class="bar bar-5" style="width: <%= @hotel.rate_five_per %>%;">
+              <p><%= (@hotel.rate_five_per*1.25).to_i %>%</p>
+            </div>
+          <% end %>
+          <div class="clearfix"></div>
+        </li>
+
+        <li>
+          <span> 4 </span>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <% if @hotel.rate_four_per==0 %>
+            <div class="bar bar-4">
+              <p>0%</p>
+            </div>
+          <% else %>
+            <div class="bar bar-4" style="width: <%= @hotel.rate_four_per %>%;">
+              <p><%= (@hotel.rate_four_per*1.25).to_i %>%</p>
+            </div>
+          <% end %>
+          <div class="clearfix"></div>
+        </li>
+        <li>
+          <span> 3 </span>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <% if @hotel.rate_three_per==0 %>
+            <div class="bar bar-3">
+              <p>0%</p>
+            </div>
+          <% else %>
+            <div class="bar bar-3" style="width: <%= @hotel.rate_three_per %>%;">
+              <p><%= (@hotel.rate_three_per*1.25).to_i %>%</p>
+            </div>
+          <% end %>
+          <div class="clearfix"></div>
+        </li>
+        <li>
+          <span> 2 </span>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <% if @hotel.rate_two_per==0 %>
+            <div class="bar bar-2">
+              <p>0%</p>
+            </div>
+          <% else %>
+            <div class="bar bar-2" style="width: <%= @hotel.rate_two_per %>%;">
+              <p><%= (@hotel.rate_two_per*1.25).to_i %>%</p>
+            </div>
+          <% end %>
+          <div class="clearfix"></div>
+        </li>
+        <li>
+          <span> 1 </span>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <% if @hotel.rate_one_per==0 %>
+            <div class="bar bar-1">
+              <p>0%</p>
+            </div>
+          <% else %>
+            <div class="bar bar-1" style="width: <%= @hotel.rate_one_per %>%;">
+              <p><%= (@hotel.rate_one_per*1.25).to_i %>%</p>
+            </div>
+          <% end %>
+          <div class="clearfix"></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div id="reviews-hotel"></div>
+</div>
