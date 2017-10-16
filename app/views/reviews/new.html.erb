@@ -59,7 +59,7 @@
                     <md-layout v-show="hotel.address">
                       <div class="md-caption">
                       <!-- khong doc duoc rate_sum tu hotel  -->
-                        アドレス: <b>{{ hotel.address }}</b> ・ Avg rate: {{ hotel.rate_sum }}
+                        アドレス: <b>{{ hotel.address }}</b> ・ レートの平均: {{ hotel.rate_sum / hotel.rate_count }}
                       </div>
                     </md-layout>
                   </md-layout>
@@ -85,7 +85,7 @@
                 f.text_area :content, class: 'graf graf--p graf-after--h3 graf--trailing review-content editable',
                             id: 'review-editable-content', title: '内容を書いてください。'
               %>
-
+              <input type="hidden" name="review[image]">
               <div class="u-paddingTop30 u-textAlignCenter container u-maxWidth740">
                 <button type="button"
                         class="button
