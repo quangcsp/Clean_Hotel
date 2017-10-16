@@ -18,11 +18,11 @@ ActiveRecord::Schema.define(version: 20171009145754) do
     t.integer  "phone"
     t.text     "description"
     t.integer  "star"
-    t.float    "rate_sum"
-    t.integer  "rate_count"
+    t.float    "rate_sum",    default: 0.0
+    t.integer  "rate_count",  default: 0
     t.string   "avatar"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "pictures", force: :cascade do |t|
@@ -32,11 +32,11 @@ ActiveRecord::Schema.define(version: 20171009145754) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.float    "rate"
-    t.string   "title"
-    t.text     "content"
+    t.float    "rate",       null: false
+    t.string   "title",      null: false
+    t.text     "content",    null: false
     t.string   "image"
-    t.integer  "hotel_id"
+    t.integer  "hotel_id",   null: false
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
