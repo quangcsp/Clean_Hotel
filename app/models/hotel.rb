@@ -32,27 +32,46 @@ class Hotel < ApplicationRecord
   def avg_rate
     unless total_rate==0
       (self.rate_one*1 + self.rate_two*2 + self.rate_three*3 + self.rate_four*4 + self.rate_five*5)/total_rate.to_f
+    else
+      0
     end
   end
 
   #vi width cua bar-rate la 80% nen nhan vs 80
   def rate_one_per
-    (self.rate_one/self.total_rate.to_f)*80.to_i
+    unless total_rate==0
+      (self.rate_one/self.total_rate.to_f)*80.to_i
+    else
+      0
+    end
   end
 
   def rate_two_per
-    (self.rate_two/self.total_rate.to_f*80).to_i
+    unless total_rate==0
+      (self.rate_two/self.total_rate.to_f*80).to_i
+    else
+      0
+    end
   end
 
   def rate_three_per
-    (self.rate_three/self.total_rate.to_f*80).to_i
+    unless total_rate==0
+      (self.rate_three/self.total_rate.to_f*80).to_i
+    else
+      0
+    end
   end
 
   def rate_four_per
-    (self.rate_four/self.total_rate.to_f*80).to_i
+    unless total_rate==0
+      (self.rate_four/self.total_rate.to_f*80).to_i
+    end
   end
 
   def rate_five_per
-    (self.rate_five/self.total_rate.to_f*80).to_i
+    unless total_rate==0
+      (self.rate_five/self.total_rate.to_f*80).to_i
+    end
   end
+
 end

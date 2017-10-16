@@ -9,6 +9,7 @@ class HotelsController < ApplicationController
 
   def show
     @hotel = Hotel.find_by(id: params[:id])
+    @reviews = @hotel.reviews.paginate(page: params[:page])
   end
 
   def new

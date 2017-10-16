@@ -123,4 +123,42 @@
 #reviews-hotel {
   width: 1000px;
   height: 500px;
+  margin-top: 40px;
+  border-top: solid 1px;
+  #title-bt-new-review{
+    height: 50px;
+    #title-review-rl {
+      float: left;
+      margin-top: 15px;
+    }
+    #bt-new-review {
+      float: right;
+      margin-top: 20px;
+      margin-right: 50px;
+      .myButton {
+        background-color:#44c767;
+        -moz-border-radius:20px;
+        -webkit-border-radius:20px;
+        border-radius:20px;
+        border:1px solid #18ab29;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:17px;
+        padding:10px 25px;
+        text-decoration:none;
+        text-shadow:0px 1px 0px #2f6627;
+      }
+      .myButton:hover {
+        background-color:#5cbf2a;
+      }
+      .myButton:active {
+        position:relative;
+        top:1px;
+      }
+
+    }
+  }
 }
+
