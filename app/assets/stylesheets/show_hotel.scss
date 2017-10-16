@@ -15,13 +15,12 @@
 
 #avatar-show-hotel{
   width: 480px;
-  height: 400px;
+  margin-top: 10px;
   float: left;
 }
 
 #title-description-hotel {
   width: 500px;
-  height: 400px;
   float: right;
   h1 {
     font-style: italic;
@@ -34,9 +33,19 @@
     }
   }
 
-
   #address-phone {
     font-style: italic;
+  }
+
+  .star-hotel {
+    margin-top: -25px;
+    .fa-star-yellow {
+      color: yellow;
+    }
+  }
+
+  #description-hotel {
+    margin-top: 10px;
   }
 }
 
@@ -44,6 +53,7 @@
   width: 1000px;
   height: 160px;
   overflow: hidden;
+  margin-top: 30px;
 
   #rate-avg-hotel{
     width: 400px;

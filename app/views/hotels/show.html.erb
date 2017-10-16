@@ -7,6 +7,16 @@
       <h1><%= @hotel.name %></h1>
       <p id="address-phone"><span><u>Adress:</u></span> <%= @hotel.address %>
         &emsp; <span><u>Tel:</u></span> +<%= @hotel.phone %></p>
+      <div class="star-hotel">
+        <span style="color: red; font-style: bold;">Star: </span>
+        <% for i in 0...5 %>
+          <% if i<@hotel.star %>
+            <i class="fa fa-star fa-star-yellow"></i>
+          <% else %>
+            <i class="fa fa-star"></i>
+          <% end %>
+        <% end %>
+      </div>
       <div id="description-hotel">
         <p><%= @hotel.description %></p>
       </div>
