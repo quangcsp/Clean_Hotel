@@ -88,7 +88,7 @@ Review.initEditor = function () {
 };
 
 Review.bindUIAction = function () {
-    $('#post-review').on('click', function (e) {
+    $('form').on('submit', function (e) {
         let title = Object.values(Review.editor_title.serialize())[0].value;
         let content = Object.values(Review.editor_content.serialize())[0].value;
         $('#review-editable-title').html(title);
@@ -112,6 +112,5 @@ function extractImg(text) {
     if (pos1 >= 0) {
         img = img.slice(pos1 -1);
     }
-
     return img;
 }

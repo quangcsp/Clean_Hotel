@@ -107,6 +107,10 @@ figcaption {
     }
   }
 
+  .medium-insert-buttons {
+    visibility: hidden;
+  }
+
   .postArticle:not(.postArticle--short) {
     .postArticle-content {
       .section--first {
