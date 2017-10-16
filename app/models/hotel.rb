@@ -26,12 +26,14 @@ class Hotel < ApplicationRecord
     end
 
   def total_rate
-    self.rate_one + self.rate_two + self.rate_three + self.rate_four + self.rate_five
+    self.rate_count = self.rate_one + self.rate_two + self.rate_three +
+      self.rate_four + self.rate_five
   end
 
   def avg_rate
     unless total_rate==0
-      (self.rate_one*1 + self.rate_two*2 + self.rate_three*3 + self.rate_four*4 + self.rate_five*5)/total_rate.to_f
+      self.rate_sum = (self.rate_one*1 + self.rate_two*2 + self.rate_three*3 +
+        self.rate_four*4 + self.rate_five*5)/total_rate.to_f
     else
       0
     end
