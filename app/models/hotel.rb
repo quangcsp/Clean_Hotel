@@ -15,7 +15,8 @@ class Hotel < ApplicationRecord
   validates :name, presence: true, length: {maximum: 20}
   validates :address, presence: true
   validates :description, presence: true
-  validates :star, presence: true
+  validates :phone, presence: true
+  validates :star, presence: true, inclusion: {in: %w{1 2 3 4 5}}
   mount_uploader :avatar, HotelAvatarUploader
 
   ["rate_one", "rate_two", "rate_three", "rate_four", "rate_five"]

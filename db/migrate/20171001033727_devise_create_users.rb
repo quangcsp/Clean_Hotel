@@ -13,7 +13,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       t.date :birth_day
       t.integer :phone
       t.string :address
-      t.boolean :admin
+      t.boolean :admin, default: false
 
       ## Recoverable
       t.string   :reset_password_token
