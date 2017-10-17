@@ -58,8 +58,8 @@
                     </md-layout>
                     <md-layout v-show="hotel.address">
                       <div class="md-caption">
-                      <!-- khong doc duoc rate_sum tu hotel  -->
-                        アドレス: <b>{{ hotel.address }}</b> ・ レートの平均: {{ hotel.rate_sum / hotel.rate_count }}
+                        <!-- khong doc duoc rate_sum tu hotel  -->
+                        アドレス: <b>{{ hotel.address }}</b> ・ レートの平均: {{ avg_rate }}
                       </div>
                     </md-layout>
                   </md-layout>
@@ -74,6 +74,7 @@
                   </md-rating-bar>
                 </md-layout>
               </md-layout>
+              <img :src="hotel.avatar.url" v-if="hotel.id">
               <h3 class="graf graf--h3 graf--leading graf--title u-paddingTop20">
                 <%=
                   f.text_area :title, class: 'review-title editable',
