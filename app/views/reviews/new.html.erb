@@ -59,7 +59,7 @@
                     <md-layout v-show="hotel.address">
                       <div class="md-caption">
                         <!-- khong doc duoc rate_sum tu hotel  -->
-                        アドレス: <b>{{ hotel.address }}</b> ・ レートの平均: {{ avg_rate }}
+                        アドレス: <b>{{ hotel.address }}</b>
                       </div>
                     </md-layout>
                   </md-layout>
@@ -68,7 +68,7 @@
                            md-align="end"
                            md-row>
                   <input type="hidden" name="review[rate]" v-model="rate">
-                  <b>Rate this hotel</b>
+                  <b>レート</b>
                   <md-rating-bar v-model="rate"
                                  class="md-primary">
                   </md-rating-bar>

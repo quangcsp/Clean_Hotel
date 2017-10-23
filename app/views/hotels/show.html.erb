@@ -5,16 +5,16 @@
     </div>
     <div id="title-description-hotel">
       <h1><%= @hotel.name %></h1>
-      <p id="address-phone"><span><u>アドレス:</u></span> <%= @hotel.address %>
-        &emsp; <span><u>電話番号:</u></span> +<%= @hotel.phone %></p>
+      <div id="address-phone"><span>アドレス:</span> <%= @hotel.address %></div>
+      <div id="address-phone"><span>電話番号:</span> +<%= @hotel.phone %></div>
       <div class="star-hotel">
-        <span style="color: red; font-style: bold; margin-right: 5px;">Star: </span>
+        <span style="color: red; font-style: bold; margin-right: 5px;">スター: </span>
         <% for i in 0...5 %>
-          <% if i<@hotel.star %>
-            <i class="fa fa-star fa-star-yellow"></i>
-          <% else %>
-            <i class="fa fa-star"></i>
-          <% end %>
+            <% if i<@hotel.star %>
+                <i class="fa fa-star fa-star-yellow"></i>
+            <% else %>
+                <i class="fa fa-star"></i>
+            <% end %>
         <% end %>
       </div>
       <div id="description-hotel">
@@ -34,13 +34,13 @@
           <span> 5 </span>
           <i class="fa fa-star" aria-hidden="true"></i>
           <% if (@hotel.rate_five_per).to_i==0 %>
-            <div class="bar bar-5">
-              <p>0%</p>
-            </div>
+              <div class="bar bar-5">
+                <p>0%</p>
+              </div>
           <% else %>
-            <div class="bar bar-5" style="width: <%= @hotel.rate_five_per %>%;">
-              <p><%= (@hotel.rate_five_per*1.25).to_i %>%</p>
-            </div>
+              <div class="bar bar-5" style="width: <%= @hotel.rate_five_per %>%;">
+                <p><%= (@hotel.rate_five_per*1.25).to_i %>%</p>
+              </div>
           <% end %>
           <div class="clearfix"></div>
         </li>
@@ -49,13 +49,13 @@
           <span> 4 </span>
           <i class="fa fa-star" aria-hidden="true"></i>
           <% if @hotel.rate_four_per.to_i==0 %>
-            <div class="bar bar-4">
-              <p>0%</p>
-            </div>
+              <div class="bar bar-4">
+                <p>0%</p>
+              </div>
           <% else %>
-            <div class="bar bar-4" style="width: <%= @hotel.rate_four_per %>%;">
-              <p><%= (@hotel.rate_four_per*1.25).to_i %>%</p>
-            </div>
+              <div class="bar bar-4" style="width: <%= @hotel.rate_four_per %>%;">
+                <p><%= (@hotel.rate_four_per*1.25).to_i %>%</p>
+              </div>
           <% end %>
           <div class="clearfix"></div>
         </li>
@@ -63,13 +63,13 @@
           <span> 3 </span>
           <i class="fa fa-star" aria-hidden="true"></i>
           <% if @hotel.rate_three_per.to_i==0 %>
-            <div class="bar bar-3">
-              <p>0%</p>
-            </div>
+              <div class="bar bar-3">
+                <p>0%</p>
+              </div>
           <% else %>
-            <div class="bar bar-3" style="width: <%= @hotel.rate_three_per %>%;">
-              <p><%= (@hotel.rate_three_per*1.25).to_i %>%</p>
-            </div>
+              <div class="bar bar-3" style="width: <%= @hotel.rate_three_per %>%;">
+                <p><%= (@hotel.rate_three_per*1.25).to_i %>%</p>
+              </div>
           <% end %>
           <div class="clearfix"></div>
         </li>
@@ -77,13 +77,13 @@
           <span> 2 </span>
           <i class="fa fa-star" aria-hidden="true"></i>
           <% if @hotel.rate_two_per.to_i==0 %>
-            <div class="bar bar-2">
-              <p>0%</p>
-            </div>
+              <div class="bar bar-2">
+                <p>0%</p>
+              </div>
           <% else %>
-            <div class="bar bar-2" style="width: <%= @hotel.rate_two_per %>%;">
-              <p><%= (@hotel.rate_two_per*1.25).to_i %>%</p>
-            </div>
+              <div class="bar bar-2" style="width: <%= @hotel.rate_two_per %>%;">
+                <p><%= (@hotel.rate_two_per*1.25).to_i %>%</p>
+              </div>
           <% end %>
           <div class="clearfix"></div>
         </li>
@@ -91,13 +91,13 @@
           <span> 1 </span>
           <i class="fa fa-star" aria-hidden="true"></i>
           <% if @hotel.rate_one_per.to_i==0 %>
-            <div class="bar bar-1">
-              <p>0%</p>
-            </div>
+              <div class="bar bar-1">
+                <p>0%</p>
+              </div>
           <% else %>
-            <div class="bar bar-1" style="width: <%= @hotel.rate_one_per %>%;">
-              <p><%= (@hotel.rate_one_per*1.25).to_i %>%</p>
-            </div>
+              <div class="bar bar-1" style="width: <%= @hotel.rate_one_per %>%;">
+                <p><%= (@hotel.rate_one_per*1.25).to_i %>%</p>
+              </div>
           <% end %>
           <div class="clearfix"></div>
         </li>
