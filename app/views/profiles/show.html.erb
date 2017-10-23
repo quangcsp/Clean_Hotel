@@ -1,0 +1,69 @@
+<div id="container-profile">
+  <div class="avatar-info">
+    <div class="avatar">
+      <%= image_tag "/assets/avatar", class: "avatar-image" %>
+    </div>
+    <div class="name-follow">
+      <p id="name"><%= @user.name.titleize %></p>
+
+      <%= link_to "Follow", user_profile_path, class: "bt-follow" %>
+    </div>
+    <div class="info">
+      <div class="info-name">
+        <ul>
+          <li><span>Email:</span></li>
+          <li><span>Birth Day:</span></li>
+          <li><span>Address:</span> </li>
+          <li><span>Phone:</span> </li>
+        </ul>
+      </div>
+      <div class="info-value">
+        <ul>
+          <li><%= @user.email %></li>
+          <li><%= @user.birth_day %></li>
+          <li><%= @user.address %></li>
+          <li><%= @user.phone %></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <% if current_user? @user %>
+  <div class="follow-user">
+    <div id="change-avatar">
+      <%= file_field :file, class: "bt-follow" %>
+    </div>
+    <div if="follow"></div>
+  </div>
+  <% end %>
+  <div id="reviews-hotel">
+    <div id="title-bt-new-review">
+      <div id="title-review-rl">
+        <h2 style="margin-top: 10px;"><%= @user.name.titleize %>のレビュー</h1>
+        </div>
+        <% if current_user? @user %>
+        <div id="bt-new-review">
+          <%= link_to "新しいレビューを書く？", new_review_path, class: "myButton" %>
+        </div>
+        <% end %>
+      </div>
+      <div class="clearfix"></div>
+      <div class="all-review">
+        <section class="u-borderBox u-maxWidth1000 u-marginAuto u-marginTop30 u-marginBottom40 u-clearfix u-sm-paddingLeft20 u-sm-paddingRight20 u-xs-marginTop15 js-trackedTopic" data-scroll="native">
+          <header class="u-flexTop u-marginBottom25 u-borderBottomLighter js-topicSuggestionHeading">
+            <span class="heading-title
+            heading-title--lineHeightTight
+            u-flex0 u-block u-paddingBottom20
+            u-uiDisplayBold u-fontSize20
+            u-textColorDarker u-borderBottomNormal
+            u-marginBottomNegative1 u-xs-fontSize18">
+          </span>
+        </header>
+        <% if @reviews.any? %>
+        <%= render @reviews %>
+        <%= will_paginate @reviews %>
+        <% end %>
+      </section>
+    </div>
+  </div>
+</div>

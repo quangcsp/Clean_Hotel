@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  get "user/:id", to: 'profiles#show', as: 'user_profile'
+
   resources :reviews do
     get 'my_review', on: :collection
   end

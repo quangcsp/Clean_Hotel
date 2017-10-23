@@ -25,7 +25,7 @@
                href="#"
                dir="auto">
               <h2>
-                <%= @review.user.name %>
+                <%= link_to @review.user.name, user_profile_path(@review.user.id) %>
               </h2>
             </a>
             <div class="ui-caption postMetaInline js-testPostMetaInlineSupplemental">
