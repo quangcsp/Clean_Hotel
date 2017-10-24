@@ -19,7 +19,6 @@ class ReviewsController < ApplicationController
 
   def create
     @review = current_user.reviews.build(review_params)
-
     if @review.save
       redirect_to @review
     else

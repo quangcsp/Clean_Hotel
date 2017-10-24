@@ -12,7 +12,7 @@ function newReview() {
         },
         computed: {
             avg_rate: function () {
-                return this.hotel.rate_count ? Math.round(this.hotel.rate_sum * 100 / this.hotel.rate_count) / 100 : 0;
+                return this.hotel.rate_count ? Math.round(this.hotel.rate_sum * 100.0 / this.hotel.rate_count) / 100 : 0;
             },
         },
         mounted: function () {
