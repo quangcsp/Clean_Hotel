@@ -4,6 +4,7 @@ class CreateReviews < ActiveRecord::Migration[5.0]
       t.float :rate, null: false
       t.string :title, null: false
       t.text :content, null: false
+      t.integer :like_count, default: 0
       t.string :image
       t.references :hotel, foreign_key: true, null: false
       t.references :user, foreign_key: true
