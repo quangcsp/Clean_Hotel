@@ -11,4 +11,6 @@ class User < ApplicationRecord
   has_many :likes
 
   validates :name, presence: true, length: {maximum: 50}
+
+  mount_uploader :avatar, UserAvatarUploader
 end

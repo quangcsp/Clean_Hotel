@@ -1,0 +1,218 @@
+#container-profile {
+  width: 1000px;
+  height: auto;
+  margin: 0 auto;
+
+  .avatar-info {
+    height: 220px;
+    border-radius: 2px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    overflow: hidden;
+    .avatar {
+      width: 200px;
+      height: 200px;
+      float: left;
+      #avatar-image {
+        margin-top: 10px;
+        margin-left: 10px;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+      }
+    }
+    .name-follow {
+      width: 200px;
+      height: 300px;
+      margin-top: 30px;
+      margin-left: 20px;
+      float: left;
+      #name{
+        font-size: 25pt;
+      }
+      .bt-follow {
+        margin-top: 10px;
+        background-color:#44c767;
+        border-radius: 5%;
+        border:1px solid #18ab29;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:17px;
+        padding:8px 30px;
+        text-decoration:none;
+        text-shadow:0px 1px 0px #2f6627;
+      }
+      .bt-follow:hover {
+        background-color:#5cbf2a;
+      }
+      .bt-follow:active {
+        position:relative;
+        top:1px;
+      }
+    }
+    .info {
+      width: 500px;
+      height: 200px;
+      float: right;
+      overflow: hidden;
+      .info-name {
+        width: 150px;
+        float: left;
+        ul {
+          margin-top: 40px;
+          margin-left: 30px;
+          li {
+            span {
+              font-style: italic;
+              color: red;
+              line-height: 20px;
+            }
+          }
+        }
+      }
+      .info-value {
+        width: 300px;
+        float: left;
+        ul {
+          margin-top: 40px;
+          li {
+          }
+        }
+      }
+
+    }
+  }
+
+  .change-avatar-info {
+    height: 100px;
+    border-radius: 2px;
+    overflow: hidden;
+    /*box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);*/
+    #change-avatar {
+      width: 500px;
+      float: left;
+
+      #bt-change-image {
+        margin-top: 30px;
+        background-color:#44c767;
+        border-radius: 5%;
+        border:1px solid #18ab29;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:17px;
+        padding:8px 30px;
+        text-decoration:none;
+        text-shadow:0px 1px 0px #2f6627;
+      }
+
+      #bt-change-image:hover {
+        background-color:#5cbf2a;
+      }
+
+      #bt-change-image:active {
+        position:relative;
+        top:1px;
+      }
+
+      #bt-upload {
+        background-color:#44c767;
+        margin-left: 10px;
+        // margin-top: 10px;
+        border-radius: 5%;
+        border:1px solid #18ab29;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:17px;
+        padding:8px 30px;
+        text-decoration:none;
+        text-shadow:0px 1px 0px #2f6627;
+      }
+
+      #bt-upload:hover {
+        background-color:#5cbf2a;
+      }
+
+      #bt-upload:active {
+        position:relative;
+        top:1px;
+      }
+
+      #bt-cancer {
+        margin-top: -10px;
+        background-color:#44c767;
+        border-radius: 5%;
+        border:1px solid #18ab29;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:17px;
+        padding:8px 30px;
+        text-decoration:none;
+        text-shadow:0px 1px 0px #2f6627;
+      }
+
+      #bt-cancer:hover {
+        background-color:#5cbf2a;
+      }
+      #bt-cancer:active {
+        position:relative;
+        top:1px;
+      }
+
+    }
+    #change-info {
+      width: 300px;
+      float: right;
+      #bt-change-info {
+        margin-top: 30px;
+        background-color:#44c767;
+        margin-left: 10px;
+        border-radius: 5%;
+        border:1px solid #18ab29;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:17px;
+        padding:8px 30px;
+        text-decoration:none;
+        text-shadow:0px 1px 0px #2f6627;
+      }
+
+      #bt-change-info:hover {
+        background-color:#5cbf2a;
+      }
+
+      #bt-change-info:active {
+        position:relative;
+        top:1px;
+      }
+    }
+
+  }
+
+  .reivew-profile {
+    height: 500px;
+  }
+}
+
+
+/*change avatar*/
+#uploadfile
+{
+  display:none;
+}
+#thumbbox
+{
+  position:relative;
+  width:100px;
+}
+

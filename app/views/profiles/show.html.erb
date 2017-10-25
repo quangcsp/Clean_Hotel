@@ -1,0 +1,124 @@
+<script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+<div id="container-profile">
+  <div class="avatar-info">
+    <div class="avatar">
+      <% if @user.avatar.blank? %>
+      <%= image_tag "/assets/avatar", id: "avatar-image" %>
+      <% else %>
+      <%= image_tag @user.avatar.url, id: "avatar-image" %>
+      <% end %>
+    </div>
+    <div class="name-follow">
+      <p id="name"><%= @user.name.titleize %></p>
+      <% unless current_user? @user %>
+        <%= link_to "Follow", user_profile_path, class: "bt-follow" %>
+      <% end %>
+    </div>
+    <div class="info">
+      <div class="info-name">
+        <ul>
+          <li><span>Email:</span></li>
+          <li><span>Birth Day:</span></li>
+          <li><span>Address:</span> </li>
+          <li><span>Phone:</span> </li>
+        </ul>
+      </div>
+      <div class="info-value">
+        <ul>
+          <li><%= @user.email %></li>
+          <li><%= @user.birth_day %></li>
+          <li><%= @user.address %></li>
+          <li><%= @user.phone %></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <% if current_user? @user %>
+  <div class="change-avatar-info">
+    <div id="change-avatar">
+    <%= render "form_change_avatar", id: "render-form" %>
+    </div>
+    <div id="change-info">
+      <%= link_to "ユーザの編集", edit_user_registration_path, id: "bt-change-info" %>
+    </div>
+  </div>
+  <% end %>
+  <div id="reviews-hotel">
+    <div id="title-bt-new-review">
+      <div id="title-review-rl">
+        <h2 style="margin-top: 10px;"><%= @user.name.titleize %>のレビュー</h1>
+        </div>
+        <% if current_user? @user %>
+        <div id="bt-new-review">
+          <%= link_to "新しいレビューを書く？", new_review_path, class: "myButton" %>
+        </div>
+        <% end %>
+      </div>
+      <div class="clearfix"></div>
+      <div class="all-review">
+        <section class="u-borderBox u-maxWidth1000 u-marginAuto u-marginTop30 u-marginBottom40 u-clearfix u-sm-paddingLeft20 u-sm-paddingRight20 u-xs-marginTop15 js-trackedTopic" data-scroll="native">
+          <header class="u-flexTop u-marginBottom25 u-borderBottomLighter js-topicSuggestionHeading">
+            <span class="heading-title
+            heading-title--lineHeightTight
+            u-flex0 u-block u-paddingBottom20
+            u-uiDisplayBold u-fontSize20
+            u-textColorDarker u-borderBottomNormal
+            u-marginBottomNegative1 u-xs-fontSize18">
+          </span>
+        </header>
+        <% if @reviews.any? %>
+        <%= render @reviews %>
+        <%= will_paginate @reviews %>
+        <% end %>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function  readURL(input,thumbimage) {
+   if  (input.files && input.files[0]) {
+     var  reader = new FileReader();
+     reader.onload = function (e) {
+      $("#avatar-image").attr('src', e.target.result);
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+  $("#avatar-image").show();
+  // $('#bt-change-image').css('cursor', 'progress');
+  $("#bt-change-image").hide();
+  $("#bt-upload").show();
+  $("#bt-cancer").show();
+    $("#bt-change-image").unbind('click'); //Xóa sự kiện  click trên nút .Choicefile
+    // $("#value-avatar").val($("#uploadfile").val());
+    // $("#file-avatar").val($("#uploadfile").val());
+    // $("#bt-upload").text($("#uploadfile").val());
+    // $("#bt-upload").text($("#file-avatar").val());
+
+  }
+  $(document).ready(function () {
+   $("#bt-change-image").bind('click', function  () { //Chọn file khi .Choicefile Click
+    $("#uploadfile").click();
+  });
+
+   $("#bt-upload").click(function () {
+    $("#bt-upload").hide();
+    $("#bt-cancer").hide();
+    $("#bt-change-image").show();
+      $("#bt-change-image").bind('click', function  () {//Tạo lại sự kiện click để chọn file
+        $("#uploadfile").click();
+      });
+    });
+
+   $("#bt-cancer").click(function () {//Xóa hình  ảnh đang xem
+    $("#bt-cancer").hide();
+    $("#bt-upload").hide();
+    $("#bt-change-image").show();
+      $("#bt-change-image").bind('click', function  () {//Tạo lại sự kiện click để chọn file
+       $("#uploadfile").click();
+     });
+      $('#bt-change-image').css('cursor', 'pointer');
+    });
+ })
+</script>

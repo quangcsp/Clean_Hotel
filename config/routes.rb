@@ -8,6 +8,9 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  get "user/:id", to: 'profiles#show', as: 'user_profile'
+  post "avatar/:id", to: 'profiles#avatar', as: 'user_profile_avatar'
+
   resources :reviews do
     get 'my_review', on: :collection
   end
