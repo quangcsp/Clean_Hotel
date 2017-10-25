@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171009145754) do
+ActiveRecord::Schema.define(version: 20171025074747) do
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "review_id",  null: false
+    t.text     "content",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["review_id"], name: "index_comments_on_review_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "hotels", force: :cascade do |t|
     t.string   "name"
@@ -25,21 +35,41 @@ ActiveRecord::Schema.define(version: 20171009145754) do
     t.datetime "updated_at",                null: false
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.integer  "review_id",  null: false
+    t.integer  "user_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["review_id"], name: "index_likes_on_review_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "pictures", force: :cascade do |t|
     t.string   "photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "reviews", force: :cascade do |t|
-    t.float    "rate",       null: false
-    t.string   "title",      null: false
+  create_table "replies", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "comment_id", null: false
     t.text     "content",    null: false
-    t.string   "image"
-    t.integer  "hotel_id",   null: false
-    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_replies_on_comment_id"
+    t.index ["user_id"], name: "index_replies_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.float    "rate",                   null: false
+    t.string   "title",                  null: false
+    t.text     "content",                null: false
+    t.integer  "like_count", default: 0
+    t.string   "image"
+    t.integer  "hotel_id",               null: false
+    t.integer  "user_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.index ["hotel_id"], name: "index_reviews_on_hotel_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end

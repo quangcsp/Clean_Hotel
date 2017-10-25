@@ -6,6 +6,9 @@ class User < ApplicationRecord
 
   has_many :hotel_rates
   has_many :reviews
+  has_many :comments
+  has_many :replies
+  has_many :likes
 
   validates :name, presence: true, length: {maximum: 50}
 end
