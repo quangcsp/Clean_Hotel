@@ -1,12 +1,18 @@
+<script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
 <div id="container-profile">
   <div class="avatar-info">
     <div class="avatar">
-      <%= image_tag "/assets/avatar", class: "avatar-image" %>
+      <% if @user.avatar.blank? %>
+      <%= image_tag "/assets/avatar", id: "avatar-image" %>
+      <% else %>
+      <%= image_tag @user.avatar.url, id: "avatar-image" %>
+      <% end %>
     </div>
     <div class="name-follow">
       <p id="name"><%= @user.name.titleize %></p>
-
-      <%= link_to "Follow", user_profile_path, class: "bt-follow" %>
+      <% unless current_user? @user %>
+        <%= link_to "Follow", user_profile_path, class: "bt-follow" %>
+      <% end %>
     </div>
     <div class="info">
       <div class="info-name">
@@ -29,11 +35,13 @@
 
   </div>
   <% if current_user? @user %>
-  <div class="follow-user">
+  <div class="change-avatar-info">
     <div id="change-avatar">
-      <%= file_field :file, class: "bt-follow" %>
+    <%= render "form_change_avatar", id: "render-form" %>
     </div>
-    <div if="follow"></div>
+    <div id="change-info">
+      <%= link_to "ユーザの編集", edit_user_registration_path, id: "bt-change-info" %>
+    </div>
   </div>
   <% end %>
   <div id="reviews-hotel">
@@ -67,3 +75,50 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  function  readURL(input,thumbimage) {
+   if  (input.files && input.files[0]) {
+     var  reader = new FileReader();
+     reader.onload = function (e) {
+      $("#avatar-image").attr('src', e.target.result);
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+  $("#avatar-image").show();
+  // $('#bt-change-image').css('cursor', 'progress');
+  $("#bt-change-image").hide();
+  $("#bt-upload").show();
+  $("#bt-cancer").show();
+    $("#bt-change-image").unbind('click'); //Xóa sự kiện  click trên nút .Choicefile
+    // $("#value-avatar").val($("#uploadfile").val());
+    // $("#file-avatar").val($("#uploadfile").val());
+    // $("#bt-upload").text($("#uploadfile").val());
+    // $("#bt-upload").text($("#file-avatar").val());
+
+  }
+  $(document).ready(function () {
+   $("#bt-change-image").bind('click', function  () { //Chọn file khi .Choicefile Click
+    $("#uploadfile").click();
+  });
+
+   $("#bt-upload").click(function () {
+    $("#bt-upload").hide();
+    $("#bt-cancer").hide();
+    $("#bt-change-image").show();
+      $("#bt-change-image").bind('click', function  () {//Tạo lại sự kiện click để chọn file
+        $("#uploadfile").click();
+      });
+    });
+
+   $("#bt-cancer").click(function () {//Xóa hình  ảnh đang xem
+    $("#bt-cancer").hide();
+    $("#bt-upload").hide();
+    $("#bt-change-image").show();
+      $("#bt-change-image").bind('click', function  () {//Tạo lại sự kiện click để chọn file
+       $("#uploadfile").click();
+     });
+      $('#bt-change-image').css('cursor', 'pointer');
+    });
+ })
+</script>
