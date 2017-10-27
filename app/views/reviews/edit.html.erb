@@ -62,7 +62,8 @@
                   <b>レート</b>
                   <md-rating-bar v-model="rate"
                                  data-rate="<%= @review.rate %>"
-                                 class="md-primary">
+                                 class="md-primary"
+                                 md-theme="yellow">
                   </md-rating-bar>
                 </md-layout>
               </md-layout>
@@ -83,7 +84,7 @@
                 <button type="button"
                         class="button
                                button--large
-                               button--warning
+                               button--delete
                                button--withChrome"
                         onclick="location.href = '/reviews/<%= @review.id %>';">
                   キャンセルする

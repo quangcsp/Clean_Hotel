@@ -44,10 +44,9 @@
               編集する
             </button>
             <button class="button
-          button--primary
           button--withChrome
           button--withHover
-          button--warning">
+          button--delete">
               <%= link_to "削除する", review_path, method: :delete, data: {confirm: "You Sure?"} %>
             </button>
           </div>
@@ -91,6 +90,7 @@
                          md-row>
                 <b>レート</b>
                 <md-rating-bar value="<%= @review.rate %>"
+                               md-theme="yellow"
                                class="md-primary"
                                disabled>
                 </md-rating-bar>
@@ -106,14 +106,14 @@
     </div>
   </div>
 
-  <div class="container u-maxWidth740" v-if="false">
+  <div class="container u-maxWidth740">
     <div class="responsesStreamWrapper u-maxWidth640 js-responsesStreamWrapper">
       <div class="container responsesStream-title u-paddingTop15">
         <div class="row">
           <header class="heading">
             <div class="u-clearfix">
               <div class="heading-content u-floatLeft">
-                <span class="heading-title heading-title--semibold">Responses</span></div>
+                <span class="heading-title heading-title--semibold">コメント</span></div>
             </div>
           </header>
         </div>
@@ -130,7 +130,7 @@
                   </div>
                 </div>
                 <div class="inlineEditor-headerContent" @click.prevent="openWriteCmtMode">
-                  <div class="inlineEditor-placeholder">Write a response…</div>
+                  <div class="inlineEditor-placeholder">コメントする...</div>
                   <div class="inlineEditor-author u-accentColor--textNormal"><%= current_user.name %></div>
                 </div>
               </div>
@@ -169,7 +169,7 @@
         <div class="streamItem streamItem--conversation" v-for="one in 2">
           <div class="streamItemConversation">
             <div class="streamItemConversation-inner cardChromeless">
-              <div class="streamItemConversationItem streamItemConversationItem--preview" v-for="onee in 2">
+              <div class="streamItemConversationItem streamItemConversationItem--preview">
                 <div class="postArticle js-postArticle js-trackedPost postArticle--short">
                   <div class="u-clearfix u-marginBottom15 u-paddingTop5">
                     <div class="postMetaInline u-floatLeft">
@@ -181,7 +181,7 @@
                           <a class="link link link--darken link--accent u-accentColor--textNormal u-accentColor--textDarken u-baseColor--link" href="#">dotglum</a>
                           <div class="u-fontSize12 u-baseColor--textNormal u-textColorNormal js-postMetaInlineSupplemental">
                             <div class="link link--darken">
-                              <time datetime="2017-10-11T04:11:09.717Z">Oct 11</time>
+                              <time>Oct 11</time>
                             </div>
                           </div>
                         </div>
@@ -204,6 +204,65 @@
                           </div>
                         </div>
                       </section>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="streamItemConversationItem streamItemConversationItem--preview" v-for="onee in 2">
+                <div class="postArticle js-postArticle js-trackedPost postArticle--short u-marginLeft15 u-paddingLeft15 reply">
+                  <div class="u-clearfix u-marginBottom15 u-paddingTop5">
+                    <div class="postMetaInline u-floatLeft">
+                      <div class="u-flexCenter">
+                        <div class="postMetaInline-avatar u-flex0">
+                          <a class="link avatar u-baseColor--link" href="https://medium.com/@dotglum">
+                            <img src="/no_avatar.jpg" class="avatar-image u-size26x26 u-xs-size12x12" alt="Go to the profile of dotglum"></a>
+                        </div>
+                        <div class="postMetaInline postMetaInline-authorLockup u-flex1 u-noWrapWithEllipsis">
+                          <a class="link link link--darken link--accent u-accentColor--textNormal u-accentColor--textDarken u-baseColor--link" href="#">dotglum</a>
+                          <div class="u-fontSize12 u-baseColor--textNormal u-textColorNormal u-inline">
+                            ・
+                            <time>Oct 11</time>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="postArticle-content">
+                      <section class="section section--body section--first section--last">
+                        <div class="section-divider">
+                          <hr class="section-divider">
+                        </div>
+                        <div class="section-content">
+                          <div class="section-inner sectionLayout--insetColumn">
+                            <p name="2fd0" id="2fd0" class="graf graf--p graf--leading graf--trailing">
+                              How would you
+                              visually represent Microsoft andAmazon compared to your visualization on Apple and
+                              Google?
+                            </p>
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="streamItemConversationItem streamItemConversationItem--preview">
+                <div class="postArticle postArticle--short u-marginLeft15 u-paddingLeft15 reply">
+                  <div class="inlineEditor-header">
+                    <div class="inlineEditor-avatar u-paddingRight10">
+                      <div class="avatar">
+                        <img src="/no_avatar.jpg" class="avatar-image u-size26x26 u-xs-size12of12" alt="<%= current_user.name %>">
+                      </div>
+                    </div>
+                    <div class="inlineEditor-headerContent">
+                      <div class="inlineEditor-placeholder">
+                        <input type="text"
+                               name="reply"
+                               placeholder="コメントする..."
+                               v-model="reply.content"
+                               @keyup.enter="postReply(1)">
+                      </div>
                     </div>
                   </div>
                 </div>
