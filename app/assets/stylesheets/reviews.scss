@@ -118,4 +118,15 @@ figcaption {
       }
     }
   }
+
+  .reply {
+    border-left: solid 3px darkblue;
+  }
+
+  input[name='reply'] {
+    width: 40vw !important;
+    border-radius: 8px;
+    padding: 2px 10px;
+    border: solid 1px lightgray;
+  }
 }

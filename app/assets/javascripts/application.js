@@ -28,4 +28,14 @@
 
 Vue.use(VeeValidate);
 Vue.use(VueMaterial);
-
+Vue.material.registerTheme({
+    default: {
+        primary: 'blue',
+        accent: 'red',
+        warn: 'orange',
+        background: 'white',
+    },
+    yellow: {
+        primary: 'yellow',
+    },
+});
