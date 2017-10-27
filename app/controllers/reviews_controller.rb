@@ -11,6 +11,7 @@ class ReviewsController < ApplicationController
 
   def show
     @review = Review.find(params[:id])
+    @comments = Comment.order(created_at: :desc).where(review_id: @review.id)
     respond_to do |format|
       format.html
       format.json {render :json => @review.comments}

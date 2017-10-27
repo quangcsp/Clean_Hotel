@@ -15,6 +15,12 @@ Rails.application.routes.draw do
     get 'my_review', on: :collection
   end
 
+  resources :relationships, only: [:create, :destroy]
+
+  resources :comments
+
+  resources :replies
+
   resources :hotels
 
 
