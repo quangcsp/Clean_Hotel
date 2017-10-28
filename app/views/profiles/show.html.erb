@@ -8,11 +8,21 @@
       <%= image_tag @user.avatar.url, id: "avatar-image" %>
       <% end %>
     </div>
-    <div class="name-follow">
+    <div class="name-follow" style="width: 200px">
       <p id="name"><%= @user.name.titleize %></p>
       <% unless current_user? @user %>
-        <%= link_to "Follow", user_profile_path, class: "bt-follow" %>
+      <%= render 'follow_form' %>
       <% end %>
+      <div class="follow-detail">
+        <strong id="following-detail">
+          <%= @user.following.count %>
+        </strong>
+        Following
+        <strong id="followers-detail">
+          <%= @user.followers.count %>
+        </strong>
+        Fllowers
+      </div>
     </div>
     <div class="info">
       <div class="info-name">
@@ -27,8 +37,8 @@
         <ul>
           <li><%= @user.email %></li>
           <li><%= @user.birth_day %></li>
-          <li><%= @user.address %></li>
           <li><%= @user.phone %></li>
+          <li><%= @user.address %></li>
         </ul>
       </div>
     </div>
@@ -37,41 +47,66 @@
   <% if current_user? @user %>
   <div class="change-avatar-info">
     <div id="change-avatar">
-    <%= render "form_change_avatar", id: "render-form" %>
+      <%= render "form_change_avatar", id: "render-form" %>
     </div>
     <div id="change-info">
       <%= link_to "ユーザの編集", edit_user_registration_path, id: "bt-change-info" %>
     </div>
   </div>
   <% end %>
-  <div id="reviews-hotel">
-    <div id="title-bt-new-review">
-      <div id="title-review-rl">
-        <h2 style="margin-top: 10px;"><%= @user.name.titleize %>のレビュー</h1>
+  <!-- tab review , following, folloers detail -->
+  <div class="nav-container">
+    <navbar>
+      <div class="navbar-inverse tabs paper-shadow-bottom-z-2">
+        <div class="container-fluid">
+          <ul class="navbar-body">
+            <li class="active-tab" onclick="openTab('Reviews')"><a class="active-tab">Reviews Lab</a></li>
+            <li onclick="openTab('Following')"><a>Following</a></li>
+            <li onclick="openTab('Followers')"><a>Followers</a></li>
+          </ul>
+          <div class="tab-highlighter"></div>
         </div>
-        <% if current_user? @user %>
-        <div id="bt-new-review">
-          <%= link_to "新しいレビューを書く？", new_review_path, class: "myButton" %>
-        </div>
-        <% end %>
       </div>
-      <div class="clearfix"></div>
-      <div class="all-review">
-        <section class="u-borderBox u-maxWidth1000 u-marginAuto u-marginTop30 u-marginBottom40 u-clearfix u-sm-paddingLeft20 u-sm-paddingRight20 u-xs-marginTop15 js-trackedTopic" data-scroll="native">
-          <header class="u-flexTop u-marginBottom25 u-borderBottomLighter js-topicSuggestionHeading">
-            <span class="heading-title
-            heading-title--lineHeightTight
-            u-flex0 u-block u-paddingBottom20
-            u-uiDisplayBold u-fontSize20
-            u-textColorDarker u-borderBottomNormal
-            u-marginBottomNegative1 u-xs-fontSize18">
-          </span>
-        </header>
-        <% if @reviews.any? %>
-        <%= render @reviews %>
-        <%= will_paginate @reviews %>
-        <% end %>
-      </section>
+    </navbar>
+  </div>
+
+  <div class="tab-review-follow">
+    <div id="Reviews" class="tab" style="display: none">
+      <div id="reviews-hotel" style="border: none; margin-top: -20px;">
+        <div id="title-bt-new-review">
+          <div id="title-review-rl">
+            <h2 style="margin-top: 30px; margin-left: 30px;"><%= @user.name.titleize %>のレビュー</h1>
+            </div>
+            <% if current_user? @user %>
+            <div id="bt-new-review">
+              <%= link_to "新しいレビューを書く？", new_review_path, class: "myButton", style: "margin-top: 30px" %>
+            </div>
+            <% end %>
+          </div>
+          <div class="clearfix"></div>
+          <div class="all-review">
+            <section class="u-borderBox u-maxWidth1000 u-marginAuto u-marginTop30 u-marginBottom40 u-clearfix u-sm-paddingLeft20 u-sm-paddingRight20 u-xs-marginTop15 js-trackedTopic" data-scroll="native">
+            <% if @reviews.any? %>
+            <%= render @reviews %>
+            <%= will_paginate @reviews %>
+            <% end %>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div id="Following" class="w3-container tab" >
+      <div class="total-following"></div>
+      <div class="user-detail">
+        <%= render @user.following %>
+      </div>
+    </div>
+
+    <div id="Followers" class="w3-container tab" style="display:none">
+      <div class="total-following"></div>
+      <div class="user-detail">
+        <%= render @user.followers %>
+      </div>
     </div>
   </div>
 </div>
@@ -90,15 +125,12 @@
   $("#bt-change-image").hide();
   $("#bt-upload").show();
   $("#bt-cancer").show();
-    $("#bt-change-image").unbind('click'); //Xóa sự kiện  click trên nút .Choicefile
-    // $("#value-avatar").val($("#uploadfile").val());
-    // $("#file-avatar").val($("#uploadfile").val());
-    // $("#bt-upload").text($("#uploadfile").val());
-    // $("#bt-upload").text($("#file-avatar").val());
+  $("#bt-change-image").unbind('click');
 
   }
   $(document).ready(function () {
-   $("#bt-change-image").bind('click', function  () { //Chọn file khi .Choicefile Click
+    //Chọn file khi .Choicefile Click
+   $("#bt-change-image").bind('click', function  () {
     $("#uploadfile").click();
   });
 
@@ -106,19 +138,65 @@
     $("#bt-upload").hide();
     $("#bt-cancer").hide();
     $("#bt-change-image").show();
-      $("#bt-change-image").bind('click', function  () {//Tạo lại sự kiện click để chọn file
+    //Tạo lại sự kiện click để chọn file
+      $("#bt-change-image").bind('click', function  () {
         $("#uploadfile").click();
       });
     });
 
-   $("#bt-cancer").click(function () {//Xóa hình  ảnh đang xem
+    //Xóa hình  ảnh đang xem
+   $("#bt-cancer").click(function () {
     $("#bt-cancer").hide();
     $("#bt-upload").hide();
     $("#bt-change-image").show();
-      $("#bt-change-image").bind('click', function  () {//Tạo lại sự kiện click để chọn file
+    //Tạo lại sự kiện click để chọn file
+      $("#bt-change-image").bind('click', function  () {
        $("#uploadfile").click();
      });
       $('#bt-change-image').css('cursor', 'pointer');
     });
  })
+</script>
+
+<script>
+  function openTab(tabName) {
+    var i;
+    var x = document.getElementsByClassName("tab");
+    for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+   }
+   document.getElementById(tabName).style.display = "block";
+ }
+</script>
+
+<script>
+/*Tab Highlighter Functionality*/
+$(document).on('click', 'navbar .tabs ul.navbar-body li a', function(){
+    var $this = $(this);
+    TabHighlighter.set($this);
+    $this.closest('li').siblings('.active-tab').removeClass('active-tab');
+    $this.closest('li').addClass('active-tab');
+});
+var TabHighlighter = {
+    set: function($this){
+        $('.tab-highlighter').css({
+            'left':  $this.closest('li').offset().left,
+            'width': $this.closest('li').outerWidth()
+        });
+    },
+    refresh: function(){
+        var $this = $('.tabs ul.navbar-body li.active-tab a');
+        $('.tab-highlighter').css({
+            'left':  $this.closest('li').offset().left,
+            'width': $this.closest('li').outerWidth()
+        });
+    }
+};
+$(window).resize(function(){
+    TabHighlighter.refresh();
+});
+$(document).ready(function(){
+    TabHighlighter.refresh();
+});
+
 </script>

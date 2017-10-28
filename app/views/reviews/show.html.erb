@@ -275,6 +275,21 @@
   </div>
 </div>
 
+<!-- Comment  -->
+<div class="comment-form" style="margin-top: 100px; margin-left: 300px">
+  <%= form_for(Comment.new, :remote => true) do |f| %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= f.hidden_field :review_id, :value => @review.id %>
+    <%= f.text_field :content %>
+    <%= f.submit "Comment" %>
+  <% end %>
+</div>
+
+<div id="show-comment" style="margin-top: 10px; margin-left: 300px">
+  <p style="text-decoration: underline;">Comments</p>
+  <%= render @comments %>
+</div>
+
 <script>
     showReview();
 </script>
