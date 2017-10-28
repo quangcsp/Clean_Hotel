@@ -1,5 +1,6 @@
 <% create_at = @review.created_at.to_time %>
 <% avg_rate = @review.hotel.rate_count ? @review.hotel.rate_sum / @review.hotel.rate_count : 0 %>
+<% avatar = current_user && current_user.avatar.url ? current_user.avatar.url : '/no_avatar.jpg' %>
 
 <div class="show-review" id="show-review" @click.self="closeWriteCmtMode">
   <header class="container u-maxWidth740">
@@ -8,10 +9,10 @@
         <div class="uiScale uiScale-ui--regular uiScale-caption--regular postMetaLockup postMetaLockup--authorWithBio u-flex js-postMetaLockup">
           <div class="u-flex0">
             <a class="link avatar u-baseColor--link"
-               href="#"
+               :href="userLink(<%= @review.user.id %>)"
                dir="auto">
-              <img src="/no_avatar.jpg"
-                   class="avatar-image avatar-image--small" alt="Go to the profile of <%= @review.user.name %>">
+              <img src="<%= @review.user.avatar.url ? @review.user.avatar.url : '/no_avatar.jpg'%>"
+                   class="avatar-image avatar-image--small u-size60x60" alt="Go to the profile of <%= @review.user.name %>">
               <div class="avatar-halo u-absolute u-baseColor--iconNormal u-textColorGreenNormal svgIcon" style="width: calc(100% + 12px); height: calc(100% + 12px); top:-6px; left:-6px">
                 <svg viewBox="0 0 114 114" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7.66922967,32.092726 C17.0070768,13.6353618 35.9421928,1.75 57,1.75 C78.0578072,1.75 96.9929232,13.6353618 106.33077,32.092726 L107.66923,31.4155801 C98.0784505,12.4582656 78.6289015,0.25 57,0.25 C35.3710985,0.25 15.9215495,12.4582656 6.33077033,31.4155801 L7.66922967,32.092726 Z"></path>
@@ -106,7 +107,7 @@
     </div>
   </div>
 
-  <div class="container u-maxWidth740">
+  <div class="container u-maxWidth740 u-borderTopLightest">
     <div class="responsesStreamWrapper u-maxWidth640 js-responsesStreamWrapper">
       <div class="container responsesStream-title u-paddingTop15">
         <div class="row">
@@ -118,55 +119,59 @@
           </header>
         </div>
       </div>
-      <div class="responsesStream-editor cardChromeless u-marginBottom20 u-paddingLeft20 u-paddingRight20">
-        <div class="inlineNewPostControl">
-          <div class="inlineEditor is-postEditMode js-inlineEditor"
-               :class="{'is-collapsed': !is_write_cmt}">
-            <div class="u-paddingTop20 js-block js-inlineEditorContent">
-              <div class="inlineEditor-header">
-                <div class="inlineEditor-avatar u-paddingRight10">
-                  <div class="avatar u-inline">
-                    <img src="/no_avatar.jpg" class="avatar-image u-size36x36 u-xs-size32x32" alt="<%= current_user.name %>">
+      <% if current_user != nil %>
+          <div class="responsesStream-editor cardChromeless u-marginBottom20 u-paddingLeft20 u-paddingRight20">
+            <div class="inlineNewPostControl">
+              <div class="inlineEditor is-postEditMode js-inlineEditor"
+                   :class="{'is-collapsed': !is_write_cmt}">
+                <div class="u-paddingTop20 js-block js-inlineEditorContent">
+                  <div class="inlineEditor-header">
+                    <div class="inlineEditor-avatar u-paddingRight10">
+                      <div class="avatar u-inline">
+                        <img src="<%= avatar %>" class="avatar-image u-size36x36 u-xs-size32x32" alt="<%= current_user.name %>">
+                      </div>
+                    </div>
+                    <div class="inlineEditor-headerContent" @click.prevent="openWriteCmtMode">
+                      <div class="inlineEditor-placeholder">コメントする...</div>
+                      <div class="inlineEditor-author u-accentColor--textNormal"><%= current_user.name %></div>
+                    </div>
                   </div>
-                </div>
-                <div class="inlineEditor-headerContent" @click.prevent="openWriteCmtMode">
-                  <div class="inlineEditor-placeholder">コメントする...</div>
-                  <div class="inlineEditor-author u-accentColor--textNormal"><%= current_user.name %></div>
-                </div>
-              </div>
-              <div class="block-streamText">
-                <div class="postArticle postArticle--short">
-                  <div class="u-maxWidth600">
-                    <div class="postArticle-content js-postField js-notesSource editable">
+                  <div class="block-streamText">
+                    <div class="postArticle postArticle--short">
+                      <div class="u-maxWidth600">
+                        <div class="postArticle-content js-postField js-notesSource editable">
                       <textarea name="comment"
                                 data-review-id="<%= @review.id %>"
                                 data-current-user-id="<%= current_user.id %>"
                                 style="margin: 0px; width: 49vw; height: 146px;"
                                 v-model="comment.content"></textarea>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div class="inlineEditor-actions">
-                <div class="u-floatLeft">
-                  <div class="buttonSet">
-                    <button
-                    class="button
+                  <div class="inlineEditor-actions">
+                    <div class="u-floatLeft">
+                      <div class="buttonSet">
+                        <button
+                        class="button
                       button--primary
                       button--withChrome
                       u-accentColor--buttonNormal"
-                    @click="postComment">
-                      投稿する
-                    </button>
+                        @click="postComment">
+                          投稿する
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+      <% end %>
       <div class="responsesStream">
-        <div class="streamItem streamItem--conversation" v-for="one in 2">
+        <div class="streamItem streamItem--conversation"
+             v-for="comment in comments"
+             :key="comment.id">
           <div class="streamItemConversation">
             <div class="streamItemConversation-inner cardChromeless">
               <div class="streamItemConversationItem streamItemConversationItem--preview">
@@ -175,18 +180,48 @@
                     <div class="postMetaInline u-floatLeft">
                       <div class="u-flexCenter">
                         <div class="postMetaInline-avatar u-flex0">
-                          <a class="link avatar u-baseColor--link" href="https://medium.com/@dotglum"><img src="/no_avatar.jpg" class="avatar-image u-size36x36 u-xs-size32x32" alt="Go to the profile of dotglum"></a>
+                          <a class="link avatar u-baseColor--link" :href="userLink(comment.owner.id)">
+                            <img :src="comment.owner.avatar" class="avatar-image u-size36x36 u-xs-size32x32">
+                          </a>
                         </div>
                         <div class="postMetaInline postMetaInline-authorLockup u-flex1 u-noWrapWithEllipsis">
-                          <a class="link link link--darken link--accent u-accentColor--textNormal u-accentColor--textDarken u-baseColor--link" href="#">dotglum</a>
+                          <a class="link link link--darken link--accent u-accentColor--textNormal u-accentColor--textDarken u-baseColor--link"
+                             :href="userLink(comment.owner.id)">
+                            {{ comment.owner.name }}
+                          </a>
                           <div class="u-fontSize12 u-baseColor--textNormal u-textColorNormal js-postMetaInlineSupplemental">
                             <div class="link link--darken">
-                              <time>Oct 11</time>
+                              <time>{{ formatTime(comment.created_at) }}</time>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
+                    <% if current_user != nil %>
+                        <div class="u-floatRight">
+                          <div class="u-flex">
+                            <div class="buttonSet">
+                              <button
+                              class="button
+                      button--primary
+                      button--link"
+                              @click="openReply(comment.id)">
+                                返事する
+                              </button>
+                            </div>
+                            <div class="buttonSet u-paddingLeft8"
+                                 v-if="comment.owner.id == <%= current_user.id %>">
+                              <button
+                              class="button
+                      button--delete
+                      button--link"
+                              @click="deleteComment(comment.id)">
+                                削除する
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                    <% end %>
                   </div>
                   <div>
                     <div class="postArticle-content">
@@ -197,9 +232,7 @@
                         <div class="section-content">
                           <div class="section-inner sectionLayout--insetColumn">
                             <p name="2fd0" id="2fd0" class="graf graf--p graf--leading graf--trailing">
-                              How would you
-                              visually represent Microsoft andAmazon compared to your visualization on Apple and
-                              Google?
+                              {{ comment.content }}
                             </p>
                           </div>
                         </div>
@@ -208,24 +241,43 @@
                   </div>
                 </div>
               </div>
-              <div class="streamItemConversationItem streamItemConversationItem--preview" v-for="onee in 2">
+              <div class="streamItemConversationItem streamItemConversationItem--preview"
+                   v-for="reply in comment.replies"
+                   :key="reply.id">
                 <div class="postArticle js-postArticle js-trackedPost postArticle--short u-marginLeft15 u-paddingLeft15 reply">
-                  <div class="u-clearfix u-marginBottom15 u-paddingTop5">
+                  <div class="u-clearfix u-paddingTop0">
                     <div class="postMetaInline u-floatLeft">
                       <div class="u-flexCenter">
                         <div class="postMetaInline-avatar u-flex0">
-                          <a class="link avatar u-baseColor--link" href="https://medium.com/@dotglum">
-                            <img src="/no_avatar.jpg" class="avatar-image u-size26x26 u-xs-size12x12" alt="Go to the profile of dotglum"></a>
+                          <a class="link avatar u-baseColor--link" :href="userLink(reply.owner.id)">
+                            <img :src="reply.owner.avatar" class="avatar-image u-size26x26 u-xs-size12x12">
+                          </a>
                         </div>
                         <div class="postMetaInline postMetaInline-authorLockup u-flex1 u-noWrapWithEllipsis">
-                          <a class="link link link--darken link--accent u-accentColor--textNormal u-accentColor--textDarken u-baseColor--link" href="#">dotglum</a>
+                          <a class="link link link--darken link--accent u-accentColor--textNormal u-accentColor--textDarken u-baseColor--link"
+                             :href="userLink(reply.owner.id)">
+                            {{ reply.owner.name }}
+                          </a>
                           <div class="u-fontSize12 u-baseColor--textNormal u-textColorNormal u-inline">
                             ・
-                            <time>Oct 11</time>
+                            <time>{{ formatTime(reply.created_at) }}</time>
                           </div>
                         </div>
                       </div>
                     </div>
+                        <div class="u-floatRight" v-if="reply.owner.id == <%= current_user.id %>">
+                          <div class="u-flex">
+                            <md-button
+                            class="button
+                                button--link
+                                button--withIcon
+                                button--delete
+                                md-icon-button"
+                            @click="deleteReply(reply.id)">
+                              <md-icon>clear</md-icon>
+                            </md-button>
+                          </div>
+                        </div>
                   </div>
                   <div>
                     <div class="postArticle-content">
@@ -236,9 +288,7 @@
                         <div class="section-content">
                           <div class="section-inner sectionLayout--insetColumn">
                             <p name="2fd0" id="2fd0" class="graf graf--p graf--leading graf--trailing">
-                              How would you
-                              visually represent Microsoft andAmazon compared to your visualization on Apple and
-                              Google?
+                              {{ reply.content }}
                             </p>
                           </div>
                         </div>
@@ -247,47 +297,34 @@
                   </div>
                 </div>
               </div>
-              <div class="streamItemConversationItem streamItemConversationItem--preview">
-                <div class="postArticle postArticle--short u-marginLeft15 u-paddingLeft15 reply">
-                  <div class="inlineEditor-header">
-                    <div class="inlineEditor-avatar u-paddingRight10">
-                      <div class="avatar">
-                        <img src="/no_avatar.jpg" class="avatar-image u-size26x26 u-xs-size12of12" alt="<%= current_user.name %>">
-                      </div>
-                    </div>
-                    <div class="inlineEditor-headerContent">
-                      <div class="inlineEditor-placeholder">
-                        <input type="text"
-                               name="reply"
-                               placeholder="コメントする..."
-                               v-model="reply.content"
-                               @keyup.enter="postReply(1)">
+              <% if current_user != nil %>
+                  <div class="streamItemConversationItem streamItemConversationItem--preview u-hide" :id="'r' + comment.id">
+                    <div class="postArticle postArticle--short u-marginLeft15 u-paddingLeft15 reply">
+                      <div class="inlineEditor-header">
+                        <div class="inlineEditor-avatar u-paddingRight10">
+                          <div class="avatar">
+                            <img src="<%= avatar %>" class="avatar-image u-size26x26 u-xs-size12of12" alt="<%= current_user.name %>">
+                          </div>
+                        </div>
+                        <div class="inlineEditor-headerContent">
+                          <div class="inlineEditor-placeholder">
+                            <input type="text"
+                                   name="reply"
+                                   placeholder="コメントする..."
+                                   v-model="reply.content"
+                                   @keyup.enter="postReply(comment.id)">
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
+              <% end %>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<!-- Comment  -->
-<div class="comment-form" style="margin-top: 100px; margin-left: 300px">
-  <%= form_for(Comment.new, :remote => true) do |f| %>
-    <%= f.hidden_field :user_id, :value => current_user.id %>
-    <%= f.hidden_field :review_id, :value => @review.id %>
-    <%= f.text_field :content %>
-    <%= f.submit "Comment" %>
-  <% end %>
-</div>
-
-<div id="show-comment" style="margin-top: 10px; margin-left: 300px">
-  <p style="text-decoration: underline;">Comments</p>
-  <%= render @comments %>
 </div>
 
 <script>

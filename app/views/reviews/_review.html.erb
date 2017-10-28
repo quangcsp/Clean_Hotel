@@ -1,6 +1,7 @@
 <% create_at = review.created_at.to_time %>
 <% raw_content = ActionView::Base.full_sanitizer.sanitize(review.content).strip %>
 <% raw_content = raw_content.truncate(120, separator: ' ') %>
+<% avatar = review.user.avatar.url ? review.user.avatar.url : '/no_avatar.jpg' %>
 
 <div class="u-borderBox u-size6of12  u-paddingRight10 u-xs-paddingLeft0 u-xs-paddingRight0 u-xs-size12of12 js-trackedPost js-sectionItem" data-source="grid_home---8------0-50----------22d054b693da-----800691088" data-post-id="2b06b7f0bc8d" data-index="0" data-action-scope="_actionscope_18" data-scroll="native">
   <div class="u-flex u-sizeFullWidth u-height260 u-sm-flexWrap u-xs-heightAuto u-borderBox u-marginBottom20 u-backgroundColorWhite u-overflowHidden u-relative u-borderRadius2 u-borderBlackLightest">
@@ -28,11 +29,13 @@
       </div>
       <div class="u-flex u-paddingTop10 u-flex0">
         <div class="u-flex0 u-paddingRight10">
-          <a class="link avatar u-baseColor--link" href="#"><img src="/no_avatar.jpg" class="avatar-image avatar-image--smaller" alt="Go to the profile of Designlab"></a>
+          <a class="link avatar u-baseColor--link" href="/user/<%= review.user.id%>">
+            <img src="<%= avatar %>" class="avatar-image avatar-image--smaller u-size50x50">
+          </a>
         </div>
         <div class="u-flex1 u-noWrapWithEllipsis u-xs-paddingTop5">
           <div class="postMetaInline postMetaInline-authorLockup u-paddingLeft0 u-noWrapWithEllipsis">
-            <a class="link u-textColorDarker u-fontSize12 u-baseColor--link" href="#" data-action="show-user-card">
+            <a class="link u-textColorDarker u-fontSize12 u-baseColor--link" href="/user/<%= review.user.id%>">
               <%= review.user.name.titleize %>
             </a>
           </div>
