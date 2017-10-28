@@ -30,7 +30,7 @@
                   <%= link_to @review.user.name, user_profile_path(@review.user.id) %>
                 </h2>
               </a>
-              <% unless current_user? @review.user %>
+              <% if current_user != nil and current_user? @review.user %>
                   <span class="followState js-followState u-marginLeft10 u-flex">
                     <% if current_user.following? @review.user %>
                         <%= form_for(current_user.active_relationships.find_by(followed_id: @review.user.id),
@@ -290,19 +290,21 @@
                         </div>
                       </div>
                     </div>
-                    <div class="u-floatRight" v-if="reply.owner.id == <%= current_user.id %>">
-                      <div class="u-flex">
-                        <md-button
-                        class="button
+                    <% if current_user != nil %>
+                        <div class="u-floatRight" v-if="reply.owner.id == <%= current_user.id %>">
+                          <div class="u-flex">
+                            <md-button
+                            class="button
                                 button--link
                                 button--withIcon
                                 button--delete
                                 md-icon-button"
-                        @click="deleteReply(reply.id)">
-                          <md-icon>clear</md-icon>
-                        </md-button>
-                      </div>
-                    </div>
+                            @click="deleteReply(reply.id)">
+                              <md-icon>clear</md-icon>
+                            </md-button>
+                          </div>
+                        </div>
+                    <% end %>
                   </div>
                   <div>
                     <div class="postArticle-content">
@@ -357,8 +359,13 @@
         <li class="u-textAlignCenter u-marginVertical10">
           <div class="multirecommend js-actionMultirecommend u-flexColumn u-marginBottom10 u-width60">
             <div class="u-relative u-foreground">
-              <button class="button button--large button--circle button--withChrome u-baseColor--buttonNormal button--withIcon button--withSvgIcon clapButton js-actionMultirecommendButton clapButton--largePill u-relative u-foreground u-width60 u-height60 u-accentColor--textNormal u-accentColor--buttonNormal is-touched"
-                      @click="changeLikeStatus()">
+              <% if current_user != nil %>
+                  <button class="button button--large button--circle button--withChrome u-baseColor--buttonNormal button--withIcon button--withSvgIcon clapButton js-actionMultirecommendButton clapButton--largePill u-relative u-foreground u-width60 u-height60 u-accentColor--textNormal u-accentColor--buttonNormal is-touched"
+                          @click="changeLikeStatus()">
+              <% else %>
+                  <button class="button button--disabled button--large button--circle button--withChrome u-baseColor--buttonNormal button--withIcon button--withSvgIcon clapButton js-actionMultirecommendButton clapButton--largePill u-relative u-foreground u-width60 u-height60 u-accentColor--textNormal u-accentColor--buttonNormal is-touched"
+                          @click="changeLikeStatus()">
+              <% end %>
               <span class="button-defaultState">
                 <span class="svgIcon svgIcon--clap svgIcon--33px u-relative u-topNegative2 u-xs-top0">
                   <svg class="svgIcon-use" width="33" height="33" viewBox="0 0 33 33" v-show="like.status == 0">
@@ -373,7 +380,7 @@
                   </svg>
                 </span>
               </span>
-                <span class="button-activeState">
+              <span class="button-activeState">
                 <span class="svgIcon svgIcon--clapFilled svgIcon--33px u-relative u-topNegative2 u-xs-top0">
                   <svg class="svgIcon-use" width="33" height="33" viewBox="0 0 33 33">
                     <g fill-rule="evenodd">
