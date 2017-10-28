@@ -30,7 +30,7 @@
                   <%= link_to @review.user.name, user_profile_path(@review.user.id) %>
                 </h2>
               </a>
-              <% if current_user != nil and current_user? @review.user %>
+              <% if current_user != nil and not current_user? @review.user %>
                   <span class="followState js-followState u-marginLeft10 u-flex">
                     <% if current_user.following? @review.user %>
                         <%= form_for(current_user.active_relationships.find_by(followed_id: @review.user.id),
