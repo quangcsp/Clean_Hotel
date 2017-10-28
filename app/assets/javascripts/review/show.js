@@ -9,11 +9,13 @@ function showReview() {
             comment: {},
             reply: {},
             comments: [],
+            like: { status: 0 },
         },
         mounted: function () {
             this.comment.user_id = $('textarea[name="comment"]').attr('data-current-user-id');
             this.reply.user_id = $('textarea[name="comment"]').attr('data-current-user-id');
             this.comment.review_id = $('textarea[name="comment"]').attr('data-review-id');
+            this.fetchLikeInfo();
             this.fetchData();
         },
         methods: {
@@ -32,6 +34,16 @@ function showReview() {
                 axios.get(url)
                     .then(res => {
                         this.comments = res.data;
+                    })
+                    .catch(err => {
+
+                    });
+            },
+            fetchLikeInfo: function () {
+                let url = '/likes/' + this.comment.user_id + '/' + this.comment.review_id + '.json';
+                axios.get(url)
+                    .then(res => {
+                        this.like = res.data;
                     })
                     .catch(err => {
 
@@ -119,6 +131,46 @@ function showReview() {
                         if (!res.data.error) {
                             comment_id = parseInt(res.data.comment_id);
                             this.removeReply(comment_id, reply_id);
+                        }
+                    })
+                    .catch(err => {
+
+                    });
+            },
+            changeLikeStatus: function () {
+                if (this.like.status === 0) {
+                    this.likef();
+                } else {
+                    this.unlike();
+                }
+            },
+            likef: function () {
+                let url = '/likes.json';
+                axios.post(url, {
+                    like: {
+                        user_id: this.comment.user_id,
+                        review_id: this.comment.review_id,
+                    },
+                })
+                    .then(res => {
+                        if (!res.data.error) {
+                            this.like.status = 1;
+                            this.like.id = res.data.id;
+                            this.like.count++;
+                        }
+                    })
+                    .catch(err => {
+
+                    });
+            },
+            unlike: function () {
+                let url = '/likes/' + this.like.id;
+                axios.delete(url)
+                    .then(res => {
+                        if (!res.data.error) {
+                            this.like.status = 0;
+                            this.like.id = -1;
+                            this.like.count--;
                         }
                     })
                     .catch(err => {
