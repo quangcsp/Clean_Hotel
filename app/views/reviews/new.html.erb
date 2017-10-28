@@ -1,3 +1,5 @@
+<% avatar = current_user.avatar.url ? current_user.avatar.url : '/no_avatar.jpg' %>
+
 <div class="write-review" id="write-review">
   <header class="container u-maxWidth740 u-paddingLeft0">
     <div class="uiScale uiScale-ui--regular uiScale-caption--regular postMetaHeader u-paddingBottom10 row">
@@ -5,15 +7,15 @@
         <div class="uiScale uiScale-ui--regular uiScale-caption--regular postMetaLockup postMetaLockup--authorWithBio u-flex js-postMetaLockup">
           <div class="u-flex0">
             <a class="link avatar u-baseColor--link"
-               href="#"
+               href="/user/<%= current_user.id%>"
                dir="auto">
-              <img src="/no_avatar.jpg"
-                   class="avatar-image avatar-image--smaller" alt="Go to the profile of Long Nguyễn">
+              <img src="<%= avatar %>"
+                   class="avatar-image avatar-image--smaller u-size60x60">
             </a>
           </div>
           <div class="u-flex1 u-paddingLeft15 u-overflowHidden">
             <a class="link ui-captionStrong link link--darken link--darker u-baseColor--link"
-               href="#"
+               href="/user/<%= current_user.id%>"
                dir="auto">
               <h2>
                 <%= current_user.name %>

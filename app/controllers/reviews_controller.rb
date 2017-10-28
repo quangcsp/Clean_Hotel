@@ -11,10 +11,45 @@ class ReviewsController < ApplicationController
 
   def show
     @review = Review.find(params[:id])
-    @comments = Comment.order(created_at: :desc).where(review_id: @review.id)
+    _comments = Comment.order(created_at: :asc).where(review_id: @review.id)
+    comments = []
+    _comments.each do |c|
+      owner = User.find(c.user_id)
+
+      _replies = Reply.where(comment_id: c.id)
+      replies = []
+      _replies.each do |r|
+        rowner = User.find(r.user_id)
+        rtmp = {
+            :id => r.id,
+            :created_at => r.created_at,
+            :owner => {
+                :id => rowner.id,
+                :name => rowner.name,
+                :avatar => rowner.avatar.url ? rowner.avatar.url : '/no_avatar.jpg',
+            },
+            :content => r.content
+        }
+        replies.push(rtmp)
+      end
+
+      tmp = {
+          :id => c.id,
+          :created_at => c.created_at,
+          :owner => {
+              :id => owner.id,
+              :name => owner.name,
+              :avatar => owner.avatar.url ? owner.avatar.url : '/no_avatar.jpg',
+          },
+          :content => c.content,
+          :replies => replies
+      }
+      comments.push(tmp)
+    end
+
     respond_to do |format|
       format.html
-      format.json {render :json => @review.comments}
+      format.json {render :json => comments}
     end
   end
 
@@ -54,10 +89,10 @@ class ReviewsController < ApplicationController
   end
 
 
-
   private
 
   def review_params
     params.require(:review).permit(:title, :content, :hotel_id, :image, :rate)
   end
+
 end

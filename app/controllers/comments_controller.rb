@@ -9,15 +9,37 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
-    @review = Review.find_by(id: params[:comment][:review_id])
-    respond_to do |format|
-      if @comment.save
-        redirect_to @review
-        # format.html {redirect_to @review}
+    if @comment.save
+      owner = User.find(@comment.user_id)
+      comment = {
+          :id => @comment.id,
+          :created_at => @comment.created_at,
+          :content => @comment.content,
+          :owner => {
+              :id => owner.id,
+              :name => owner.name,
+              :avatar => owner.avatar.url ? owner.avatar.url : '/no_avatar.jpg',
+          },
+          :reply => []
+      }
+      respond_to do |format|
+        format.json {render :json => comment}
         format.js
-      else
+      end
+    else
+      respond_to do |format|
         format.html {render 'new'}
         format.js
+      end
+    end
+  end
+
+  def destroy
+    @comment = Comment.find(params[:id])
+    if current_user.id == @comment.user_id
+      status = @comment.destroy
+      respond_to do |format|
+        format.json {render :json => status}
       end
     end
   end
