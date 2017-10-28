@@ -327,6 +327,16 @@
   </div>
 </div>
 
+<!-- like review -->
+<div class="like-container" style="margin-left: 300px;">
+  <% @like = Like.find_by(user_id: current_user.id, review_id: @review.id) %>
+  <% if @like.blank? %>
+    <%= render 'like_form' %>
+  <% else %>
+    <%= render 'unlike_form' %>
+  <% end %>
+</div>
+
 <script>
     showReview();
 </script>
