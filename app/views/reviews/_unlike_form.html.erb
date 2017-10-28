@@ -1,0 +1,4 @@
+<%= form_for(@like, url: likes_path, html: {method: :delete}) do |f| %>
+<%= f.hidden_field :like_id, value: @like.id %>
+<%= f.submit "UnLike" %>
+<% end %>

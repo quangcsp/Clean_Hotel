@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   resources :replies
 
+  resource :likes, only: [:create, :destroy]
+
   resources :hotels
 
 
