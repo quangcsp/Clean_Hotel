@@ -3,7 +3,7 @@
   <div class="avatar-info">
     <div class="avatar">
       <% if @user.avatar.blank? %>
-      <%= image_tag "/assets/avatar", id: "avatar-image" %>
+      <%= image_tag "/no_avatar.jpg", id: "avatar-image" %>
       <% else %>
       <%= image_tag @user.avatar.url, id: "avatar-image" %>
       <% end %>
@@ -50,7 +50,8 @@
       <%= render "form_change_avatar", id: "render-form" %>
     </div>
     <div id="change-info">
-      <%= link_to "ユーザの編集", edit_user_registration_path, id: "bt-change-info" %>
+      <%= link_to "ユーザの編集", edit_user_registration_path, id: "bt-change-info",
+                  class: "button button--primary  button--large button--withChrome is-active" %>
     </div>
   </div>
   <% end %>
@@ -75,7 +76,7 @@
       <div id="reviews-hotel" style="border: none; margin-top: -20px;">
         <div id="title-bt-new-review">
           <div id="title-review-rl">
-            <h2 style="margin-top: 30px; margin-left: 30px;"><%= @user.name.titleize %>のレビュー</h1>
+            <h2 style="margin-top: 30px; margin-left: 30px;"><%= @user.name.titleize %>のレビュー</h2>
             </div>
             <% if current_user? @user %>
             <div id="bt-new-review">

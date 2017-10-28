@@ -21,7 +21,9 @@ Rails.application.routes.draw do
 
   resources :replies
 
-  resource :likes, only: [:create, :destroy]
+  get "likes/:user_id/:review_id", to: 'likes#info', as: 'like_info'
+  delete "likes/:id", to: 'likes#destroy', as: 'like_destroy'
+  post "likes", to: 'likes#create', as: 'like_create'
 
   resources :hotels
 
