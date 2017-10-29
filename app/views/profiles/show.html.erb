@@ -10,7 +10,7 @@
     </div>
     <div class="name-follow" style="width: 200px">
       <p id="name"><%= @user.name.titleize %></p>
-      <% unless current_user? @user %>
+      <% if current_user != nil and not current_user? @user %>
       <%= render 'follow_form' %>
       <% end %>
       <div class="follow-detail">
@@ -73,41 +73,26 @@
 
   <div class="tab-review-follow">
     <div id="Reviews" class="tab" style="display: none">
-      <div id="reviews-hotel" style="border: none; margin-top: -20px;">
-        <div id="title-bt-new-review">
-          <div id="title-review-rl">
-            <h2 style="margin-top: 30px; margin-left: 30px;"><%= @user.name.titleize %>のレビュー</h2>
-            </div>
-            <% if current_user? @user %>
-            <div id="bt-new-review">
-              <%= link_to "新しいレビューを書く？", new_review_path, class: "myButton", style: "margin-top: 30px" %>
-            </div>
-            <% end %>
-          </div>
-          <div class="clearfix"></div>
-          <div class="all-review">
-            <section class="u-borderBox u-maxWidth1000 u-marginAuto u-marginTop30 u-marginBottom40 u-clearfix u-sm-paddingLeft20 u-sm-paddingRight20 u-xs-marginTop15 js-trackedTopic" data-scroll="native">
-            <% if @reviews.any? %>
+      <section class="u-borderBox u-marginAuto u-marginTop30 u-marginBottom40 u-clearfix u-paddingLeft20 u-paddingRight20 u-xs-marginTop15 js-trackedTopic" data-scroll="native">
+        <% if @reviews.any? %>
             <%= render @reviews %>
             <%= will_paginate @reviews %>
-            <% end %>
-          </section>
-        </div>
-      </div>
+        <% end %>
+      </section>
     </div>
 
     <div id="Following" class="w3-container tab" >
       <div class="total-following"></div>
-      <div class="user-detail">
+      <section class="u-borderBox u-marginAuto u-marginTop30 u-marginBottom40 u-clearfix u-paddingLeft20 u-paddingRight20 u-xs-marginTop15 js-trackedTopic" data-scroll="native">
         <%= render @user.following %>
-      </div>
+      </section>
     </div>
 
     <div id="Followers" class="w3-container tab" style="display:none">
       <div class="total-following"></div>
-      <div class="user-detail">
+      <section class="u-borderBox u-marginAuto u-marginTop30 u-marginBottom40 u-clearfix u-paddingLeft20 u-paddingRight20 u-xs-marginTop15 js-trackedTopic" data-scroll="native">
         <%= render @user.followers %>
-      </div>
+      </section>
     </div>
   </div>
 </div>
@@ -198,6 +183,7 @@ $(window).resize(function(){
 });
 $(document).ready(function(){
     TabHighlighter.refresh();
+    openTab('Reviews');
 });
 
 </script>
