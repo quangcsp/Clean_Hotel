@@ -9,13 +9,10 @@
       <%= devise_error_messages! %>
       <%= f.text_field :name, autofocus: true, placeholder: "ニックネーム", class: "text-field" %>
       <%= f.file_field :avatar, autofocus: true, class: "text-field" %>
-      <%= f.text_field :age, autofocus: true, placeholder: "ねんれい", class: "text-field" %>
-      <%= f.password_field :password, autofocus: true, placeholder: "新規なパスワード", class: "pass" %>
-      <%= f.password_field :password_confirmation, autofocus: true, placeholder: "パスワード認証", class: "pass" %>
-      <%= f.password_field :current_password, autofocus: true, placeholder: "現在のパスワード", class: "pass" %>
       <%= f.text_field :address, autofocus: true, placeholder: "アドレス", class: "text-field" %>
       <%= f.text_field :phone, autofocus: true, placeholder: "電話番号", class: "text-field" %>
       <%= f.date_field :birth_day, autofocus: true, placeholder: "誕生日", class: "text-field" %>
+      <%= f.password_field :current_password, autofocus: true, placeholder: "現在のパスワード", class: "pass" %>
       <br>
       <%= f.label :gender, "性的:" %>
       <%= f.label :male, "男性"%>
