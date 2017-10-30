@@ -2,7 +2,7 @@
 <% avg_rate = @review.hotel.rate_count ? @review.hotel.rate_sum / @review.hotel.rate_count : 0 %>
 <% avatar = current_user && current_user.avatar.url ? current_user.avatar.url : '/no_avatar.jpg' %>
 
-<div class="show-review" id="show-review" @click.self="closeWriteCmtMode">
+<div class="show-review" id="show-review" @click.self="closeWriteCmtMode" data-review-id="<%= @review.id %>">
   <header class="container u-maxWidth740">
     <div class="uiScale uiScale)-ui--regular uiScale-caption--regular postMetaHeader u-paddingBottom10 row">
       <div class="col u-size8of12 js-postMetaLockup">
