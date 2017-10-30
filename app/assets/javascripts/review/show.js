@@ -13,8 +13,8 @@ function showReview() {
         },
         mounted: function () {
             this.comment.user_id = $('textarea[name="comment"]').attr('data-current-user-id');
-            this.reply.user_id = $('textarea[name="comment"]').attr('data-current-user-id');
-            this.comment.review_id = $('textarea[name="comment"]').attr('data-review-id');
+            this.reply.user_id = this.comment.user_id;
+            this.comment.review_id = $('#show-review').attr('data-review-id');
             this.fetchLikeInfo();
             this.fetchData();
         },
@@ -91,7 +91,6 @@ function showReview() {
                     comment: this.comment,
                 })
                     .then(res => {
-                        console.log(res.data);
                         this.comments.push(res.data);
                         this.comment.content = '';
                         this.closeWriteCmtMode();
