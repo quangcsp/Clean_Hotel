@@ -4,7 +4,7 @@ class LikesController < ApplicationController
   end
 
   def info
-    count = Like.count
+    count = Like.where(review_id: params[:review_id]).count
     @like = Like.find_by(user_id: params[:user_id], review_id: params[:review_id])
     if @like.blank?
       status = 0
