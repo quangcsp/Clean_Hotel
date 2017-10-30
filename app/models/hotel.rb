@@ -18,6 +18,8 @@ class Hotel < ApplicationRecord
   validates :phone, presence: true
   validates :star, presence: true,
     numericality: {greater_than: 0, less_than_or_equal_to: 5}
+  validates :max_price, presence: true
+  validates :min_price, presence: true
   mount_uploader :avatar, HotelAvatarUploader
 
   ["rate_one", "rate_two", "rate_three", "rate_four", "rate_five"]

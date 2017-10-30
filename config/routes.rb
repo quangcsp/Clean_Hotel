@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   get "user/:id", to: 'profiles#show', as: 'user_profile'
   post "avatar/:id", to: 'profiles#avatar', as: 'user_profile_avatar'
+  get 'profile/change_password', to: 'profiles#change_password', as: "user_change_password"
+  patch "profile/change_password", to: 'profiles#update_password', as: 'user_update_password'
 
   resources :reviews do
     get 'my_review', on: :collection
