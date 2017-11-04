@@ -21,10 +21,12 @@ class LikesController < ApplicationController
 
   def create
     @like = Like.new(like_params)
+    @review = @like.review
     if @like.save
       respond_to do |format|
         format.json {render :json => {:id => @like.id}}
       end
+      @review.update_attributes(like_count: (@review.like_count+1))
     else
       respond_to do |format|
         format.json {render :json => {:error => 'error'}}
@@ -35,6 +37,7 @@ class LikesController < ApplicationController
   def destroy
     @like = Like.find_by(id: params[:id])
     @review = @like.review
+    @review.update_attributes(like_count: (@review.like_count-1))
     Like.delete(@like.id)
 
     respond_to do |format|

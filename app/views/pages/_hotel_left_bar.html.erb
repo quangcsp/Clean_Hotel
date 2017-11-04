@@ -1,0 +1,27 @@
+<div class="item-top-hotel">
+  <div class="image-item-top-hotel" style="background-image: url('<%= hotel.avatar.url() %>'); "></div>
+  <div class="info-item-top-hotel">
+    <div>
+    <%= hotel.name %>
+    </div>
+    <span style="color: red; font-size: 14px;  margin-right: 3px">スター:</span>
+    <% for i in 0...5 %>
+    <% if i<hotel.star %>
+    <i class="fa fa-star fa-star-yellow" style="font-size: 0.9em"></i>
+    <% else %>
+    <i class="fa fa-star" style="font-size: 0.9em"></i>
+    <% end %>
+    <% end %>
+    <br>
+    <div style="margin-top: 30px;">
+        <span style="font-size: 14px"><span style="color: red; font-size: 14px;  margin-right: 3px">アドレス:</span><%= hotel.address %></span>
+    </div>
+    <div style="margin-top: 5px;">
+        <span style="font-size: 14px"><span style="color: red; font-size: 14px;  margin-right: 3px">電話:</span>+<%= hotel.phone %></span>
+    </div>
+
+
+</div>
+</div>
+
+<script></script>
