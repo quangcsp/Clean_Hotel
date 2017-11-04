@@ -12,5 +12,5 @@ class Review < ApplicationRecord
   validates :content, presence: true, length: {minimum: 10}
   validates :rate, presence: true, numericality: true
   validates :hotel_id, presence: true
-  default_scope -> { order(created_at: :desc) }
+  # default_scope -> { order(created_at: :desc) }
 end

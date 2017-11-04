@@ -1,0 +1,47 @@
+<div>
+  <% if review.image.blank? %>
+  <div class="item" id="item-<%= review.id %>" style="background-image: url('/assets/hotel.jpg')">
+    <div class="top-info"></div>
+    <div class="bottom-info">
+    </div>
+    <div class="content-info">
+      <div class="name" style="height: 28px">
+        <span style=" font-style: bold; font-size: 20px">
+          <%= link_to (raw review.title), review_path(review.id) %>
+        </span>
+      </div>
+      <div>
+        <span style="color: white; font-size: 14px;">
+          <%= link_to review.user.name.titleize, user_profile_path(review.user.id) %>
+        </span>
+      </div>
+    </div>
+  </div>
+  <% else %>
+  <div class="item" id="item-<%= review.id %>" style="background-image: url('<%= review.image %>')">
+    <div class="top-info"></div>
+    <div class="bottom-info"></div>
+    <div class="content-info">
+      <div class="name" style="height: 28px">
+        <span style=" font-style: bold; font-size: 20px">
+          <%= link_to (raw review.title), review_path(review.id) %>
+        </span>
+      </div>
+      <div>
+        <span style="color: white; font-size: 14px;">
+        <%= link_to review.user.name.titleize, user_profile_path(review.user.id) %>
+        </span>
+      </div>
+
+    </div>
+  </div>
+  <% end %>
+</div>
+
+
+<!-- <script>
+  $("#item-<%= review.id %>").click(function () {
+    window.location = ('reviews/<%= review.id %>');
+  });
+</script>
+-->

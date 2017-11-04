@@ -5,7 +5,7 @@ class ReviewsController < ApplicationController
     # if user_signed_in?
     #   @reviews = current_user.reviews.paginate(page: params[:page])
     # else
-    @reviews = Review.all.paginate(page: params[:page])
+    @reviews = Review.order(created_at: :desc).paginate(page: params[:page])
     # end
   end
 
