@@ -4,149 +4,169 @@
       <%= link_to "ホームページ", root_path %>
     </li>
     <% if user_signed_in? %>
-      <li class="menu-item-has-children">
-        <%= link_to "ホテル" %>
-        <ul class="sub-menu">
-          <% if current_user.admin? %>
-            <li><%= link_to "すべてのホテル", hotels_path %></li>
-            <li><%= link_to "ホテルを作る", new_hotel_path %></li>
-          <% else %>
-            <li><%= link_to "すべてのホテル", hotels_path %></li>
-          <% end %>
+        <% if current_user.admin? %>
+            <li class="menu-item-has-children">
+              <%= link_to "ホテル" %>
+              <ul class="sub-menu">
 
-        </ul>
-      </li>
+                <li><%= link_to "すべてのホテル", hotels_path %></li>
+                <li><%= link_to "ホテルを作る", new_hotel_path %></li>
+              </ul>
+            </li>
+        <% else %>
+            <li>
+              <%= link_to "すべてのホテル", hotels_path %>
+            </li>
+        <% end %>
     <% else %>
-      <li class="menu-item"><%= link_to "ホテル" %></li>
+        <li class="menu-item"><%= link_to "ホテル" %></li>
     <% end %>
-    <% if user_signed_in? %>
-      <li class="menu-item-has-children">
-        <%= link_to "レビュー"%>
-        <ul class="sub-menu">
-          <li><%= link_to "すべてレビュー", reviews_path %></li>
-          <li><%= link_to "私のレビュー", my_review_reviews_path %></li>
-          <li><%= link_to "レビューを作る", new_review_path %></li>
-        </ul>
-      </li>
-    <% else %>
-      <li class="menu-item">
-        <%= link_to "すべてレビュー", reviews_path %>
-      </li>
-    <% end %>
-    <li class="menu-item"><a href="#">連絡</a></li>
-    <% if user_signed_in? %>
-    <li class="menu-item-has-children">
-      <a href="#fallback-page"><%= current_user.name.titleize %></a>
-      <ul class="sub-menu">
-        <li><%= link_to "プロフェール", user_profile_path(current_user.id) %></li>
-        <li><%= link_to "パスワード編集", user_change_password_path %></li>
-        <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-      </ul>
-    </li>
-    <% else %>
+    <!--
+    <% if user_signed_in? %>-->
+        <!--<li class="menu-item-has-children">-->
+        <!--<%= link_to "レビュー" %>-->
+        <!--<ul class="sub-menu">-->
+        <!--<li><%= link_to "すべてレビュー", reviews_path %></li>-->
+        <!--<li><%= link_to "私のレビュー", my_review_reviews_path %></li>-->
+        <!--<li><%= link_to "レビューを作る", new_review_path %></li>-->
+        <!--</ul>-->
+        <!--</li>-->
+        <!--
+    <% else %>-->
+        <!--<li class="menu-item">-->
+        <!--<%= link_to "すべてレビュー", reviews_path %>-->
+        <!--</li>-->
+        <!--
+    <% end %>-->
     <li class="menu-item">
-      <%= link_to "サインイン", new_user_session_path %>
+      <div class="inputGroup-icon u-marginTop5">
+        <span class="svgIcon svgIcon--search svgIcon--25px u-top0 u-baseColor--iconLight"
+              style="margin-right: -40px;">
+          <svg class="svgIcon-use" width="25" height="25" viewBox="0 0 25 25">
+            <path d="M20.067 18.933l-4.157-4.157a6 6 0 1 0-.884.884l4.157 4.157a.624.624 0 1 0 .884-.884zM6.5 11c0-2.62 2.13-4.75 4.75-4.75S16 8.38 16 11s-2.13 4.75-4.75 4.75S6.5 13.62 6.5 11z"></path>
+          </svg>
+        </span>
+        <input type="text" class="js-predictiveSearchInput textInput textInput--rounded textInput--darkText u-baseColor--textNormal textInput--transparent u-minWidth360"
+               id="search"
+               placeholder="ホテル名前、アドレス..."
+               style="padding-left: 40px;">
+      </div>
     </li>
-    <li class="menu-iem">
-      <%= link_to "サインアップ", new_user_registration_path %>
-    </li>
+    <% if user_signed_in? %>
+        <li class="menu-item-has-children">
+          <a href="#fallback-page"><%= current_user.name.titleize %></a>
+          <ul class="sub-menu">
+            <li><%= link_to "プロフェール", user_profile_path(current_user.id) %></li>
+            <li><%= link_to "自分のレビュー", my_review_reviews_path %></li>
+            <li><%= link_to "レビューを作る", new_review_path %></li>
+            <li><%= link_to "パスワード編集", user_change_password_path %></li>
+            <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+          </ul>
+        </li>
+    <% else %>
+        <li class="menu-item">
+          <%= link_to "サインイン", new_user_session_path %>
+        </li>
+        <li class="menu-iem">
+          <%= link_to "サインアップ", new_user_registration_path %>
+        </li>
     <% end %>
   </ul>
 </nav>
 
 <script>
-  // Using jQuery because WordPress already has it
-  (function($) {
-    var $allMenus = $(".menu-item-has-children");
-    var $allToggles = $allMenus.find('> a');
-    var $allTopLinks = $(".nav > li > a");
+    // Using jQuery because WordPress already has it
+    (function ($) {
+        var $allMenus = $('.menu-item-has-children');
+        var $allToggles = $allMenus.find('> a');
+        var $allTopLinks = $('.nav > li > a');
 
-    var hoverTimer, blurTimer,
-    delay = 500;
+        var hoverTimer, blurTimer,
+            delay = 500;
 
-  // Reusable functions
-  function openMenu($current) {
-    $allToggles.attr("aria-expanded", "false");
-    $current.attr("aria-expanded", "true");
-  }
+        // Reusable functions
+        function openMenu($current) {
+            $allToggles.attr('aria-expanded', 'false');
+            $current.attr('aria-expanded', 'true');
+        }
 
-  function closeMenu($current) {
-    $current.attr("aria-expanded", "false");
-  }
+        function closeMenu($current) {
+            $current.attr('aria-expanded', 'false');
+        }
 
-  function focusSubmenu($current) {
-    $current.on("transitionend", function() {
-      if ($current.css("visibility") === "visible") {
-        $current.find("li:first-child a").focus();
-        $current.off("transitionend");
-      }
-    });
-  }
+        function focusSubmenu($current) {
+            $current.on('transitionend', function () {
+                if ($current.css('visibility') === 'visible') {
+                    $current.find('li:first-child a').focus();
+                    $current.off('transitionend');
+                }
+            });
+        }
 
-  // Add aria roles
-  $(".menu-item.active > a").attr("aria-current", "page");
-  $allToggles.attr({
-    "aria-haspopup": "true",
-    "aria-expanded": "false",
-    "role": "button"
-  });
+        // Add aria roles
+        $('.menu-item.active > a').attr('aria-current', 'page');
+        $allToggles.attr({
+            'aria-haspopup': 'true',
+            'aria-expanded': 'false',
+            'role': 'button',
+        });
 
-  // Open menu on hover
-  $allMenus.on("mouseenter", function(e) {
-    openMenu($(this).find("[aria-expanded]"));
+        // Open menu on hover
+        $allMenus.on('mouseenter', function (e) {
+            openMenu($(this).find('[aria-expanded]'));
 
-    clearTimeout(hoverTimer);
-  });
+            clearTimeout(hoverTimer);
+        });
 
-  // Close menu after a short delay
-  $allMenus.on("mouseleave", function() {
-    var $element = $(this).find("[aria-expanded]");
+        // Close menu after a short delay
+        $allMenus.on('mouseleave', function () {
+            var $element = $(this).find('[aria-expanded]');
 
-    hoverTimer = setTimeout(function() {
-      closeMenu($element);
-    }, delay);
-  });
+            hoverTimer = setTimeout(function () {
+                closeMenu($element);
+            }, delay);
+        });
 
-  // Toggle menu on click, tap, or focus + enter/space
-  $allToggles
-  .on("click touchstart", function(e) {
-    var $this = $(this);
-    var $submenu = $this.next(".sub-menu");
+        // Toggle menu on click, tap, or focus + enter/space
+        $allToggles
+            .on('click touchstart', function (e) {
+                var $this = $(this);
+                var $submenu = $this.next('.sub-menu');
 
-    if ($this.attr("aria-expanded") === "true") closeMenu($this);
-    else openMenu($this);
+                if ($this.attr('aria-expanded') === 'true') closeMenu($this);
+                else openMenu($this);
 
-    focusSubmenu($submenu);
+                focusSubmenu($submenu);
 
-    e.preventDefault();
-  })
-  .on("keyup", function(e) {
-    if (e.keyCode === 32) {
-      openMenu($(this));
-      focusSubmenu($(this).next(".sub-menu"));
-    }
-  });
+                e.preventDefault();
+            })
+            .on('keyup', function (e) {
+                if (e.keyCode === 32) {
+                    openMenu($(this));
+                    focusSubmenu($(this).next('.sub-menu'));
+                }
+            });
 
-  // Close menu when refocusing on top-level links
-  $allTopLinks.on("focus", function() {
-    closeMenu($allToggles);
-  });
+        // Close menu when refocusing on top-level links
+        $allTopLinks.on('focus', function () {
+            closeMenu($allToggles);
+        });
 
-  // Close menu on esc and focus loss
-  $(".site-navigation").on("keyup", function(e) {
-    if (e.keyCode === 27) closeMenu($allToggles);
-  });
+        // Close menu on esc and focus loss
+        $('.site-navigation').on('keyup', function (e) {
+            if (e.keyCode === 27) closeMenu($allToggles);
+        });
 
-  // Close menu if focus isn't inside site navigation
-  $('.sub-menu').on('focusout', function(){
-    // There's a delay between focusout and re-focus
-    setTimeout( function() {
-      var $focused = $(document.activeElement);
-      if($focused.closest('.site-navigation').length === 0 ) {
-        closeMenu($allToggles);
-      }
-    }, 1);
-  });
+        // Close menu if focus isn't inside site navigation
+        $('.sub-menu').on('focusout', function () {
+            // There's a delay between focusout and re-focus
+            setTimeout(function () {
+                var $focused = $(document.activeElement);
+                if ($focused.closest('.site-navigation').length === 0) {
+                    closeMenu($allToggles);
+                }
+            }, 1);
+        });
 
-})(jQuery);
+    })(jQuery);
 </script>
