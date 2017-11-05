@@ -1,4 +1,4 @@
-<div class="item-top-hotel">
+<div class="item-top-hotel item-top-hotel-<%= hotel.id %>">
   <div class="image-item-top-hotel" style="background-image: url('<%= hotel.avatar.url() %>'); "></div>
   <div class="info-item-top-hotel">
     <div>
@@ -24,4 +24,8 @@
 </div>
 </div>
 
-<script></script>
+<script>
+    $(".item-top-hotel-<%= hotel.id %>").click(function() {
+        window.location = "/hotels/<%= hotel.id %>"
+    })
+</script>
