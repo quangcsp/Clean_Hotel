@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.browser
 //= require turbolinks
 //= require medium-editor.min
 //= require handlebars.runtime.min
@@ -24,6 +25,7 @@
 //= require vue-material
 //= require vee-validate
 //= require axios.min
+//= require foxycomplete
 //= require_tree .
 
 Vue.use(VeeValidate);

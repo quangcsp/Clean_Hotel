@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'searches/index'
+
   # get 'reviews/new'
   #
 
@@ -22,6 +24,8 @@ Rails.application.routes.draw do
   resources :comments
 
   resources :replies
+
+  get "search", to: 'searches#search'
 
   get "likes/:user_id/:review_id", to: 'likes#info', as: 'like_info'
   delete "likes/:id", to: 'likes#destroy', as: 'like_destroy'
