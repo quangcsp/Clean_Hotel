@@ -1,9 +1,9 @@
 <% create_at = review.created_at.to_time %>
 <% raw_content = ActionView::Base.full_sanitizer.sanitize(review.content).strip %>
-<% raw_content = raw_content.truncate(20) %>
+<% raw_content = raw_content.truncate(14) %>
 <% raw_title = ActionView::Base.full_sanitizer.sanitize(review.title).strip %>
-<% raw_title = raw_title.truncate(17) %>
-<% raw_hotel = review.hotel.name.truncate(17) %>
+<% raw_title = raw_title.truncate(11) %>
+<% raw_hotel = review.hotel.name.truncate(10) %>
 <% avatar = review.user.avatar.url ? review.user.avatar.url : '/no_avatar.jpg' %>
 
 <div class="follow-review-item follow-review-item-<%= review.id %> u-borderBox u-borderRadius2 u-borderBlackLightest">

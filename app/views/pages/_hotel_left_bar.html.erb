@@ -1,10 +1,11 @@
-<% raw_address = hotel.address.truncate(12) %>
+<% raw_name_hotel = hotel.name.truncate(10) %>
+<% raw_address = hotel.address.truncate(11) %>
 
 <div class="item-top-hotel item-top-hotel-<%= hotel.id %>">
   <div class="image-item-top-hotel" style="background-image: url('<%= hotel.avatar.url() %>'); "></div>
   <div class="info-item-top-hotel">
     <div>
-    <%= hotel.name %>
+    <%= raw_name_hotel %>
     </div>
     <span style="color: red; font-size: 14px;  margin-right: 3px">スター:</span>
     <% for i in 0...5 %>
