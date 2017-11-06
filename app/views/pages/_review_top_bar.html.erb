@@ -1,5 +1,5 @@
 <% raw_title = ActionView::Base.full_sanitizer.sanitize(review.title).strip %>
-<% raw_title = raw_title.truncate(20) %>
+<% raw_title = raw_title.truncate(11) %>
 <div>
   <% if review.image.blank? %>
   <div class="item" id="item-<%= review.id %>" style="background-image: url('/assets/hotel.jpg')">
@@ -26,7 +26,7 @@
     <div class="content-info">
       <div class="name" style="height: 28px">
         <span style=" font-style: bold; font-size: 20px">
-          <%= link_to (raw review.title), review_path(review.id) %>
+          <%= link_to (raw_title), review_path(review.id) %>
         </span>
       </div>
       <div>
