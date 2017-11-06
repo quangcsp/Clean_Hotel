@@ -19,6 +19,7 @@ function newReview() {
             this.rate = parseInt($('.md-rating-bar').attr('data-rate')) ?
                 parseInt($('.md-rating-bar').attr('data-rate')) : 0;
             this.fetchHotel();
+            Review.init();
         },
         methods: {
             hotelFilter: function (list, query) {
