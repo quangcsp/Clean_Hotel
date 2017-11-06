@@ -1,7 +1,8 @@
 <nav class="site-navigation" role="navigation" aria-label="Main Navigation">
   <ul class="nav">
-    <li class="menu-item">
-      <%= link_to "ホームページ", root_path %>
+    <li class="menu-item home-page">
+      <div style="margin-top: 5px;"><%= link_to "ホームページ"%></div>
+
     </li>
     <% if user_signed_in? %>
         <% if current_user.admin? %>
@@ -170,4 +171,10 @@
         });
 
     })(jQuery);
+</script>
+
+<script>
+  $(".home-page").click(function (){
+    window.location = ("/");
+  })
 </script>
