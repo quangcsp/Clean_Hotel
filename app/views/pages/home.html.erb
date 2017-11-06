@@ -22,8 +22,8 @@
         <% @users = current_user.following %>
         <% @reviews = Review.where(:user_id => @users.each do |user|
           user.id
-          end  ).order(created_at: :desc)
-         %>
+        end  ).order(created_at: :desc)
+        %>
         <% if @reviews.any? %>
         <% @reviews.each do |review| %>
         <%= render 'review_right_bar', review: review %>
@@ -41,7 +41,7 @@
 
       </div>
 
-      <% @hotels = Hotel.order(star: :desc ).limit(10) %>
+      <% @hotels = Hotel.order(rate_sum: :desc ).limit(10) %>
       <!-- <p>Top Hotel</p> -->
       <div class="tab">
         <button class="tablinks" onclick="openCity(event, 'top-hotel-home')" id="defaultOpen" style="font-size: 15px">トップホテル</button>
@@ -62,69 +62,23 @@
       </div>
     </div>
   </div>
-
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-
-
-  <script type="text/javascript">
-    $(document).ready(function(){
-      $('.review-autoplay').slick({
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        dots: true,
-      });
-    });
-  </script>
-
 </body>
 
-<!-- <div class="home-page">
-  <section class="u-borderBox u-maxWidth1000 u-marginAuto u-marginTop30 u-marginBottom40 u-clearfix u-sm-paddingLeft20 u-sm-paddingRight20 u-xs-marginTop15 js-trackedTopic" data-scroll="native">
-    <header class="u-flexTop u-marginBottom25 u-borderBottomLighter js-topicSuggestionHeading">
-      <span class="heading-title
-      heading-title--lineHeightTight
-      u-flex0 u-block u-paddingBottom20
-      u-uiDisplayBold u-fontSize20
-      u-textColorDarker u-borderBottomNormal
-      u-marginBottomNegative1 u-xs-fontSize18">
-      フォーロー中のレビュー
-    </span>
-  </header>
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script> -->
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script> -->
 
-</section>
-
-<section class="u-borderBox u-maxWidth1000 u-marginAuto u-marginTop30 u-marginBottom40 u-clearfix u-sm-paddingLeft20 u-sm-paddingRight20 u-xs-marginTop15 js-trackedTopic" data-scroll="native">
-  <header class="u-flexTop u-marginBottom25 u-borderBottomLighter js-topicSuggestionHeading">
-    <span class="heading-title
-    heading-title--lineHeightTight
-    u-flex0 u-block u-paddingBottom20
-    u-uiDisplayBold u-fontSize20
-    u-textColorDarker u-borderBottomNormal
-    u-marginBottomNegative1 u-xs-fontSize18">
-    ホットのレビュー
-  </span>
-</header>
-
-</section>
-
-<section class="u-borderBox u-maxWidth1000 u-marginAuto u-marginTop30 u-marginBottom40 u-clearfix u-sm-paddingLeft20 u-sm-paddingRight20 u-xs-marginTop15 js-trackedTopic" data-scroll="native">
-  <header class="u-flexTop u-marginBottom25 u-borderBottomLighter js-topicSuggestionHeading">
-    <span class="heading-title
-    heading-title--lineHeightTight
-    u-flex0 u-block u-paddingBottom20
-    u-uiDisplayBold u-fontSize20
-    u-textColorDarker u-borderBottomNormal
-    u-marginBottomNegative1 u-xs-fontSize18">
-    新しいレビュー
-  </span>
-</header>
-
-</section>
-</div> -->
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.review-autoplay').slick({
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      dots: true,
+    });
+  });
+</script>
 
 <script>
   function openCity(evt, cityName) {

@@ -1,3 +1,5 @@
+<% raw_address = hotel.address.truncate(12) %>
+
 <div class="item-top-hotel item-top-hotel-<%= hotel.id %>">
   <div class="image-item-top-hotel" style="background-image: url('<%= hotel.avatar.url() %>'); "></div>
   <div class="info-item-top-hotel">
@@ -14,8 +16,11 @@
     <% end %>
     <br>
     <div style="margin-top: 30px;">
-        <span style="font-size: 14px"><span style="color: red; font-size: 14px;  margin-right: 3px">アドレス:</span><%= hotel.address %></span>
+        <span style="font-size: 14px"><span style="color: red; font-size: 14px;  margin-right: 3px">レート:</span><%= hotel.avg_rate %>/5</span>
     </div>
+<!--     <div style="margin-top: 5px">
+        <span style="font-size: 14px"><span style="color: red; font-size: 14px;  margin-right: 3px">アドレス:</span><%= raw_address %></span>
+    </div> -->
     <div style="margin-top: 5px;">
         <span style="font-size: 14px"><span style="color: red; font-size: 14px;  margin-right: 3px">電話:</span>+<%= hotel.phone %></span>
     </div>
