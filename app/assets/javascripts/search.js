@@ -44,7 +44,7 @@
                 dataType: 'json', // expect json data
                 matchContains: 'word',
                 parse: function (data) {
-                    if (data.length === 0) data.push({ title: '結果がありません' });
+                    if (!data || data.length === 0) data.push({ title: '結果がありません' });
                     return $.map(data, function (row) {
                         return {
                             data: row,

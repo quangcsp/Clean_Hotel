@@ -26,6 +26,7 @@
 //= require vee-validate
 //= require axios.min
 //= require foxycomplete
+//= require search
 //= require_tree .
 
 Vue.use(VeeValidate);
