@@ -6,6 +6,7 @@
 <% raw_hotel = review.hotel.name.truncate(10) %>
 <% avatar = review.user.avatar.url ? review.user.avatar.url : '/no_avatar.jpg' %>
 <% review.update_attributes(like_count: Like.where(review_id: review.id).count) %>
+<% @review = review %>
 
 <div class="follow-review-item follow-review-item-<%= review.id %> u-borderBox u-borderRadius2 u-borderBlackLightest">
   <% if review.image.blank? %>
@@ -47,6 +48,16 @@
             <time><%= create_at.strftime("%Y年%m月%d日") %></time>
           </div>
         </div>
+        <% if user_signed_in? %>
+            <div>
+              <% @bookmark = Bookmark.find_by(user_id: current_user.id, review_id: @review.id) %>
+              <% if @bookmark.blank? %>
+                  <%= render 'reviews/create_bookmark_form' %>
+              <% else %>
+                  <%= render 'reviews/destroy_bookmark_form' %>
+              <% end %>
+            </div>
+        <% end %>
       </div>
     </div>
     <br>

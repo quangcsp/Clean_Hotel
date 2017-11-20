@@ -1,4 +1,9 @@
 <%= form_for(@bookmark, url: bookmarks_path, html: {method: :delete}) do |f| %>
-<%= f.hidden_field :bookmark_id, value: @bookmark.id %>
-<%= f.submit "UnBookmark" %>
+    <%= f.hidden_field :bookmark_id, value: @bookmark.id %>
+    <button class="button button--large button--dark button--chromeless is-touchIconFadeInPulse u-baseColor--buttonDark button--withIcon button--withSvgIcon button--bookmark js-bookmarkButton" title="Bookmark this story to read later" aria-label="Bookmark this story to read later">
+        <span class="button-defaultState"><span class="svgIcon svgIcon--bookmark svgIcon--29px">
+<svg class="svgIcon-use" width="29" height="29" viewBox="0 0 29 29"><path d="M19.385 4h-9.77A2.623 2.623 0 0 0 7 6.615V23.01a1.022 1.022 0 0 0 1.595.847l5.905-4.004 5.905 4.004A1.022 1.022 0 0 0 22 23.011V6.62A2.625 2.625 0 0 0 19.385 4z" fill-rule="evenodd"></path></svg>
+      </span>
+      </span>
+    </button>
 <% end %>
