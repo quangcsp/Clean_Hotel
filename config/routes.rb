@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'searches/index'
 
   # get 'reviews/new'
@@ -35,6 +36,7 @@ Rails.application.routes.draw do
   delete 'bookmarks', to: 'bookmarks#destroy'
 
   resources :hotels
+
 
 
 
