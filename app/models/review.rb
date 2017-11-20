@@ -7,6 +7,7 @@ class Review < ApplicationRecord
   belongs_to :user
   has_many :comments
   has_many :likes
+  has_many :bookmarks
 
   validates :title, presence: true
   validates :content, presence: true, length: {minimum: 10}

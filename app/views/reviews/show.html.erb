@@ -2,6 +2,17 @@
 <% avg_rate = @review.hotel.rate_count ? @review.hotel.rate_sum / @review.hotel.rate_count : 0 %>
 <% avatar = current_user && current_user.avatar.url ? current_user.avatar.url : '/no_avatar.jpg' %>
 
+<% if user_signed_in? %>
+<div style="width: 1000px; height: 100px; margin-left: 150px;">
+  <% @bookmark = Bookmark.find_by(user_id: current_user.id, review_id: @review.id) %>
+  <% if @bookmark.blank? %>
+  <%= render 'create_bookmark_form' %>
+  <% else %>
+  <%= render 'destroy_bookmark_form' %>
+  <% end %>
+</div>
+<% end %>
+
 <div class="show-review" id="show-review" @click.self="closeWriteCmtMode" data-review-id="<%= @review.id %>">
   <header class="container u-maxWidth740">
     <div class="uiScale uiScale)-ui--regular uiScale-caption--regular postMetaHeader u-paddingBottom10 row">
