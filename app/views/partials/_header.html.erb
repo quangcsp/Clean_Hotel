@@ -60,6 +60,7 @@
           <% if current_user.admin? %>
             <li><%= link_to "データ管理", '/admin' %></li>
           <% end %>
+            <li><%= link_to "Bookmarks", '/bookmarks' %></li>
             <li><%= link_to "プロフェール", user_profile_path(current_user.id) %></li>
             <li><%= link_to "自分のレビュー", my_review_reviews_path %></li>
             <li><%= link_to "レビューを作る", new_review_path %></li>
