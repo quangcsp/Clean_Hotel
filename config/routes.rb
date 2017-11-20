@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   delete "likes/:id", to: 'likes#destroy', as: 'like_destroy'
   post "likes", to: 'likes#create', as: 'like_create'
 
+  post 'bookmarks', to: 'bookmarks#create'
+  delete 'bookmarks', to: 'bookmarks#destroy'
+
   resources :hotels
 
 
