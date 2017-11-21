@@ -5,9 +5,9 @@
 class Review < ApplicationRecord
   belongs_to :hotel
   belongs_to :user
-  has_many :comments
-  has_many :likes
-  has_many :bookmarks
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
 
   validates :title, presence: true
   validates :content, presence: true, length: {minimum: 10}
