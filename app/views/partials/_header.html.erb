@@ -12,33 +12,21 @@
 
                 <li><%= link_to "すべてのホテル", hotels_path %></li>
                 <li><%= link_to "ホテルを作る", new_hotel_path %></li>
+                <li><%= link_to "ホテ管理", "/check_hotel" %></li>
+                <li><%= link_to "すべてのレビュー", reviews_path %></li>
               </ul>
             </li>
         <% else %>
             <li>
               <%= link_to "すべてのホテル", hotels_path %>
             </li>
+            <li><%= link_to "ホテルを作る", new_hotel_path %></li>
+            <li><%= link_to "すべてのレビュー", reviews_path %></li>
         <% end %>
     <% else %>
         <li class="menu-item"><%= link_to "ホテル", hotels_path %></li>
     <% end %>
-    <!--
-    <% if user_signed_in? %>-->
-        <!--<li class="menu-item-has-children">-->
-        <!--<%= link_to "レビュー" %>-->
-        <!--<ul class="sub-menu">-->
-        <!--<li><%= link_to "すべてレビュー", reviews_path %></li>-->
-        <!--<li><%= link_to "私のレビュー", my_review_reviews_path %></li>-->
-        <!--<li><%= link_to "レビューを作る", new_review_path %></li>-->
-        <!--</ul>-->
-        <!--</li>-->
-        <!--
-    <% else %>-->
-        <!--<li class="menu-item">-->
-        <!--<%= link_to "すべてレビュー", reviews_path %>-->
-        <!--</li>-->
-        <!--
-    <% end %>-->
+
     <li class="menu-item">
       <div class="inputGroup-icon u-marginTop5">
         <span class="svgIcon svgIcon--search svgIcon--25px u-top0 u-baseColor--iconLight"
@@ -60,7 +48,7 @@
           <% if current_user.admin? %>
             <li><%= link_to "データ管理", '/admin' %></li>
           <% end %>
-            <li><%= link_to "Bookmarks", '/bookmarks' %></li>
+            <li><%= link_to "ブックマーク", '/bookmarks' %></li>
             <li><%= link_to "プロフェール", user_profile_path(current_user.id) %></li>
             <li><%= link_to "自分のレビュー", my_review_reviews_path %></li>
             <li><%= link_to "レビューを作る", new_review_path %></li>

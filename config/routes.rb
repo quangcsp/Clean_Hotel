@@ -36,6 +36,9 @@ Rails.application.routes.draw do
   post 'bookmarks', to: 'bookmarks#create'
   delete 'bookmarks', to: 'bookmarks#destroy'
 
+  get 'check_hotel', to: 'hotels#check_hotel'
+  get 'wait_accept', to: 'hotels#wait_accept'
+
   resources :hotels
 
 

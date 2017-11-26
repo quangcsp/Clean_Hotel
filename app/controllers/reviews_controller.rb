@@ -5,7 +5,8 @@ class ReviewsController < ApplicationController
     # if user_signed_in?
     #   @reviews = current_user.reviews.paginate(page: params[:page])
     # else
-    @reviews = Review.order(created_at: :desc).paginate(page: params[:page])
+    @hotels = Hotel.where(status: 'accept')
+    @reviews = Review.where(hotel_id: @hotels.each do |hotel| hotel.id end).order(created_at: :desc).paginate(page: params[:page])
     # end
   end
 

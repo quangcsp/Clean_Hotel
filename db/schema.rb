@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171120062318) do
+ActiveRecord::Schema.define(version: 20171126140844) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer  "user_id"
@@ -40,10 +40,11 @@ ActiveRecord::Schema.define(version: 20171120062318) do
     t.float    "rate_sum",    default: 0.0
     t.integer  "rate_count",  default: 0
     t.string   "avatar"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.float    "max_price",   default: 0.0
     t.float    "min_price",   default: 0.0
+    t.string   "status",      default: "pending"
   end
 
   create_table "likes", force: :cascade do |t|
