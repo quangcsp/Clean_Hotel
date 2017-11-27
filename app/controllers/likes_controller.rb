@@ -23,6 +23,9 @@ class LikesController < ApplicationController
     @like = Like.new(like_params)
     @review = @like.review
     if @like.save
+      unless @review.user.id==current_user.id
+        Notification.create(subscriber_id: @review.user.id, notifi_user_id: @current_user.id, action: "like", message: '', review_id: @review.id)
+      end
       respond_to do |format|
         format.json {render :json => {:id => @like.id}}
       end
