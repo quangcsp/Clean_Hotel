@@ -1,10 +1,11 @@
 <body>
-  <div class="search-bar"></div>
+  <% @hotels = Hotel.where(status: 'accept') %>
+
   <div class="container-home">
     <div style="margin-bottom: 22px;">
       <span style="color: #FF8040; font-size: 22px;">新しいレビュー</span>
     </div>
-    <% @new_reviews  = Review.order(created_at: :desc).limit(6)%>
+    <% @new_reviews  = Review.where(hotel_id: @hotels.each do |hotel| hotel.id end).order(created_at: :desc).limit(6)%>
     <div class="new-reivew-home">
       <div class="review-autoplay">
         <% @new_reviews.each do |review| %>
@@ -22,7 +23,7 @@
         <% @users = current_user.following %>
         <% @reviews = Review.where(:user_id => @users.each do |user|
           user.id
-        end  ).order(created_at: :desc)
+        end).order(created_at: :desc)
         %>
         <% if @reviews.any? %>
         <% @reviews.each do |review| %>
@@ -41,7 +42,7 @@
 
       </div>
 
-      <% @hotels = Hotel.order(rate_sum: :desc ).limit(10) %>
+      <% @hotels_order_rate = Hotel.where(status: "accept").order(rate_sum: :desc ).limit(10) %>
       <!-- <p>Top Hotel</p> -->
       <div class="tab">
         <button class="tablinks" onclick="openCity(event, 'top-hotel-home')" id="defaultOpen" style="font-size: 15px">トップホテル</button>
@@ -49,7 +50,7 @@
       </div>
 
       <div class="top-hotel-home tabcontent" id="top-hotel-home">
-        <% @hotels.each do |hotel| %>
+        <% @hotels_order_rate.each do |hotel| %>
         <%= render "hotel_left_bar", hotel: hotel %>
         <% end %>
 

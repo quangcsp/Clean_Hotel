@@ -3,81 +3,86 @@
     <li class="menu-item home-page">
       <div style="margin-top: 5px;"><%= link_to "ホームページ"%></div>
 
-    </li>
-    <% if user_signed_in? %>
-        <% if current_user.admin? %>
-            <li class="menu-item-has-children">
-              <%= link_to "ホテル" %>
-              <ul class="sub-menu">
+  </li>
+  <% if user_signed_in? %>
+  <% if current_user.admin? %>
+  <li class="menu-item-has-children">
+      <%= link_to "ホテル" %>
+      <ul class="sub-menu">
 
-                <li><%= link_to "すべてのホテル", hotels_path %></li>
-                <li><%= link_to "ホテルを作る", new_hotel_path %></li>
-              </ul>
-            </li>
-        <% else %>
-            <li>
-              <%= link_to "すべてのホテル", hotels_path %>
-            </li>
-        <% end %>
-    <% else %>
-        <li class="menu-item"><%= link_to "ホテル", hotels_path %></li>
-    <% end %>
-    <!--
-    <% if user_signed_in? %>-->
-        <!--<li class="menu-item-has-children">-->
-        <!--<%= link_to "レビュー" %>-->
-        <!--<ul class="sub-menu">-->
-        <!--<li><%= link_to "すべてレビュー", reviews_path %></li>-->
-        <!--<li><%= link_to "私のレビュー", my_review_reviews_path %></li>-->
-        <!--<li><%= link_to "レビューを作る", new_review_path %></li>-->
-        <!--</ul>-->
-        <!--</li>-->
-        <!--
-    <% else %>-->
-        <!--<li class="menu-item">-->
-        <!--<%= link_to "すべてレビュー", reviews_path %>-->
-        <!--</li>-->
-        <!--
-    <% end %>-->
-    <li class="menu-item">
-      <div class="inputGroup-icon u-marginTop5">
-        <span class="svgIcon svgIcon--search svgIcon--25px u-top0 u-baseColor--iconLight"
-              style="margin-right: -40px;">
-          <svg class="svgIcon-use" width="25" height="25" viewBox="0 0 25 25">
-            <path d="M20.067 18.933l-4.157-4.157a6 6 0 1 0-.884.884l4.157 4.157a.624.624 0 1 0 .884-.884zM6.5 11c0-2.62 2.13-4.75 4.75-4.75S16 8.38 16 11s-2.13 4.75-4.75 4.75S6.5 13.62 6.5 11z"></path>
-          </svg>
-        </span>
-        <input type="text" class="js-predictiveSearchInput textInput textInput--rounded textInput--darkText u-baseColor--textNormal textInput--transparent u-minWidth360"
-               id="search"
-               placeholder="ホテル名前、アドレス..."
-               style="padding-left: 40px;">
-      </div>
-    </li>
-    <% if user_signed_in? %>
-        <li class="menu-item-has-children">
-          <a href="#fallback-page"><%= current_user.name.titleize %></a>
-          <ul class="sub-menu">
-          <% if current_user.admin? %>
-            <li><%= link_to "データ管理", '/admin' %></li>
-          <% end %>
-            <li><%= link_to "Bookmarks", '/bookmarks' %></li>
-            <li><%= link_to "プロフェール", user_profile_path(current_user.id) %></li>
-            <li><%= link_to "自分のレビュー", my_review_reviews_path %></li>
-            <li><%= link_to "レビューを作る", new_review_path %></li>
-            <li><%= link_to "パスワード編集", user_change_password_path %></li>
-            <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-          </ul>
-        </li>
-    <% else %>
-        <li class="menu-item">
-          <%= link_to "サインイン", new_user_session_path %>
-        </li>
-        <li class="menu-iem">
-          <%= link_to "サインアップ", new_user_registration_path %>
-        </li>
-    <% end %>
+        <li><%= link_to "すべてのホテル", hotels_path %></li>
+        <li><%= link_to "ホテルを作る", new_hotel_path %></li>
+        <li><%= link_to "ホテ管理", "/check_hotel" %></li>
+        <li><%= link_to "すべてのレビュー", reviews_path %></li>
+    </ul>
+</li>
+<% else %>
+<li class="menu-item-has-children">
+  <%= link_to "ホテル" %>
+  <ul class="sub-menu">
+    <li><%= link_to "すべてのホテル", hotels_path %></li>
+    <li><%= link_to "ホテルを作る", new_hotel_path %></li>
+    <li><%= link_to "すべてのレビュー", reviews_path %></li>
+</ul>
+</li>
+<% end %>
+<% else %>
+<li class="menu-item"><%= link_to "ホテル", hotels_path %></li>
+<% end %>
+
+<li class="menu-item">
+  <div class="inputGroup-icon u-marginTop5">
+    <span class="svgIcon svgIcon--search svgIcon--25px u-top0 u-baseColor--iconLight"
+    style="margin-right: -40px;">
+    <svg class="svgIcon-use" width="25" height="25" viewBox="0 0 25 25">
+        <path d="M20.067 18.933l-4.157-4.157a6 6 0 1 0-.884.884l4.157 4.157a.624.624 0 1 0 .884-.884zM6.5 11c0-2.62 2.13-4.75 4.75-4.75S16 8.38 16 11s-2.13 4.75-4.75 4.75S6.5 13.62 6.5 11z"></path>
+    </svg>
+</span>
+<input type="text" class="js-predictiveSearchInput textInput textInput--rounded textInput--darkText u-baseColor--textNormal textInput--transparent u-minWidth360"
+id="search"
+placeholder="ホテル名前、アドレス..."
+style="padding-left: 40px;">
+</div>
+</li>
+<% if user_signed_in? %>
+<li class="menu-item-has-children">
+  <a href="#fallback-page"><%= current_user.name.titleize %></a>
+  <ul class="sub-menu">
+      <% if current_user.admin? %>
+      <li><%= link_to "データ管理", '/admin' %></li>
+      <% end %>
+      <li><%= link_to "ブックマーク", '/bookmarks' %></li>
+      <li><%= link_to "プロフェール", user_profile_path(current_user.id) %></li>
+      <li><%= link_to "自分のレビュー", my_review_reviews_path %></li>
+      <li><%= link_to "レビューを作る", new_review_path %></li>
+      <li><%= link_to "パスワード編集", user_change_password_path %></li>
+      <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
   </ul>
+</li>
+<% else %>
+<li class="menu-item">
+  <%= link_to "サインイン", new_user_session_path %>
+</li>
+<li class="menu-iem">
+  <%= link_to "サインアップ", new_user_registration_path %>
+</li>
+<% end %>
+
+</ul>
 </nav>
+
+<% if user_signed_in? %>
+<% @notifications = Notification.where(subscriber_id: current_user.id, status: 'false') %>
+<div class="dropdown">
+<button onclick="myFunction()" class="btn-notifi dropbtn fa fa-bell-o" style="font-size: 20px"><%= @notifications.count %></button>
+</div>
+  <div id="myDropdown" class="dropdown-content">
+    <% if user_signed_in? %>
+        <%= render @notifications %>
+    <% end %>
+  </div>
+</div>
+<% end %>
 
 
 <script>
@@ -88,7 +93,7 @@
         var $allTopLinks = $('.nav > li > a');
 
         var hoverTimer, blurTimer,
-            delay = 500;
+        delay = 500;
 
         // Reusable functions
         function openMenu($current) {
@@ -135,23 +140,23 @@
 
         // Toggle menu on click, tap, or focus + enter/space
         $allToggles
-            .on('click touchstart', function (e) {
-                var $this = $(this);
-                var $submenu = $this.next('.sub-menu');
+        .on('click touchstart', function (e) {
+            var $this = $(this);
+            var $submenu = $this.next('.sub-menu');
 
-                if ($this.attr('aria-expanded') === 'true') closeMenu($this);
-                else openMenu($this);
+            if ($this.attr('aria-expanded') === 'true') closeMenu($this);
+            else openMenu($this);
 
-                focusSubmenu($submenu);
+            focusSubmenu($submenu);
 
-                e.preventDefault();
-            })
-            .on('keyup', function (e) {
-                if (e.keyCode === 32) {
-                    openMenu($(this));
-                    focusSubmenu($(this).next('.sub-menu'));
-                }
-            });
+            e.preventDefault();
+        })
+        .on('keyup', function (e) {
+            if (e.keyCode === 32) {
+                openMenu($(this));
+                focusSubmenu($(this).next('.sub-menu'));
+            }
+        });
 
         // Close menu when refocusing on top-level links
         $allTopLinks.on('focus', function () {
@@ -180,5 +185,48 @@
 <script>
   $(".home-page").click(function (){
     window.location = ("/");
+})
+
+  $(".bell").click(function() {
+    $(".notificaiton-count").hide();
+    $('.bell').css('color', 'red');
+    $(".notification-container").toggle();
   })
+</script>
+
+<script>
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+
+<script>
+$(".btn-notifi").click(function(){
+  <% if user_signed_in?%>
+    <% @notifications.each do |notification| %>
+    <% unless notification.status? %>
+      $(this).css('color', 'red');
+      <%= notification.update_attributes(status: "true") %>
+    <% end %>
+  <% end %>
+  <% end %>
+
+})
 </script>

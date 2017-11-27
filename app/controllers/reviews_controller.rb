@@ -5,7 +5,8 @@ class ReviewsController < ApplicationController
     # if user_signed_in?
     #   @reviews = current_user.reviews.paginate(page: params[:page])
     # else
-    @reviews = Review.order(created_at: :desc).paginate(page: params[:page])
+    @hotels = Hotel.where(status: 'accept')
+    @reviews = Review.where(hotel_id: @hotels.each do |hotel| hotel.id end).order(created_at: :desc).paginate(page: params[:page])
     # end
   end
 
@@ -60,6 +61,10 @@ class ReviewsController < ApplicationController
   def create
     @review = current_user.reviews.build(review_params)
     if @review.save
+      @users = current_user.followers
+      @users.each do |user|
+        Notification.create(subscriber_id: user.id, notifi_user_id: current_user.id, action: 'review', review_id: @reivew.id,  message: '')
+      end
       redirect_to @review
     else
       render 'reviews/new'
