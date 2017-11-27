@@ -67,24 +67,23 @@ style="padding-left: 40px;">
   <%= link_to "サインアップ", new_user_registration_path %>
 </li>
 <% end %>
-<% if user_signed_in? %>
-<% @notifications = Notification.where(subscriber_id: current_user.id) %>
-<li class="menu-item" style="width: 40px;overflow: hidden">
-    <div class="bell fa fa-bell-o" style="margin-top: 13px; margin-left: 25px; font-size: 23px; float: left"></div>
-    <div class="notificaiton-count" style="float: left; margin-top: 13px "><span style="color: red;"><%= @notifications.count %></span></div>
-</li>
-<% end %>
+
 </ul>
 </nav>
-<div class="notification-container" style="display: none;">
-    <% if user_signed_in? %>
-    <div class="notification">
-        <div class="notifi-detail">
-            <%= render @notifications %>
-        </div>
-    </div>
-    <% end %>
+
+<% if user_signed_in? %>
+<% @notifications = Notification.where(subscriber_id: current_user.id, status: 'false') %>
+<div class="dropdown">
+<button onclick="myFunction()" class="btn-notifi dropbtn fa fa-bell-o" style="font-size: 20px"><%= @notifications.count %></button>
 </div>
+  <div id="myDropdown" class="dropdown-content">
+    <% if user_signed_in? %>
+        <%= render @notifications %>
+    <% end %>
+  </div>
+</div>
+<% end %>
+
 
 <script>
     // Using jQuery because WordPress already has it
@@ -193,4 +192,41 @@ style="padding-left: 40px;">
     $('.bell').css('color', 'red');
     $(".notification-container").toggle();
   })
+</script>
+
+<script>
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+
+<script>
+$(".btn-notifi").click(function(){
+  <% if user_signed_in?%>
+    <% @notifications.each do |notification| %>
+    <% unless notification.status? %>
+      $(this).css('color', 'red');
+      <%= notification.update_attributes(status: "true") %>
+    <% end %>
+  <% end %>
+  <% end %>
+
+})
 </script>

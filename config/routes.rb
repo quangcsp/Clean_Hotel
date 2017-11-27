@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   get 'wait_accept', to: 'hotels#wait_accept'
 
   resources :hotels
+  resources :notifications, only: :update
 
 
 
