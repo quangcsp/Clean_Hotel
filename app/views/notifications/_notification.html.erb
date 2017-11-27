@@ -13,6 +13,8 @@
     <%= link_to notifi_user.name.titleize+" has comment your review ",  review_path(notification.review.id) %>
     <% elsif notification.action == 'reply' %>
     <%= link_to notifi_user.name.titleize+" has reply your comment ",  review_path(notification.review.id) %>
+    <% elsif notification.action == 'like' %>
+    <%= link_to notifi_user.name.titleize+" has like your comment ",  review_path(notification.review.id) %>
     <% end %>
   </div>
 </div>

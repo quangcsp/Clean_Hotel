@@ -26,12 +26,14 @@
         end).order(created_at: :desc)
         %>
         <% if @reviews.any? %>
-        <% @reviews.each do |review| %>
-        <%= render 'review_right_bar', review: review %>
-        <% end %>
+          <% @reviews.each do |review| %>
+            <% if review.hotel.status=='accept' %>
+            <%= render 'review_right_bar', review: review %>
+            <% end %>
+          <% end %>
         <% end %>
         <% else %>
-        <% @reviews = Review.order(created_at: :desc) %>
+        <% @reviews = Review.where(hotel_id: @hotels.each do |hotel| hotel.id end).order(created_at: :desc) %>
         <% if @reviews.any? %>
         <% @reviews.each do |review| %>
         <%= render 'review_right_bar', review: review %>
@@ -55,7 +57,7 @@
         <% end %>
 
       </div>
-      <% @top_review = Review.order(like_count: :desc ).limit(10) %>
+      <% @top_review = Review.where(hotel_id: @hotels.each do |hotel| hotel.id end).order(like_count: :desc ).limit(10) %>
       <div class="top-review-home tabcontent" id="top-review-home">
         <% @top_review.each do |review| %>
         <%= render "review_left_bar", review: review %>
