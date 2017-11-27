@@ -4,7 +4,9 @@ class SearchesController < ApplicationController
 
   def search
     # call custom json function with query and limit params
-    hotels = Hotel.where('name LIKE ?', "%#{params[:q]}%").or(Hotel.where('address LIKE ?', "%#{params[:q]}%")).limit(params[:limit])
+    hotels = Hotel.where('name LIKE ?', "%#{params[:q]}%")
+                 .or(Hotel.where('address LIKE ?', "%#{params[:q]}%"))
+                 .where('status <> "pending"').limit(params[:limit])
     results = []
     hotels.each do |h|
       results.push({
