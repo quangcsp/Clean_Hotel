@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127055521) do
+ActiveRecord::Schema.define(version: 20171127154547) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer  "user_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20171127055521) do
     t.float    "max_price",   default: 0.0
     t.float    "min_price",   default: 0.0
     t.string   "status",      default: "pending"
+    t.integer  "user_id",     default: 1
   end
 
   create_table "likes", force: :cascade do |t|

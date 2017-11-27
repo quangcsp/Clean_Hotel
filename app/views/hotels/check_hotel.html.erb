@@ -11,9 +11,13 @@
       padding: 8px;
     }
 
-    #customers tr:nth-child(even){background-color: #f2f2f2;}
+    #customers tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
 
-    #customers tr:hover {background-color: #ddd;}
+    #customers tr:hover {
+      background-color: #ddd;
+    }
 
     #customers th {
       padding-top: 12px;
@@ -24,62 +28,72 @@
     }
 
     .bt-pending {
-    background-color: #555555;; /* Green */
-    border: none;
-    color: white;
-    padding: 8px 23px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-      .bt-accept {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 8px;
-  }
-        .bt-delete {
-    background-color: #f44336; /* Green */
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 8px;
-  }
+      background-color: #555555;; /* Green */
+      border: none;
+      color: white;
+      padding: 8px 23px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .bt-accept {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    .bt-delete {
+      background-color: #f44336; /* Green */
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
   </style>
 </head>
 <body>
 
-  <div style="width: 1200px; margin: 0 auto">
-    <table id="customers">
-      <tr>
-        <th width="180px">Avatar</th>
-        <th>Info</th>
-        <th width="400px">Description</th>
-        <th width="120px">Status</th>
-        <th>Action</th>
-      </tr>
-      <% @hotels.each do |hotel| %>
-        <%= render 'check_hotel_item', hotel: hotel %>
-      <% end %>
-    </table>
-  </div>
+<div style="width: 1200px; margin: 0 auto">
+  <% if @hotels.length > 0 %>
+      <table id="customers">
+        <tr>
+          <th width="180px">Avatar</th>
+          <th>Info</th>
+          <th width="400px">Description</th>
+          <th width="120px">Status</th>
+          <% if user_signed_in? %>
+              <% if current_user.admin? %>
+                  <th>Action</th>
+              <% end %>
+          <% end %>
+        </tr>
+        <% @hotels.each do |hotel| %>
+            <%= render 'check_hotel_item', hotel: hotel %>
+        <% end %>
+      </table>
+  <% else %>
+      <div>You have't required hotel</div>
+  <% end %>
+</div>
 
 
 </body>

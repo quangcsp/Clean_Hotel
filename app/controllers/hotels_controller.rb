@@ -22,9 +22,10 @@ class HotelsController < ApplicationController
 
   def create
     @hotel = Hotel.create(hotel_params)
+    @hotel.user_id = current_user.id
     if @hotel.save
       # redirect ve trang show chi tiet khach san hotels/show
-      redirect_to wait_accept_path
+      redirect_to check_hotel_path
     else
       render "hotels/new"
     end
@@ -47,7 +48,13 @@ class HotelsController < ApplicationController
   end
 
   def check_hotel
-    @hotels = Hotel.all.order(created_at: :desc)
+    if user_signed_in?
+      if current_user.admin?
+        @hotels = Hotel.all.order(created_at: :desc)
+      else
+        @hotels = Hotel.where(user_id: current_user.id).order(created_at: :desc)
+      end
+    end
   end
 
 
