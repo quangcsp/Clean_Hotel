@@ -61,6 +61,10 @@ class ReviewsController < ApplicationController
   def create
     @review = current_user.reviews.build(review_params)
     if @review.save
+      @users = current_user.followers
+      @users.each do |user|
+        Notification.create(subscriber_id: user.id, notifi_user_id: current_user.id, action: 'review', review_id: @reivew.id,  message: '')
+      end
       redirect_to @review
     else
       render 'reviews/new'

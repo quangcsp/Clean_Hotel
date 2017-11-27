@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171126140844) do
+ActiveRecord::Schema.define(version: 20171127055521) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer  "user_id"
@@ -54,6 +54,18 @@ ActiveRecord::Schema.define(version: 20171126140844) do
     t.datetime "updated_at", null: false
     t.index ["review_id"], name: "index_likes_on_review_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "subscriber_id"
+    t.integer  "notifi_user_id"
+    t.string   "action"
+    t.string   "message"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.boolean  "status",         default: false
+    t.integer  "review_id"
+    t.index ["review_id"], name: "index_notifications_on_review_id"
   end
 
   create_table "pictures", force: :cascade do |t|

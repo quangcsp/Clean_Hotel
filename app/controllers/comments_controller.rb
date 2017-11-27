@@ -11,6 +11,11 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     if @comment.save
       owner = User.find(@comment.user_id)
+      subscriber = @comment.review.user
+      unless owner.id==subscriber.id
+        Notification.create(subscriber_id: subscriber.id, notifi_user_id: owner.id, action: 'comment', message: '', review_id: @comment.review.id)
+      end
+
       comment = {
           :id => @comment.id,
           :created_at => @comment.created_at,

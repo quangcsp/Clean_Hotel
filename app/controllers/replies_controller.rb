@@ -12,6 +12,10 @@ class RepliesController < ApplicationController
 
     if @reply.save
       owner = User.find(@reply.user_id)
+      subscriber = @reply.comment.user
+      unless owner.id == subscriber.id
+        Notification.create(subscriber_id: subscriber.id, notifi_user_id: owner.id, action: 'reply', message: '', review_id: @reply.comment.review.id)
+      end
       reply = {
           :id => @reply.id,
           :created_at => @reply.created_at,
