@@ -2,18 +2,15 @@
   <ul class="nav">
     <li class="menu-item home-page">
       <div style="margin-top: 5px;"><%= link_to "ホームページ"%></div>
-
   </li>
   <% if user_signed_in? %>
   <% if current_user.admin? %>
   <li class="menu-item-has-children">
       <%= link_to "ホテル" %>
       <ul class="sub-menu">
-
         <li><%= link_to "すべてのホテル", hotels_path %></li>
         <li><%= link_to "ホテルを作る", new_hotel_path %></li>
         <li><%= link_to "ホテ管理", "/check_hotel" %></li>
-        <li><%= link_to "すべてのレビュー", reviews_path %></li>
     </ul>
 </li>
 <% else %>
@@ -22,7 +19,6 @@
   <ul class="sub-menu">
     <li><%= link_to "すべてのホテル", hotels_path %></li>
     <li><%= link_to "ホテルを作る", new_hotel_path %></li>
-    <li><%= link_to "すべてのレビュー", reviews_path %></li>
 </ul>
 </li>
 <% end %>
