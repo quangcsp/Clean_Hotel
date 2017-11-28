@@ -76,13 +76,13 @@
   <% if @hotels.length > 0 %>
       <table id="customers">
         <tr>
-          <th width="180px">Avatar</th>
-          <th>Info</th>
-          <th width="400px">Description</th>
-          <th width="120px">Status</th>
+          <th width="180px">アバター</th>
+          <th>情報</th>
+          <th width="400px">説明</th>
+          <th width="120px">状態</th>
           <% if user_signed_in? %>
               <% if current_user.admin? %>
-                  <th>Action</th>
+                  <th>アクション</th>
               <% end %>
           <% end %>
         </tr>
@@ -91,7 +91,7 @@
         <% end %>
       </table>
   <% else %>
-      <div>You have't required hotel</div>
+      <div>提案したホテルがない</div>
   <% end %>
 </div>
 

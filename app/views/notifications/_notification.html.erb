@@ -8,13 +8,13 @@
   </div>
   <div style="float: left">
     <% if notification.action == 'review' %>
-    <%= link_to notifi_user.name.titleize+" has post a new review  ",  review_path(notification.review.id) %>
+    <%= link_to notifi_user.name.titleize+" は新しいレビューを投稿します  ",  review_path(notification.review.id) %>
     <% elsif notification.action == 'comment' %>
-    <%= link_to notifi_user.name.titleize+" has comment your review ",  review_path(notification.review.id) %>
+    <%= link_to notifi_user.name.titleize+" はあなたのレビューにコメントします ",  review_path(notification.review.id) %>
     <% elsif notification.action == 'reply' %>
-    <%= link_to notifi_user.name.titleize+" has reply your comment ",  review_path(notification.review.id) %>
+    <%= link_to notifi_user.name.titleize+" はあなたのコメントを返事します ",  review_path(notification.review.id) %>
     <% elsif notification.action == 'like' %>
-    <%= link_to notifi_user.name.titleize+" has like your comment ",  review_path(notification.review.id) %>
+    <%= link_to notifi_user.name.titleize+" はあなたのレビューをいいね ",  review_path(notification.review.id) %>
     <% end %>
   </div>
 </div>
