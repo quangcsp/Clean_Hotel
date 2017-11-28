@@ -1,6 +1,6 @@
 (function ($) {
     // when document is ready for manipulation
-    $(document).ready(function () {
+    document.addEventListener('turbolinks:load', function() {
 
         // our search box with id of search
         $('#search').each(function () {
