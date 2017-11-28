@@ -64,23 +64,39 @@ style="padding-left: 40px;">
   <%= link_to "サインアップ", new_user_registration_path %>
 </li>
 <% end %>
-
+<% if user_signed_in? %>
+<% @notifications_stt_false = Notification.where(subscriber_id: current_user.id, status: 'false').order(created_at: :desc) %>
+<li class="menu-item" style="width: 40px;overflow: hidden">
+    <div class="bell fa fa-bell-o" style="margin-top: 13px; margin-left: 25px; font-size: 23px; float: left"></div>
+    <div class="notificaiton-count" style="float: left; margin-top: 13px "><span style="color: red;"><%= @notifications_stt_false.count %></span></div>
+</li>
+<% end %>
 </ul>
 </nav>
 
-<% if user_signed_in? %>
-<% @notifications = Notification.where(subscriber_id: current_user.id, status: 'false') %>
-<div class="dropdown">
-<button onclick="myFunction()" class="btn-notifi dropbtn fa fa-bell-o" style="font-size: 20px"><%= @notifications.count %></button>
-</div>
-  <div id="myDropdown" class="dropdown-content">
+<div class="notification-container" style="display: none;">
     <% if user_signed_in? %>
-        <%= render @notifications %>
+    <div class="notification">
+        <div class="notifi-detail">
+          <% if @notifications_stt_false.count >= 6 %>
+            <%= render @notifications_stt_false %>
+          <% else %>
+            <%= render @notifications_stt_false %>
+            <% count_notifi_stt_true = 6-@notifications_stt_false.count %>
+            <% @notifications_stt_true = Notification.where(subscriber_id: current_user.id, status: true).order(created_at: :desc).limit(count_notifi_stt_true) %>
+            <%= render @notifications_stt_true %>
+          <% end %>
+        </div>
+    </div>
     <% end %>
-  </div>
 </div>
-<% end %>
 
+<div class="form-submit-notifi" style="display: none">
+  <%= form_for Notification.new do |f| %>
+    <%= f.hidden_field :subscriber_id, value: current_user.id %>
+    <%= f.submit 'submit',class: 'bt-submit-notifi'%>
+  <% end %>
+</div>
 
 <script>
     // Using jQuery because WordPress already has it
@@ -183,47 +199,10 @@ style="padding-left: 40px;">
   $(".home-page").click(function (){
     window.location = ("/");
 })
-
   $(".bell").click(function() {
+    $(".bt-submit-notifi").click();
     $(".notificaiton-count").hide();
     $('.bell').css('color', 'red');
     $(".notification-container").toggle();
   })
-</script>
-
-<script>
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-</script>
-
-<script>
-$(".btn-notifi").click(function(){
-  <% if user_signed_in?%>
-    <% @notifications.each do |notification| %>
-    <% unless notification.status? %>
-      $(this).css('color', 'red');
-      <%= notification.update_attributes(status: "true") %>
-    <% end %>
-  <% end %>
-  <% end %>
-
-})
 </script>

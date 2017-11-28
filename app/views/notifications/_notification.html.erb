@@ -2,21 +2,21 @@
 
 <% unless notifi_user.nil? %>
 <% avatar = notifi_user && notifi_user.avatar.url ? notifi_user.avatar.url : 'no_avatar.jpg' %>
-<div style="overflow: hidden;">
-  <div style="float: left">
-    <img src="<%= avatar %>" style="width: 60px; background-size: cover; padding: 5px;">
+<div class="notification-item ">
+  <div class="notification-avatar-user">
+    <img src="<%= avatar %>">
   </div>
-  <div style="float: left">
+  <div class="notification-info notifi-review-<%= notification.review.id %>">
     <% if notification.action == 'review' %>
     <%= link_to notifi_user.name.titleize+" は新しいレビューを投稿します  ",  review_path(notification.review.id) %>
     <% elsif notification.action == 'comment' %>
     <%= link_to notifi_user.name.titleize+" はあなたのレビューにコメントします ",  review_path(notification.review.id) %>
     <% elsif notification.action == 'reply' %>
-    <%= link_to notifi_user.name.titleize+" はあなたのコメントを返事します ",  review_path(notification.review.id) %>
+    <%= link_to notifi_user.name.titleize+" はあなたのコメントを返事します",  review_path(notification.review.id) %>
     <% elsif notification.action == 'like' %>
-    <%= link_to notifi_user.name.titleize+" はあなたのレビューをいいね ",  review_path(notification.review.id) %>
+    <%= link_to notifi_user.name.titleize+" はあなたのレビューをいいね",  review_path(notification.review.id) %>
     <% end %>
   </div>
-</div>
 
+</div>
 <% end %>

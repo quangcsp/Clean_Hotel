@@ -1,7 +1,11 @@
 <body>
   <% @hotels = Hotel.where(status: 'accept') %>
 
+
+
+
   <div class="container-home">
+
     <div style="margin-bottom: 22px;">
       <span style="color: #FF8040; font-size: 22px;">新しいレビュー</span>
     </div>
@@ -26,17 +30,20 @@
         end).order(created_at: :desc)
         %>
         <% if @reviews.any? %>
-          <% @reviews.each do |review| %>
-            <% if review.hotel.status=='accept' %>
-            <%= render 'review_right_bar', review: review %>
-            <% end %>
+
+        <% @reviews.each do |review| %>
+          <% if review.hotel.status == 'accept' %>
+          <%= render 'review_right_bar', review: review %>
           <% end %>
+        <% end %>
         <% end %>
         <% else %>
         <% @reviews = Review.where(hotel_id: @hotels.each do |hotel| hotel.id end).order(created_at: :desc) %>
         <% if @reviews.any? %>
         <% @reviews.each do |review| %>
+        <% if review.hotel.status == 'accept' %>
         <%= render 'review_right_bar', review: review %>
+        <% end %>
         <% end %>
         <% end %>
         <% end %>
@@ -57,7 +64,8 @@
         <% end %>
 
       </div>
-      <% @top_review = Review.where(hotel_id: @hotels.each do |hotel| hotel.id end).order(like_count: :desc ).limit(10) %>
+      <% @hotels_stt_accept = Hotel.where(status: 'accept') %>
+      <% @top_review = Review.where(hotel_id: @hotels_stt_accept.each do |hotel| hotel.id end).order(like_count: :desc ).limit(10) %>
       <div class="top-review-home tabcontent" id="top-review-home">
         <% @top_review.each do |review| %>
         <%= render "review_left_bar", review: review %>
@@ -101,4 +109,6 @@
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 </script>
+
+
 

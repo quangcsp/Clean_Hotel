@@ -26,6 +26,8 @@ Rails.application.routes.draw do
 
   resources :replies
 
+  resources :notifications, only: :create
+
   get "search", to: 'searches#search'
 
   get "likes/:user_id/:review_id", to: 'likes#info', as: 'like_info'

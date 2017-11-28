@@ -1,9 +1,9 @@
 class NotificationsController < ApplicationController
-  def update
 
-  end
-
-  def show
-
+  def create
+    @notifications = Notification.where(subscriber_id: params[:notification][:subscriber_id], status: 'false')
+    @notifications.each do |notification|
+      notification.update_attributes(status: true)
+    end
   end
 end
