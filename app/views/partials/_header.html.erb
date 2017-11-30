@@ -92,10 +92,12 @@ style="padding-left: 40px;">
 </div>
 
 <div class="form-submit-notifi" style="display: none">
+<% if user_signed_in? %>
   <%= form_for Notification.new do |f| %>
     <%= f.hidden_field :subscriber_id, value: current_user.id %>
     <%= f.submit 'submit',class: 'bt-submit-notifi'%>
   <% end %>
+<% end %>
 </div>
 
 <script>
